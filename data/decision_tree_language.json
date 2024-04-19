@@ -1,0 +1,91 @@
+{
+  "decision_tree": {
+    "root": {
+      "condition": "Tmdb-score",
+      "branches": [
+        {
+          "condition": "<= 6.0",
+          "outcome": {
+            "condition": "Budget",
+            "branches": [
+              {
+                "condition": ">70000000",
+                "outcome": "Angol"
+              },
+              {
+                "condition": "<=70000000",
+                "outcome": {
+                  "condition": "Popularity",
+                  "branches": [
+                    { 
+                      "condition": ">20", 
+                      "outcome": ["Angol", "Spanyol"] 
+                    },
+                    { 
+                      "condition": "<=20", 
+                      "outcome": "Francia" 
+                    }
+                  ]
+                }
+              }
+            ]
+          }
+        },
+        { 
+          "condition": "6.0< && <7.0", 
+          "outcome": {
+            "condition": "Gender of protagonist",
+            "branches": [
+              { 
+                "condition": "1",  
+                "outcome": {
+                  "condition": "Number_of_ratings",  
+                  "branches": [
+                    {  
+                      "condition": ">700",  
+                      "outcome": "Angol"  
+                    },  
+                    {   
+                      "condition": "<=700",   
+                      "outcome": ["Magyar","Angol"]   
+                    }   
+                  ]    
+                }    
+              },     
+              {      
+                "condition": "2",       
+                "outcome": {        
+                  "condition": "Number_of_ratings",         
+                  "branches": [          
+                    {           
+                      "condition": ">1000",            
+                      "outcome": ["Angol", "Német"]             
+                    },                              
+                    {                  
+                      "condition": "<=1000 ",                  
+                      "outcome": "Angol"                   
+                    }                    
+                  ]                     
+                }                      
+              }                          
+            ]                               
+          }                                   
+        },
+        {
+          "condition": ">=7.0",
+          "outcome":{
+		  "condition": "Popularity",
+		  "branches":[
+		  {"condition": "<=40",
+		  "outcome": ["Angol", "Francia", "Német", "Olasz", "Kínai", "Spanyol"]
+		  },
+		  {"condition": ">40",
+		  "outcome": "Angol"
+		  }
+		  ]
+		  }
+        }		
+      ]                                               
+    }                                                     
+  }
+}
