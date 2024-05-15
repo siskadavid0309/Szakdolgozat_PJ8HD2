@@ -33,29 +33,136 @@ namespace KeywordInsert
             }
         }
 
-        public void DbMethods(ref List<int> kwID, ref List<string> kw, ref List<int> mID, ref List<string> mkw)
+        public void getMoviedata(ref List<int> movieID, ref List<string> moviekw, ref List<string> movielanguage,
+            ref List<string> moviedirector, ref List<string> moviecountry)
         {
             SQLiteDataReader reader = null;
             SQLiteCommand command = connection.CreateCommand();
-            command.CommandText = "SELECT * FROM Keywords";
-            reader = command.ExecuteReader();
-
-            while (reader.Read())
-            {
-                kwID.Add(Convert.ToInt32(reader["ID"]));
-                kw.Add(string.Format("{0}", reader["Keyword_Name"]));
-            }
-
-            reader.Close();
+            
             command.CommandText = "SELECT * FROM Movies";
             reader = command.ExecuteReader();
             while (reader.Read())
             {
-                mID.Add(Convert.ToInt32(reader["ID"]));
-                mkw.Add(string.Format("{0}", reader["Keywords"]));
+                movieID.Add(Convert.ToInt32(reader["ID"]));
+                moviekw.Add(string.Format("{0}", reader["Keywords"]));
+                movielanguage.Add(string.Format("{0}", reader["Language"]));
+                moviedirector.Add(string.Format("{0}", reader["Director"]));
+                moviecountry.Add(string.Format("{0}", reader["Production_countries"]));
+            }
+            reader.Close();
+        }
+
+        public void keywordPrepare(ref List<string> keywords)
+        {
+            SQLiteDataReader reader = null;
+            SQLiteCommand command = connection.CreateCommand();
+            command.CommandText = "SELECT * FROM Movies";
+            reader = command.ExecuteReader();
+            string tmp;
+            string[] parts;
+            while (reader.Read())
+            {
+                tmp=string.Format("{0}", reader["Keywords"]);
+                parts = tmp.Split(',');
+                for (int i = 0; i < parts.Length; i++)
+                {
+                    keywords.Add(parts[i]);
+                }
+                
+            }
+            reader.Close();
+            for (int i = 0; i < keywords.Count; i++)
+            {
+                if (keywords[i].StartsWith(" "))
+                {
+                    keywords[i]= keywords[i].Substring(1);
+                }
             }
         }
 
+        public void languagePrepare(ref List<string> language)
+        {
+            SQLiteDataReader reader = null;
+            SQLiteCommand command = connection.CreateCommand();
+            command.CommandText = "SELECT * FROM Movies";
+            reader = command.ExecuteReader();
+            string tmp;
+            string[] parts;
+            while (reader.Read())
+            {
+                tmp = string.Format("{0}", reader["Language"]);
+                parts = tmp.Split(',');
+                for (int i = 0; i < parts.Length; i++)
+                {
+                    language.Add(parts[i]);
+                }
+
+            }
+            reader.Close();
+            for (int i = 0; i < language.Count; i++)
+            {
+                if (language[i].StartsWith(" "))
+                {
+                    language[i] = language[i].Substring(1);
+                }
+            }
+        }
+
+        public void directorPrepare(ref List<string> director)
+        {
+            SQLiteDataReader reader = null;
+            SQLiteCommand command = connection.CreateCommand();
+            command.CommandText = "SELECT * FROM Movies";
+            reader = command.ExecuteReader();
+            string tmp;
+            string[] parts;
+            while (reader.Read())
+            {
+                tmp = string.Format("{0}", reader["Director"]);
+                parts = tmp.Split(',');
+                for (int i = 0; i < parts.Length; i++)
+                {
+                    director.Add(parts[i]);
+                }
+
+            }
+            reader.Close();
+            for (int i = 0; i < director.Count; i++)
+            {
+                if (director[i].StartsWith(" "))
+                {
+                    director[i] = director[i].Substring(1);
+                }
+            }
+        }
+
+        public void countryPrepare(ref List<string> country)
+        {
+            SQLiteDataReader reader = null;
+            SQLiteCommand command = connection.CreateCommand();
+            command.CommandText = "SELECT * FROM Movies";
+            reader = command.ExecuteReader();
+            string tmp;
+            string[] parts;
+            while (reader.Read())
+            {
+                tmp = string.Format("{0}", reader["Production_countries"]);
+                parts = tmp.Split(',');
+                for (int i = 0; i < parts.Length; i++)
+                {
+                    country.Add(parts[i]);
+                }
+
+            }
+            reader.Close();
+            for (int i = 0; i < country.Count; i++)
+            {
+                if (country[i].StartsWith(" "))
+                {
+                    country[i] = country[i].Substring(1);
+                }
+            }
+        }
         public void DbWrite(List<string> cmds)
         {
             SQLiteCommand command = connection.CreateCommand();
