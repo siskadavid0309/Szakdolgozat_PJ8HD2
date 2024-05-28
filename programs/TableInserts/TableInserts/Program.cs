@@ -158,7 +158,6 @@ namespace TableInserts
             {
                 for(int j = 0; j<id.Count; j++)
                 {
-                    //if (mkw[i].Contains(" "+kw[j]+","))
                     if (movieData[i].Equals(list_ok[j]) || movieData[i].StartsWith(list_ok[j] + ",") || movieData[i].Contains(", " + list_ok[j] + ",") || movieData[i].EndsWith(" " + list_ok[j]))
                     {
                         finalID.Add(Convert.ToInt32(movieID[i]));
@@ -172,7 +171,7 @@ namespace TableInserts
         {
             for (int i = 0; i < ids.Count; i++)
             {
-                cmds.Add(string.Format("INSERT INTO \"Genres_\" (\"ID\", \"Genres_Name\") VALUES ({0}, \"" + genres_ok[i] + "\");", ids[i]));
+                cmds.Add(string.Format("INSERT INTO \"Genres\" (\"ID\", \"Genres_Name\") VALUES ({0}, \"" + genres_ok[i] + "\");", ids[i]));
             }
         }
 
@@ -180,14 +179,14 @@ namespace TableInserts
         {
             for (int i = 0; i < finalID.Count; i++)
             {
-                cmds.Add(string.Format("INSERT INTO \"Movies_Genres_\" (\"Movie_ID\", \"Genres_ID\") VALUES ({0}, {1});", finalID[i], finalgenre[i]));
+                cmds.Add(string.Format("INSERT INTO \"Movies_Genres\" (\"Movie_ID\", \"Genres_ID\") VALUES ({0}, {1});", finalID[i], finalgenre[i]));
             }
         }
         static void FillUp_MK(List<int> finalID, List<int> finalkw, ref List<string> cmds)
         {
             for (int i = 0; i < finalID.Count; i++)
             {
-                cmds.Add(string.Format("INSERT INTO \"Movies_Keywords_\" (\"Movie_ID\", \"Keywords_ID\") VALUES ({0}, {1});", finalID[i], finalkw[i]));
+                cmds.Add(string.Format("INSERT INTO \"Movies_Keywords\" (\"Movie_ID\", \"Keywords_ID\") VALUES ({0}, {1});", finalID[i], finalkw[i]));
             }
         }
 
@@ -195,7 +194,7 @@ namespace TableInserts
         {
             for (int i = 0; i < ids.Count; i++)
             {
-                cmds.Add(string.Format("INSERT INTO \"Keywords_\" (\"ID\", \"Keyword_Name\") VALUES ({0}, \"" + keywords_ok[i]+"\");", ids[i]));
+                cmds.Add(string.Format("INSERT INTO \"Keywords\" (\"ID\", \"Keyword_Name\") VALUES ({0}, \"" + keywords_ok[i]+"\");", ids[i]));
             }
         }
 
@@ -203,7 +202,7 @@ namespace TableInserts
         {
             for (int i = 0; i < languageid.Count; i++)
             {
-                cmds.Add(string.Format("INSERT INTO \"Languages_\" (\"ID\", \"Language_Name\") VALUES ({0}, \"" + language_ok[i] + "\");", languageid[i]));
+                cmds.Add(string.Format("INSERT INTO \"Languages\" (\"ID\", \"Language_Name\") VALUES ({0}, \"" + language_ok[i] + "\");", languageid[i]));
             }
         }
 
@@ -211,7 +210,7 @@ namespace TableInserts
         {
             for (int i = 0; i < finallanguageid.Count; i++)
             {
-                cmds.Add(string.Format("INSERT INTO \"Movies_Languages_\" (\"Movie_ID\", \"Languages_ID\") VALUES ({0}, {1});", finallanguageid[i], finallanguage[i]));
+                cmds.Add(string.Format("INSERT INTO \"Movies_Languages\" (\"Movie_ID\", \"Languages_ID\") VALUES ({0}, {1});", finallanguageid[i], finallanguage[i]));
             }
         }
 
@@ -219,7 +218,7 @@ namespace TableInserts
         {
             for (int i = 0; i < directorid.Count; i++)
             {
-                cmds.Add(string.Format("INSERT INTO \"Directors_\" (\"ID\", \"Director_Name\") VALUES ({0}, \"" + director_ok[i] + "\");", directorid[i]));
+                cmds.Add(string.Format("INSERT INTO \"Directors\" (\"ID\", \"Director_Name\") VALUES ({0}, \"" + director_ok[i] + "\");", directorid[i]));
             }
         }
 
@@ -227,7 +226,7 @@ namespace TableInserts
         {
             for (int i = 0; i < finaldirectorid.Count; i++)
             {
-                cmds.Add(string.Format("INSERT INTO \"Movies_Directors_\" (\"Movie_ID\", \"Directors_ID\") VALUES ({0}, {1});", finaldirectorid[i], finaldirector[i]));
+                cmds.Add(string.Format("INSERT INTO \"Movies_Directors\" (\"Movie_ID\", \"Directors_ID\") VALUES ({0}, {1});", finaldirectorid[i], finaldirector[i]));
             }
         }
 
@@ -235,7 +234,7 @@ namespace TableInserts
         {
             for (int i = 0; i < countryid.Count; i++)
             {
-                cmds.Add(string.Format("INSERT INTO \"Countries_\" (\"ID\", \"Country_Name\") VALUES ({0}, \"" + country_ok[i] + "\");", countryid[i]));
+                cmds.Add(string.Format("INSERT INTO \"Countries\" (\"ID\", \"Country_Name\") VALUES ({0}, \"" + country_ok[i] + "\");", countryid[i]));
             }
         }
 
@@ -243,7 +242,7 @@ namespace TableInserts
         {
             for (int i = 0; i < finalcountryid.Count; i++)
             {
-                cmds.Add(string.Format("INSERT INTO \"Movies_Countries_\" (\"Movie_ID\", \"Countries_ID\") VALUES ({0}, {1});", finalcountryid[i], finalcountry[i]));
+                cmds.Add(string.Format("INSERT INTO \"Movies_Countries\" (\"Movie_ID\", \"Countries_ID\") VALUES ({0}, {1});", finalcountryid[i], finalcountry[i]));
             }
         }
         static List<string> Matches(List<string> list)
