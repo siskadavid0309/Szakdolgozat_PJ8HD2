@@ -33,9 +33,8 @@ namespace TableInserts
                 Environment.Exit(1);
             }
         }
-
-        public void getMoviedata(ref List<int> movieID, ref List<string> moviekw, ref List<string> movielanguage,
-            ref List<string> moviedirector, ref List<string> moviecountry, ref List<string> moviegenre)
+        /*
+        public void getMoviedata(ref List<Movie> movies)
         {
             SQLiteDataReader reader = null;
             SQLiteCommand command = connection.CreateCommand();
@@ -44,12 +43,38 @@ namespace TableInserts
             reader = command.ExecuteReader();
             while (reader.Read())
             {
-                movieID.Add(Convert.ToInt32(reader["ID"]));
+                movies.Id.Add(Convert.ToInt32(reader["ID"]));
+                
                 moviekw.Add(string.Format("{0}", reader["Keywords"]));
                 movielanguage.Add(string.Format("{0}", reader["Language"]));
                 moviedirector.Add(string.Format("{0}", reader["Director"]));
                 moviecountry.Add(string.Format("{0}", reader["Production_countries"]));
                 moviegenre.Add(string.Format("{0}", reader["Genre"]));
+                
+            }
+            reader.Close();
+        }
+        */
+
+        public void getMoviedata(ref List<Movie> movies)
+        {
+            SQLiteDataReader reader = null;
+            SQLiteCommand command = connection.CreateCommand();
+
+            command.CommandText = "SELECT * FROM Movies";
+            reader = command.ExecuteReader();
+            while (reader.Read())
+            {
+                Movie movie = new Movie
+                {
+                    Id = Convert.ToInt32(reader["ID"]),
+                    Keywords = reader["Keywords"].ToString(),
+                    Language = reader["Language"].ToString(),
+                    Director = reader["Director"].ToString(),
+                    Country = reader["Production_countries"].ToString(),
+                    Genre = reader["Genre"].ToString()
+                };
+                movies.Add(movie);
             }
             reader.Close();
         }

@@ -18,21 +18,18 @@ namespace TableInserts
             string databasePath = Path.Combine(currentDirectory, databaseFileName);
             SqlConnector conn = new SqlConnector(databasePath);
             List<string> cmds = new List<string>();
-          
-            List<int> movieID = new List<int>();
-            List<string> moviekw = new List<string>();
-            List<string> movielanguage = new List<string>();
-            List<string> moviedirector = new List<string>();
-            List<string> moviecountry = new List<string>();
-            List<string> moviegenre = new List<string>();
+
+            List<Movie> movies = new List<Movie>();
+            int mode = 0;
+            
             List<int> id = new List<int>();
             List<string> data = new List<string>();
             List<int> finalMovieID = new List<int>();
             List<int> finalDataID=new List<int>();
 
-            conn.getMoviedata(ref movieID, ref moviekw, ref movielanguage, ref moviedirector, ref moviecountry, ref moviegenre);
+            conn.getMoviedata(ref movies);
   
-            Options(conn, id, data, movieID, moviekw, movielanguage, moviedirector,moviecountry,moviegenre, finalMovieID, finalDataID, cmds);
+            Options(conn, id, data, movies, finalMovieID, finalDataID, cmds, mode);
           
         }
 
@@ -47,14 +44,15 @@ namespace TableInserts
             cmds.Clear();
         }
 
-        static void genre_movie(SqlConnector conn, List<int> id, List<string> data, List<int> movieID, List<string> moviegenre,
-             List<int> finalMovieID, List<int> finalDataID, List<string> cmds)
+        static void genre_movie(SqlConnector conn, List<int> id, List<string> data, List<Movie> movies,
+             List<int> finalMovieID, List<int> finalDataID, List<string> cmds, int mode)
         {
+            mode = 0;
             conn.genrePrepare(ref data);
             data = Matches(data);
             idGenerate(ref id, data);
 
-            createData(id, data, movieID, moviegenre, ref finalMovieID, ref finalDataID);
+            createData(id, data, movies, ref finalMovieID, ref finalDataID, mode);
             FillUp_MG(finalMovieID,finalDataID, ref cmds);
             conn.DbWrite(cmds);
             cmds.Clear();
@@ -70,14 +68,15 @@ namespace TableInserts
             cmds.Clear();
         }
 
-        static void keyword_movie(SqlConnector conn, List<int> id, List<string> data, List<int> movieID, List<string> moviekw,
-             List<int> finalMovieID, List<int> finalDataID, List<string> cmds)
+        static void keyword_movie(SqlConnector conn, List<int> id, List<string> data, List<Movie> movies,
+             List<int> finalMovieID, List<int> finalDataID, List<string> cmds, int mode)
         {
+            mode = 1;
             conn.keywordPrepare(ref data);
             data = Matches(data);
             idGenerate(ref id, data);
 
-            createData(id, data, movieID, moviekw, ref finalMovieID, ref finalDataID);
+            createData(id, data, movies, ref finalMovieID, ref finalDataID, mode);
             FillUp_MK(finalMovieID, finalDataID, ref cmds);
             conn.DbWrite(cmds);
             cmds.Clear();
@@ -93,14 +92,15 @@ namespace TableInserts
             cmds.Clear();
         }
         
-        static void language_movie(SqlConnector conn, List<int> id, List<string> data, List<int> movieID, List<string> movielanguage,
-             List<int> finalMovieID, List<int> finalDataID, List<string> cmds)
+        static void language_movie(SqlConnector conn, List<int> id, List<string> data, List<Movie> movies,
+             List<int> finalMovieID, List<int> finalDataID, List<string> cmds, int mode)
         {
+            mode = 2;
             conn.languagePrepare(ref data);
             data = Matches(data);
             idGenerate(ref id, data);
 
-            createData(id, data, movieID, movielanguage, ref finalMovieID, ref finalDataID);
+            createData(id, data, movies, ref finalMovieID, ref finalDataID, mode);
             FillUp_ML(finalMovieID, finalDataID, ref cmds);
             conn.DbWrite(cmds);
             cmds.Clear();
@@ -116,14 +116,15 @@ namespace TableInserts
             cmds.Clear();
         }
 
-        static void director_movie(SqlConnector conn, List<int> id, List<string> data, List<int> movieID, List<string> moviedirector,
-             List<int> finalMovieID, List<int> finalDataID, List<string> cmds)
+        static void director_movie(SqlConnector conn, List<int> id, List<string> data, List<Movie> movies,
+             List<int> finalMovieID, List<int> finalDataID, List<string> cmds, int mode)
         {
+            mode = 3;
             conn.directorPrepare(ref data);
             data = Matches(data);
             idGenerate(ref id, data);
 
-            createData(id, data, movieID, moviedirector, ref finalMovieID, ref finalDataID);
+            createData(id, data, movies, ref finalMovieID, ref finalDataID, mode);
             FillUp_MD(finalMovieID, finalDataID, ref cmds);
             conn.DbWrite(cmds);
             cmds.Clear();
@@ -139,28 +140,32 @@ namespace TableInserts
             cmds.Clear();
         }
         
-        static void country_movie(SqlConnector conn, List<int> id, List<string> data, List<int> movieID, List<string> moviecountry,
-             List<int> finalMovieID, List<int> finalDataID, List<string> cmds)
+        static void country_movie(SqlConnector conn, List<int> id, List<string> data, List<Movie> movies,
+             List<int> finalMovieID, List<int> finalDataID, List<string> cmds, int mode)
         {
+            mode = 4;
             conn.countryPrepare(ref data);
             data = Matches(data);
             idGenerate(ref id, data);
 
-            createData(id, data, movieID, moviecountry, ref finalMovieID, ref finalDataID);
+            createData(id, data, movies, ref finalMovieID, ref finalDataID, mode);
             FillUp_MC(finalMovieID, finalDataID, ref cmds);
             conn.DbWrite(cmds);
             cmds.Clear();
         }
         
-        static void createData(List<int> id, List<string> list_ok, List<int> movieID, List<string> movieData, ref List<int> finalID, ref List<int> finalData)
+        static void createData(List<int> id, List<string> list_ok, List<Movie> movies, ref List<int> finalID, ref List<int> finalData, int mode)
         {
-            for (int i = 0; i < movieID.Count; i++)
+            List<string> tempData=new List<string>();
+            copy(movies, ref tempData, mode);
+            for (int i = 0; i < tempData.Count; i++)
             {
                 for(int j = 0; j<id.Count; j++)
                 {
-                    if (movieData[i].Equals(list_ok[j]) || movieData[i].StartsWith(list_ok[j] + ",") || movieData[i].Contains(", " + list_ok[j] + ",") || movieData[i].EndsWith(" " + list_ok[j]))
+                        
+                    if (tempData[i].Equals(list_ok[j]) || tempData[i].StartsWith(list_ok[j] + ",") || tempData[i].Contains(", " + list_ok[j] + ",") || tempData[i].EndsWith(" " + list_ok[j]))
                     {
-                        finalID.Add(Convert.ToInt32(movieID[i]));
+                        finalID.Add(Convert.ToInt32(movies[i].Id));
                         finalData.Add(Convert.ToInt32(id[j]));
                     }
                 }
@@ -276,9 +281,8 @@ namespace TableInserts
             }
         }
 
-        static void Options(SqlConnector conn, List<int> id, List<string> data, List<int> movieID, List<string> moviekw,
-            List<string> movielanguage, List<string> moviedirector, List<string> moviecountry, List<string> moviegenre,
-             List<int> finalMovieID, List<int> finalDataID, List<string> cmds)
+        static void Options(SqlConnector conn, List<int> id, List<string> data, List<Movie> movies,
+             List<int> finalMovieID, List<int> finalDataID, List<string> cmds, int mode)
         {
             bool beolvasas = false;
             int szam=0;
@@ -309,33 +313,73 @@ namespace TableInserts
                     keyword(conn, id, data, cmds);
                     break;
                 case 1:
-                    keyword_movie(conn, id, data, movieID, moviekw, finalMovieID, finalDataID, cmds);
+                    keyword_movie(conn, id, data, movies, finalMovieID, finalDataID, cmds, mode);
                     break;
                 case 2:
                     language(conn, id, data, cmds);
                     break;
                 case 3:
-                    language_movie(conn, id, data, movieID, movielanguage, finalMovieID, finalDataID, cmds);
+                    language_movie(conn, id, data, movies, finalMovieID, finalDataID, cmds, mode);
                     break;
                 case 4:
                     director(conn, id, data, cmds);
                     break;
                 case 5:
-                    director_movie(conn, id, data, movieID, moviedirector, finalMovieID, finalDataID, cmds);
+                    director_movie(conn, id, data, movies, finalMovieID, finalDataID, cmds, mode);
                     break;
                 case 6:
                     country(conn, id, data, cmds);
                     break;
                 case 7:
-                    country_movie(conn, id, data, movieID, moviecountry, finalMovieID, finalDataID, cmds);
+                    country_movie(conn, id, data, movies, finalMovieID, finalDataID, cmds, mode);
                     break;
                 case 8:
                     genre(conn, id, data, cmds);
                     break;
                 case 9:
-                    genre_movie(conn, id, data, movieID, moviegenre, finalMovieID, finalDataID, cmds);
+                    genre_movie(conn, id, data, movies, finalMovieID, finalDataID, cmds, mode);
                     break;
             }
+        }
+
+        static void copy(List<Movie> movies, ref List<string> tempData, int mode)
+        {
+
+                switch (mode)
+                {
+                    case 0:
+                    for (int i = 0; i < movies.Count; i++)
+                    {
+                        tempData.Add(movies[i].Genre);
+                    }
+                        break;
+                    case 1:
+                    for (int i = 0; i < movies.Count; i++)
+                    {
+                        tempData.Add(movies[i].Keywords);
+                    }
+                    break;
+                    case 2:
+                    for (int i = 0; i < movies.Count; i++)
+                    {
+                        tempData.Add(movies[i].Language);
+                    }
+                    break;
+                    case 3:
+                    for (int i = 0; i < movies.Count; i++)
+                    {
+                        tempData.Add(movies[i].Director);
+                    }
+                    break;
+                    case 4:
+                    for (int i = 0; i < movies.Count; i++)
+                    {
+                        tempData.Add(movies[i].Country);
+                    }
+                    break;
+
+                }
+            
         }
 
     }
