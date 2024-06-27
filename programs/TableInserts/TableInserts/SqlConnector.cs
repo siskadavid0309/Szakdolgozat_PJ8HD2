@@ -33,31 +33,10 @@ namespace TableInserts
                 Environment.Exit(1);
             }
         }
-        /*
-        public void getMoviedata(ref List<Movie> movies)
-        {
-            SQLiteDataReader reader = null;
-            SQLiteCommand command = connection.CreateCommand();
-            
-            command.CommandText = "SELECT * FROM Movies";
-            reader = command.ExecuteReader();
-            while (reader.Read())
-            {
-                movies.Id.Add(Convert.ToInt32(reader["ID"]));
-                
-                moviekw.Add(string.Format("{0}", reader["Keywords"]));
-                movielanguage.Add(string.Format("{0}", reader["Language"]));
-                moviedirector.Add(string.Format("{0}", reader["Director"]));
-                moviecountry.Add(string.Format("{0}", reader["Production_countries"]));
-                moviegenre.Add(string.Format("{0}", reader["Genre"]));
-                
-            }
-            reader.Close();
-        }
-        */
 
-        public void getMoviedata(ref List<Movie> movies)
+        public List<Movie> collectMoviedata()
         {
+            List<Movie> movies = new List<Movie>();
             SQLiteDataReader reader = null;
             SQLiteCommand command = connection.CreateCommand();
 
@@ -77,10 +56,13 @@ namespace TableInserts
                 movies.Add(movie);
             }
             reader.Close();
+
+            return movies;
         }
 
-        public void keywordPrepare(ref List<string> keywords)
+        public List<string> prepareKeywords()
         {
+            List<string> keywords = new List<string>();
             SQLiteDataReader reader = null;
             SQLiteCommand command = connection.CreateCommand();
             command.CommandText = "SELECT * FROM Movies";
@@ -99,10 +81,13 @@ namespace TableInserts
             }
             reader.Close();
             removeWhitespace(ref keywords);
+
+            return keywords;
         }
 
-        public void languagePrepare(ref List<string> language)
+        public List<string> prepareLanguages()
         {
+            List<string> language= new List<string>();
             SQLiteDataReader reader = null;
             SQLiteCommand command = connection.CreateCommand();
             command.CommandText = "SELECT * FROM Movies";
@@ -121,10 +106,13 @@ namespace TableInserts
             }
             reader.Close();
             removeWhitespace(ref language);
+
+            return language;
         }
 
-        public void directorPrepare(ref List<string> director)
+        public List<string> prepareDirectors()
         {
+            List<string> director= new List<string>();
             SQLiteDataReader reader = null;
             SQLiteCommand command = connection.CreateCommand();
             command.CommandText = "SELECT * FROM Movies";
@@ -143,10 +131,13 @@ namespace TableInserts
             }
             reader.Close();
             removeWhitespace(ref director);
+
+            return director;
         }
 
-        public void countryPrepare(ref List<string> country)
+        public List<string> prepareCountries()
         {
+            List<string> country= new List<string>();
             SQLiteDataReader reader = null;
             SQLiteCommand command = connection.CreateCommand();
             command.CommandText = "SELECT * FROM Movies";
@@ -165,10 +156,13 @@ namespace TableInserts
             }
             reader.Close();
             removeWhitespace(ref country);
+
+            return country;
         }
 
-        public void genrePrepare(ref List<string> genre)
+        public List<string> prepareGenres()
         {
+            List<string> genre = new List<string>();
             SQLiteDataReader reader = null;
             SQLiteCommand command = connection.CreateCommand();
             command.CommandText = "SELECT * FROM Movies";
@@ -187,6 +181,8 @@ namespace TableInserts
             }
             reader.Close();
             removeWhitespace(ref genre);
+
+            return genre;
         }
 
         static void removeWhitespace(ref List<string> list)
@@ -199,13 +195,20 @@ namespace TableInserts
                 }
             }
         }
-        public void DbWrite(List<string> cmds)
+        public void executeInserts(List<string> cmds)
         {
             SQLiteCommand command = connection.CreateCommand();
-            for (int i = 0; i < cmds.Count; i++)
+            try
             {
-                command.CommandText = cmds[i];
-                command.ExecuteNonQuery();
+                for (int i = 0; i < cmds.Count; i++)
+                {
+                    command.CommandText = cmds[i];
+                    command.ExecuteNonQuery();
+                }
+            }
+            catch
+            {
+                Console.WriteLine("Hiba történt a tábla feltöltése során");
             }
         }
     }
