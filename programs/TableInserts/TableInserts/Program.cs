@@ -19,19 +19,16 @@ namespace TableInserts
             List<string> cmds = new List<string>();
 
             List<Movie> movies = new List<Movie>();
-            FillUps fill = new FillUps();
-            Algorithms alg = new Algorithms();
             Table table = new Table();
-            int mode = 0;
+
             
             List<int> id = new List<int>();
-            List<string> data = new List<string>();
             List<int> finalMovieID = new List<int>();
             List<int> finalDataID=new List<int>();
 
-            movies=conn.collectMoviedata();
+            movies=conn.CollectMovie();
   
-            table.Options(conn, id, data, movies, finalMovieID, finalDataID, fill, alg, cmds, mode);
+            table.Options(conn, id, movies, finalMovieID, finalDataID, cmds);
             Console.ReadKey();
         }
     }

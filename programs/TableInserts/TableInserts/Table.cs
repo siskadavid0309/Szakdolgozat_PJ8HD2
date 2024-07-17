@@ -8,128 +8,149 @@ namespace TableInserts
 {
     internal class Table
     {
-        public static void genre(SqlConnector conn, List<int> id, List<string> data, FillUps fill, Algorithms alg, List<string> cmds)
+        public static void Genre(SqlConnector conn, List<int> id, List<string> cmds)
         {
-            data = conn.prepareGenres();
+            Algorithms alg = new Algorithms();
+            FillUps fill = new FillUps();
+            List<string> data = conn.PrepareGenres();
             data = alg.Matches(data);
-            alg.idGenerate(ref id, data);
-            fill.G(id, data, ref cmds);
-            conn.executeInserts(cmds);
+            alg.GenerateId(ref id, data);
+            fill.Genres(id, data, ref cmds);
+            conn.ExecuteInserts(cmds);
             cmds.Clear();
         }
 
-        public static void genre_movie(SqlConnector conn, List<int> id, List<string> data, List<Movie> movies,
-             List<int> finalMovieID, List<int> finalDataID, FillUps fill, Algorithms alg, List<string> cmds, int mode)
+        public static void Genre_Movie(SqlConnector conn, List<int> id, List<Movie> movies,
+             List<int> finalMovieID, List<int> finalDataID, List<string> cmds)
         {
-            mode = 0;
-            data=data = conn.prepareGenres();
+            
+            Algorithms alg= new Algorithms();
+            FillUps fill= new FillUps();
+            int mode = (int)Mode.Genre;
+            List<string> data = conn.PrepareGenres();
             data = alg.Matches(data);
-            alg.idGenerate(ref id, data);
+            alg.GenerateId(ref id, data);
 
-            alg.createData(id, data, movies, ref finalMovieID, ref finalDataID, mode);
-            fill.MG(finalMovieID, finalDataID, ref cmds);
-            conn.executeInserts(cmds);
+            alg.CreateData(id, data, movies, ref finalMovieID, ref finalDataID, mode);
+            fill.MoviesGenres(finalMovieID, finalDataID, ref cmds);
+            conn.ExecuteInserts(cmds);
             cmds.Clear();
         }
 
-        public static void keyword(SqlConnector conn, List<int> id, List<string> data, FillUps fill, Algorithms alg, List<string> cmds)
+        public static void Keyword(SqlConnector conn, List<int> id, List<string> cmds)
         {
-            data=conn.prepareKeywords();
+            Algorithms alg = new Algorithms();
+            FillUps fill = new FillUps();
+            List<string> data =conn.PrepareKeywords();
             data = alg.Matches(data);
-            alg.idGenerate(ref id, data);
-            fill.K(id, data, ref cmds);
-            conn.executeInserts(cmds);
+            alg.GenerateId(ref id, data);
+            fill.Keywords(id, data, ref cmds);
+            conn.ExecuteInserts(cmds);
             cmds.Clear();
         }
 
-        public static void keyword_movie(SqlConnector conn, List<int> id, List<string> data, List<Movie> movies,
-             List<int> finalMovieID, List<int> finalDataID, FillUps fill, Algorithms alg, List<string> cmds, int mode)
+        public static void Keyword_Movie(SqlConnector conn, List<int> id, List<Movie> movies,
+             List<int> finalMovieID, List<int> finalDataID, List<string> cmds)
         {
-            mode = 1;
-            data=conn.prepareKeywords();
+            Algorithms alg = new Algorithms();
+            FillUps fill = new FillUps();
+            int mode = (int)Mode.Keyword;
+            List<string> data =conn.PrepareKeywords();
             data = alg.Matches(data);
-            alg.idGenerate(ref id, data);
+            alg.GenerateId(ref id, data);
 
-            alg.createData(id, data, movies, ref finalMovieID, ref finalDataID, mode);
-            fill.MK(finalMovieID, finalDataID, ref cmds);
-            conn.executeInserts(cmds);
+            alg.CreateData(id, data, movies, ref finalMovieID, ref finalDataID, mode);
+            fill.MoviesKeywords(finalMovieID, finalDataID, ref cmds);
+            conn.ExecuteInserts(cmds);
             cmds.Clear();
         }
 
-        public static void language(SqlConnector conn, List<int> id, List<string> data, FillUps fill, Algorithms alg, List<string> cmds)
+        public static void Language(SqlConnector conn, List<int> id, List<string> cmds)
         {
-            data = conn.prepareLanguages();
+            Algorithms alg = new Algorithms();
+            FillUps fill = new FillUps();
+            List<string> data = conn.PrepareLanguages();
             data = alg.Matches(data);
-            alg.idGenerate(ref id, data);
-            fill.L(id, data, ref cmds);
-            conn.executeInserts(cmds);
+            alg.GenerateId(ref id, data);
+            fill.Languages(id, data, ref cmds);
+            conn.ExecuteInserts(cmds);
             cmds.Clear();
         }
 
-        public static void language_movie(SqlConnector conn, List<int> id, List<string> data, List<Movie> movies,
-             List<int> finalMovieID, List<int> finalDataID, FillUps fill, Algorithms alg, List<string> cmds, int mode)
+        public static void Language_Movie(SqlConnector conn, List<int> id, List<Movie> movies,
+             List<int> finalMovieID, List<int> finalDataID, List<string> cmds)
         {
-            mode = 2;
-            data=conn.prepareLanguages();
+            Algorithms alg = new Algorithms();
+            FillUps fill = new FillUps();
+            int mode = (int)Mode.Language;
+            List<string> data =conn.PrepareLanguages();
             data = alg.Matches(data);
-            alg.idGenerate(ref id, data);
+            alg.GenerateId(ref id, data);
 
-            alg.createData(id, data, movies, ref finalMovieID, ref finalDataID, mode);
-            fill.ML(finalMovieID, finalDataID, ref cmds);
-            conn.executeInserts(cmds);
+            alg.CreateData(id, data, movies, ref finalMovieID, ref finalDataID, mode);
+            fill.MoviesLanguages(finalMovieID, finalDataID, ref cmds);
+            conn.ExecuteInserts(cmds);
             cmds.Clear();
         }
 
-        public static void director(SqlConnector conn, List<int> id, List<string> data, FillUps fill, Algorithms alg, List<string> cmds)
+        public static void Director(SqlConnector conn, List<int> id, List<string> cmds)
         {
-            data=conn.prepareDirectors();
+            Algorithms alg = new Algorithms();
+            FillUps fill = new FillUps();
+            List<string> data =conn.PrepareDirectors();
             data = alg.Matches(data);
-            alg.idGenerate(ref id, data);
-            fill.D(id, data, ref cmds);
-            conn.executeInserts(cmds);
+            alg.GenerateId(ref id, data);
+            fill.Directors(id, data, ref cmds);
+            conn.ExecuteInserts(cmds);
             cmds.Clear();
         }
 
-        public static void director_movie(SqlConnector conn, List<int> id, List<string> data, List<Movie> movies,
-             List<int> finalMovieID, List<int> finalDataID, FillUps fill, Algorithms alg, List<string> cmds, int mode)
+        public static void Director_Movie(SqlConnector conn, List<int> id, List<Movie> movies,
+             List<int> finalMovieID, List<int> finalDataID, List<string> cmds)
         {
-            mode = 3;
-            data = conn.prepareDirectors();
+            Algorithms alg = new Algorithms();
+            FillUps fill = new FillUps();
+            int mode = (int)Mode.Director;
+            List<string> data = conn.PrepareDirectors();
             data = alg.Matches(data);
-            alg.idGenerate(ref id, data);
+            alg.GenerateId(ref id, data);
 
-            alg.createData(id, data, movies, ref finalMovieID, ref finalDataID, mode);
-            fill.MD(finalMovieID, finalDataID, ref cmds);
-            conn.executeInserts(cmds);
+            alg.CreateData(id, data, movies, ref finalMovieID, ref finalDataID, mode);
+            fill.MoviesDirectors(finalMovieID, finalDataID, ref cmds);
+            conn.ExecuteInserts(cmds);
             cmds.Clear();
         }
 
-        public static void country(SqlConnector conn, List<int> id, List<string> data, FillUps fill, Algorithms alg, List<string> cmds)
+        public static void Country(SqlConnector conn, List<int> id, List<string> cmds)
         {
-            data = conn.prepareCountries();
+            Algorithms alg = new Algorithms();
+            FillUps fill = new FillUps();
+            List<string> data = conn.PrepareCountries();
             data = alg.Matches(data);
-            alg.idGenerate(ref id, data);
-            fill.C(id, data, ref cmds);
-            conn.executeInserts(cmds);
+            alg.GenerateId(ref id, data);
+            fill.Countries(id, data, ref cmds);
+            conn.ExecuteInserts(cmds);
             cmds.Clear();
         }
 
-        public static void country_movie(SqlConnector conn, List<int> id, List<string> data, List<Movie> movies,
-             List<int> finalMovieID, List<int> finalDataID, FillUps fill, Algorithms alg, List<string> cmds, int mode)
+        public static void Country_Movie(SqlConnector conn, List<int> id, List<Movie> movies,
+             List<int> finalMovieID, List<int> finalDataID,List<string> cmds)
         {
-            mode = 4;
-            data = conn.prepareCountries();
+            Algorithms alg = new Algorithms();
+            FillUps fill = new FillUps();
+            int mode = (int)Mode.Country;
+            List<string> data = conn.PrepareCountries();
             data = alg.Matches(data);
-            alg.idGenerate(ref id, data);
+            alg.GenerateId(ref id, data);
 
-            alg.createData(id, data, movies, ref finalMovieID, ref finalDataID, mode);
-            fill.MC(finalMovieID, finalDataID, ref cmds);
-            conn.executeInserts(cmds);
+            alg.CreateData(id, data, movies, ref finalMovieID, ref finalDataID, mode);
+            fill.MoviesCountries(finalMovieID, finalDataID, ref cmds);
+            conn.ExecuteInserts(cmds);
             cmds.Clear();
         }
 
-        public void Options(SqlConnector conn, List<int> id, List<string> data, List<Movie> movies,
-     List<int> finalMovieID, List<int> finalDataID, FillUps fill, Algorithms alg, List<string> cmds, int mode)
+        public void Options(SqlConnector conn, List<int> id, List<Movie> movies,
+     List<int> finalMovieID, List<int> finalDataID, List<string> cmds)
         {
             bool beolvasas = false;
             int szam = 0;
@@ -157,34 +178,34 @@ namespace TableInserts
             switch (decide)
             {
                 case 0:
-                    keyword(conn, id, data, fill, alg, cmds);
+                    Keyword(conn, id, cmds);
                     break;
                 case 1:
-                    keyword_movie(conn, id, data, movies, finalMovieID, finalDataID, fill, alg, cmds, mode);
+                    Keyword_Movie(conn, id, movies, finalMovieID, finalDataID, cmds);
                     break;
                 case 2:
-                    language(conn, id, data, fill, alg, cmds);
+                    Language(conn, id, cmds);
                     break;
                 case 3:
-                    language_movie(conn, id, data, movies, finalMovieID, finalDataID, fill, alg, cmds, mode);
+                    Language_Movie(conn, id, movies, finalMovieID, finalDataID, cmds);
                     break;
                 case 4:
-                    director(conn, id, data, fill, alg, cmds);
+                    Director(conn, id, cmds);
                     break;
                 case 5:
-                    director_movie(conn, id, data, movies, finalMovieID, finalDataID, fill, alg, cmds, mode);
+                    Director_Movie(conn, id, movies, finalMovieID, finalDataID, cmds);
                     break;
                 case 6:
-                    country(conn, id, data, fill, alg, cmds);
+                    Country(conn, id, cmds);
                     break;
                 case 7:
-                    country_movie(conn, id, data, movies, finalMovieID, finalDataID, fill, alg, cmds, mode);
+                    Country_Movie(conn, id, movies, finalMovieID, finalDataID, cmds);
                     break;
                 case 8:
-                    genre(conn, id, data, fill, alg, cmds);
+                    Genre(conn, id, cmds);
                     break;
                 case 9:
-                    genre_movie(conn, id, data, movies, finalMovieID, finalDataID, fill, alg, cmds, mode);
+                    Genre_Movie(conn, id, movies, finalMovieID, finalDataID, cmds);
                     break;
             }
         }

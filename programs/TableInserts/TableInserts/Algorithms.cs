@@ -7,12 +7,20 @@ using TableInserts;
 
 namespace TableInserts
 {
+    public enum Mode
+    {
+        Genre,
+        Keyword,
+        Language,
+        Director,
+        Country
+    }
     internal class Algorithms
     {
-        public void createData(List<int> id, List<string> list_ok, List<Movie> movies, ref List<int> finalID, ref List<int> finalData, int mode)
+        public void CreateData(List<int> id, List<string> list_ok, List<Movie> movies, ref List<int> finalID, ref List<int> finalData, int mode)
         {
             List<string> tempData = new List<string>();
-            copy(movies, ref tempData, mode);
+            Copy(movies, ref tempData, mode);
             for (int i = 0; i < tempData.Count; i++)
             {
                 for (int j = 0; j < id.Count; j++)
@@ -51,7 +59,7 @@ namespace TableInserts
             return list_ok;
         }
 
-        public void idGenerate(ref List<int> id, List<string> list)
+        public void GenerateId(ref List<int> id, List<string> list)
         {
             for (int i = 0; i < list.Count; i++)
             {
@@ -61,36 +69,36 @@ namespace TableInserts
 
 
 
-        public static void copy(List<Movie> movies, ref List<string> tempData, int mode)
+        public static void Copy(List<Movie> movies, ref List<string> tempData, int mode)
         {
 
             switch (mode)
             {
-                case 0:
+                case (int)Mode.Genre:
                     for (int i = 0; i < movies.Count; i++)
                     {
                         tempData.Add(movies[i].Genre);
                     }
                     break;
-                case 1:
+                case (int)Mode.Keyword:
                     for (int i = 0; i < movies.Count; i++)
                     {
                         tempData.Add(movies[i].Keywords);
                     }
                     break;
-                case 2:
+                case (int)Mode.Language:
                     for (int i = 0; i < movies.Count; i++)
                     {
                         tempData.Add(movies[i].Language);
                     }
                     break;
-                case 3:
+                case (int)Mode.Director:
                     for (int i = 0; i < movies.Count; i++)
                     {
                         tempData.Add(movies[i].Director);
                     }
                     break;
-                case 4:
+                case (int)Mode.Country:
                     for (int i = 0; i < movies.Count; i++)
                     {
                         tempData.Add(movies[i].Country);

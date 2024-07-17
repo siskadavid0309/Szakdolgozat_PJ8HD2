@@ -23,18 +23,18 @@ namespace TableInserts
                 }
                 catch
                 {
-                    Console.WriteLine("Az adatbázishoz való kapcsolódás sikertelen");
+                    Console.WriteLine("Failed to connect to the database");
                 }
 
             }
             else
             {
-                Console.WriteLine("Az adatbázis nem található");
+                Console.WriteLine("Database not found");
                 Environment.Exit(1);
             }
         }
 
-        public List<Movie> collectMoviedata()
+        public List<Movie> CollectMovie()
         {
             List<Movie> movies = new List<Movie>();
             SQLiteDataReader reader = null;
@@ -60,7 +60,7 @@ namespace TableInserts
             return movies;
         }
 
-        public List<string> prepareKeywords()
+        public List<string> PrepareKeywords()
         {
             List<string> keywords = new List<string>();
             SQLiteDataReader reader = null;
@@ -80,12 +80,12 @@ namespace TableInserts
                 
             }
             reader.Close();
-            removeWhitespace(ref keywords);
+            RemoveWhitespace(ref keywords);
 
             return keywords;
         }
 
-        public List<string> prepareLanguages()
+        public List<string> PrepareLanguages()
         {
             List<string> language= new List<string>();
             SQLiteDataReader reader = null;
@@ -105,12 +105,12 @@ namespace TableInserts
 
             }
             reader.Close();
-            removeWhitespace(ref language);
+            RemoveWhitespace(ref language);
 
             return language;
         }
 
-        public List<string> prepareDirectors()
+        public List<string> PrepareDirectors()
         {
             List<string> director= new List<string>();
             SQLiteDataReader reader = null;
@@ -130,12 +130,12 @@ namespace TableInserts
 
             }
             reader.Close();
-            removeWhitespace(ref director);
+            RemoveWhitespace(ref director);
 
             return director;
         }
 
-        public List<string> prepareCountries()
+        public List<string> PrepareCountries()
         {
             List<string> country= new List<string>();
             SQLiteDataReader reader = null;
@@ -155,12 +155,12 @@ namespace TableInserts
 
             }
             reader.Close();
-            removeWhitespace(ref country);
+            RemoveWhitespace(ref country);
 
             return country;
         }
 
-        public List<string> prepareGenres()
+        public List<string> PrepareGenres()
         {
             List<string> genre = new List<string>();
             SQLiteDataReader reader = null;
@@ -180,12 +180,12 @@ namespace TableInserts
 
             }
             reader.Close();
-            removeWhitespace(ref genre);
+            RemoveWhitespace(ref genre);
 
             return genre;
         }
 
-        static void removeWhitespace(ref List<string> list)
+        static void RemoveWhitespace(ref List<string> list)
         {
             for (int i = 0; i < list.Count; i++)
             {
@@ -195,7 +195,7 @@ namespace TableInserts
                 }
             }
         }
-        public void executeInserts(List<string> cmds)
+        public void ExecuteInserts(List<string> cmds)
         {
             SQLiteCommand command = connection.CreateCommand();
             try
@@ -208,7 +208,7 @@ namespace TableInserts
             }
             catch
             {
-                Console.WriteLine("Hiba történt a tábla feltöltése során");
+                Console.WriteLine("An error occurred during table upload");
             }
         }
     }
