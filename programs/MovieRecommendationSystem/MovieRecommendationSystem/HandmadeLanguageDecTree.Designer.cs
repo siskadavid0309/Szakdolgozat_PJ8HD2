@@ -1,6 +1,6 @@
 ﻿namespace MovieRecommendationSystem
 {
-    partial class DecTree
+    partial class HandmadeLanguageDecTree
     {
         /// <summary>
         /// Required designer variable.
@@ -37,7 +37,7 @@
             this.ClientSize = new System.Drawing.Size(800, 450);
             this.Name = "DecTree";
             this.Text = "DecTree";
-            this.Load += new System.EventHandler(this.DecTree_Load);
+            //this.Load += new System.EventHandler(this.DecTree_Load);
             this.ResumeLayout(false);
 
         }

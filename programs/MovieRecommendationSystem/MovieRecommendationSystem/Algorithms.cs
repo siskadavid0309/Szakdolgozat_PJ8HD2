@@ -34,6 +34,13 @@ namespace MovieRecommendationSystem
                 movies[i].CountryString = new List<string>();
             }
         }
+        /// <summary>
+        /// A movies lista GenreString, Keywordstring, stb. adattagjainak feltöltése a korábban már eltárolt azonosító integerek (id-k) segítségevel, melyeket a switch case-ben használunk
+        /// </summary>
+        /// <param name="movies"></param>
+        /// <param name="tableID">Az aktuális adat id-jait tartalmazó lista</param>
+        /// <param name="tableData">Az aktuális adatokat ténylegesen tartalmazó lista, amelyek majd a megfelelő adattagba kerülnek </param>
+        /// <param name="mode">Meghatározza hogy melyik adattagot kell feltölteni</param>
         public void tableFiller(ref List<Movie> movies, List<int> tableID, List<string> tableData, int mode)
         {
             switch(mode)
@@ -56,6 +63,13 @@ namespace MovieRecommendationSystem
             }
 
         }
+        
+        /// <summary>
+        /// A GenreString adattag tényleges feltöltése az egyes filmek esetén
+        /// </summary>
+        /// <param name="movies">A movie lista GenreString adattagjába kerülnek az adatok</param>
+        /// <param name="tableID">A Genres táblából származó műfaj azonosítók (id-k)</param>
+        /// <param name="tableData">A Genres táblából származó műfajok tényleges nevei</param>
         public void GenreToString(ref List<Movie> movies, List<int> tableID, List<string> tableData)
         {
             for (int i = 0; i < movies.Count; i++)
@@ -153,23 +167,6 @@ namespace MovieRecommendationSystem
             tableID.Clear();
             tableData.Clear();
         }
-        /*
-        public void Test(List<Movie> movies)
-        {
-           int darab = movies.Count;
-            Console.WriteLine(darab);
-            
-            int index = 0;
-            Console.WriteLine(movies[index].Id);
-            Console.WriteLine(movies[index].Title);
-            Console.WriteLine(movies[index].Released);
-            Console.WriteLine(movies[index].Runtime);
-            Console.WriteLine(movies[index].Popularity);
-            for (int i = 0; i < movies[index].Genre.Count; i++) 
-            {
-                Console.WriteLine(movies[index].Genre[i]);
-            }
-        }
-        */
+
     }
 }

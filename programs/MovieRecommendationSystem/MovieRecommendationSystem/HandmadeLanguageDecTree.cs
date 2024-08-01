@@ -13,13 +13,19 @@ using System.IO;
 
 namespace MovieRecommendationSystem
 {
-    public partial class DecTree : Form
+    public partial class HandmadeLanguageDecTree : Form
     {
-        public DecTree()
+        public HandmadeLanguageDecTree()
         {
             InitializeComponent();
         }
 
+        /// <summary>
+        /// Rekurzív metódus, amellyel a JSON fájlból a döntési fa csomópontonként kerül feldolgozásra
+        /// </summary>
+        /// <param name="dot">A string lista, amiből majd a dot fájl készül</param>
+        /// <param name="node">Az éppen aktuálisan feldolgozott csomópont</param>
+        /// <param name="parentName">Az adott csomópont szülője</param>
         static void ParseNode(List<string> dot, JToken node, string parentName)
         {
             if (node.Type == JTokenType.Object)
@@ -29,19 +35,19 @@ namespace MovieRecommendationSystem
                 {
                     foreach (var conditionObject in conditionArray)
                     {
-                        var condition = conditionObject["condition"]?.ToString();
-                        var outcome = conditionObject["outcome"];
+                        var condition = conditionObject["condition"]?.ToString(); // Lekéri a feltétel szövegét
+                        var outcome = conditionObject["outcome"]; // Lekéri a kimeneti objektumot
 
                         if (condition != null && outcome != null)
                         {
-                            if (outcome.Type == JTokenType.Object)
+                            if (outcome.Type == JTokenType.Object) // Ha a kimenetel objektum, akkor egy új csomópont
                             {
                                 string nodeName = Guid.NewGuid().ToString();
                                 dot.Add($"    \"{parentName}\" -> \"{nodeName}\" [label=\"{condition}\"];");
                                 dot.Add($"    \"{nodeName}\" [label=\"{outcome["node"]}\"];");
                                 ParseNode(dot, outcome, nodeName);
                             }
-                            else if (outcome.Type == JTokenType.Array)
+                            else if (outcome.Type == JTokenType.Array) // Ha a kimenet egy tömb, akkor minden elemet külön kezel
                             {
                                 foreach (var item in outcome)
                                 {
@@ -60,7 +66,7 @@ namespace MovieRecommendationSystem
                     }
                 }
             }
-            else if (node.Type == JTokenType.Array)
+            else if (node.Type == JTokenType.Array) //Ha az aktuális csomópont tömb, akkor szintén minden elemet külön dolgoz fel
             {
                 foreach (var item in node)
                 {
@@ -75,13 +81,16 @@ namespace MovieRecommendationSystem
             }
         }
 
+        /// <summary>
+        /// A döntési fa felépítéséhez szükséges változók létrehozása, föggvények meghívása
+        /// </summary>
         public void MainJson()
         {
-            
-            string json =  CreateJsonPath();
-            json=File.ReadAllText( json );
 
-            
+            string json = CreateJsonPath();
+            json = File.ReadAllText(json);
+
+
             JObject jsonObj = JObject.Parse(json);
 
             var dot = new List<string>
@@ -94,9 +103,9 @@ namespace MovieRecommendationSystem
 
             dot.Add("}");
 
-            File.WriteAllLines("decision_tree.dot", dot);
+            File.WriteAllLines("decision_tree.dot", dot); //A dot string lista tartalmából készít egy .dot fájlt
 
-            ProcessStartInfo startInfo = new ProcessStartInfo
+            ProcessStartInfo startInfo = new ProcessStartInfo //Graphviz parancsok amelyek segítségével a .dot fájlból .png kép készül
             {
                 FileName = "dot",
                 Arguments = "-Tpng decision_tree.dot -o decision_tree.png",
@@ -105,12 +114,12 @@ namespace MovieRecommendationSystem
                 CreateNoWindow = true
             };
 
-            using (Process process = Process.Start(startInfo))
+            using (Process process = Process.Start(startInfo)) //A folyamat indítása
             {
                 process.WaitForExit();
             }
 
-            PictureBox pictureBox = new PictureBox
+            PictureBox pictureBox = new PictureBox //PictureBox használata a kép megjelenítéséhez
             {
                 Dock = DockStyle.Fill,
                 Image = Image.FromFile("decision_tree.png"),
@@ -120,10 +129,6 @@ namespace MovieRecommendationSystem
             this.Controls.Add(pictureBox);
         }
 
-        private void DecTree_Load(object sender, EventArgs e)
-        {
-            MainJson();
-        }
 
         public string CreateJsonPath()
         {

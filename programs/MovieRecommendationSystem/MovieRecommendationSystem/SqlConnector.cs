@@ -75,14 +75,19 @@ namespace MovieRecommendation
             return movies;
         }
 
+        /// <summary>
+        /// A korábbiakban feltöltött Id adattag és a Movies_Genres kapcsolótábla segítségével a Genre adattag feltöltésre kerül, itt még a műfajokat azonosító integerekkel
+        /// </summary>
+        /// <param name="movies">A movies listában tároljuk el a filmek műfajait</param>
         public void FillupGenre(ref List<Movie> movies)
+        
         {
 
             int index;
             int data;
             SQLiteDataReader reader = null;
             SQLiteCommand command = connection.CreateCommand();
-
+            
             command.CommandText = "SELECT * FROM Movies_Genres";
             reader = command.ExecuteReader();
             while (reader.Read())
@@ -196,6 +201,12 @@ namespace MovieRecommendation
             reader.Close();
         }
 
+        /// <summary>
+        /// A korábbiakban megkapott integerek felhasználásával hozzárendeljük a műfajok nevét is a filmekhez
+        /// </summary>
+        /// <param name="movies">A movies lista megfelelő adattagjában fogjuk eltárolni a műfajok tényleges neveit is</param>
+        /// <param name="tableID">A műfajok integer azonosítót tároljuk benne</param>
+        /// <param name="tableData">A műfajok neveit tároljuk benne</param>
         public void GetGenre(ref List<Movie> movies, List<int> tableID, List<string> tableData)
         {
             SQLiteDataReader reader = null;
@@ -210,8 +221,8 @@ namespace MovieRecommendation
             }
             reader.Close();
             Algorithms alg = new Algorithms();
-            int mode = (int)Mode.Genre;
-            alg.tableFiller(ref movies, tableID, tableData, mode);
+            int mode = (int)Mode.Genre; //enumot használva beállítjuk a mode változó értékét Genre-re, amit castolással integerré alakítunk
+            alg.tableFiller(ref movies, tableID, tableData, mode); //a tableFiller metódusnak átadjuk a műfajok azonosítóit és a műfajokat is, a mode változó értékébőúl pedig tudni fogja hogy a movies lista melyik adattagját kell feltölteni a kapott adatokkal
         }
 
         public void GetKeyword(ref List<Movie> movies, List<int> tableID, List<string> tableData)

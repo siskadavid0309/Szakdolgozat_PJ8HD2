@@ -12,22 +12,27 @@ using System.Windows.Forms;
 
 namespace MovieRecommendationSystem
 {
-    public partial class Form1 : Form
+    public partial class Main : Form
     {
         private List<Movie> movies=new List<Movie>();
+        private List<Language> movie=new List<Language>();
         public List<int> tableID = new List<int>();
         public List<string> tableData = new List<string>();
-        public Form1()
+        public Main()
         {
             InitializeComponent();
         }
 
-        private void Form1_Load(object sender, EventArgs e)
+        /// <summary>
+        /// Az ablak megnyílásakor lefutó metódushívások
+        /// </summary>
+        private void Main_Load(object sender, EventArgs e)
         {
             string databasePath = CreatePath();
             SqlConnector conn = new SqlConnector(databasePath);
             Algorithms alg = new Algorithms();
-            DecTree tree = new DecTree();
+            HandmadeLanguageDecTree tree = new HandmadeLanguageDecTree();
+            CreateTree createTree = new CreateTree();
             movies = conn.collectMovie();
             alg.InitLists(ref movies);
             conn.FillupGenre(ref movies);
@@ -35,7 +40,7 @@ namespace MovieRecommendationSystem
             conn.FillupDirector(ref movies);
             conn.FillupLanguage(ref movies);
             conn.FillupCountry(ref movies);
-            //alg.Test(movies);
+
             conn.GetGenre(ref movies, tableID, tableData);
             conn.GetKeyword(ref movies, tableID, tableData);
             conn.GetDirector(ref movies, tableID, tableData);
@@ -44,6 +49,7 @@ namespace MovieRecommendationSystem
             dataGridView1.DataSource= movies;
             tree.Show();
             tree.MainJson();
+
         }
 
         public string CreatePath()
