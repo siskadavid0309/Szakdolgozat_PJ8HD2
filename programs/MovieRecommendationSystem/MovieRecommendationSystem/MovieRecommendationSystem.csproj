@@ -133,7 +133,13 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Algorithms.cs" />
-    <Compile Include="CreateTree.cs" />
+    <Compile Include="DecTreeForDirector.cs" />
+    <Compile Include="DecTreeForGender.cs" />
+    <Compile Include="DecTreeForTmdb.cs" />
+    <Compile Include="Director.cs" />
+    <Compile Include="DirectorPredict.cs" />
+    <Compile Include="Gender.cs" />
+    <Compile Include="GenderPredict.cs" />
     <Compile Include="HandmadeLanguageDecTree.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -147,14 +153,15 @@
     <Compile Include="Main.Designer.cs">
       <DependentUpon>Main.cs</DependentUpon>
     </Compile>
-    <Compile Include="HandmadeLanguageDecTreeNode.cs" />
-    <Compile Include="LangPredict.cs" />
+    <Compile Include="LanguagePredict.cs" />
     <Compile Include="Language.cs" />
     <Compile Include="Movie.cs" />
-    <Compile Include="MoviePrediction.cs" />
     <Compile Include="Program.cs" />
+    <Compile Include="PropertiesForDecTree.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="SqlConnector.cs" />
+    <Compile Include="Tmdb.cs" />
+    <Compile Include="TmdbPredict.cs" />
     <EmbeddedResource Include="HandmadeLanguageDecTree.resx">
       <DependentUpon>HandmadeLanguageDecTree.cs</DependentUpon>
     </EmbeddedResource>
@@ -183,6 +190,9 @@
   </ItemGroup>
   <ItemGroup>
     <None Include="App.config" />
+  </ItemGroup>
+  <ItemGroup>
+    <Service Include="{508349B6-6B84-4DF5-91F0-309BEEBAD82D}" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <Target Name="EnsureNuGetPackageBuildImports" BeforeTargets="PrepareForBuild">

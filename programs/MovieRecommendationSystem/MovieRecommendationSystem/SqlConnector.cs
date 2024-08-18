@@ -207,7 +207,7 @@ namespace MovieRecommendation
         /// <param name="movies">A movies lista megfelelő adattagjában fogjuk eltárolni a műfajok tényleges neveit is</param>
         /// <param name="tableID">A műfajok integer azonosítót tároljuk benne</param>
         /// <param name="tableData">A műfajok neveit tároljuk benne</param>
-        public void GetGenre(ref List<Movie> movies, List<int> tableID, List<string> tableData)
+        public void GetGenre(ref List<Movie> movies, List<int> tableID, List<string> tableData, ref PropertiesForDecTree prop)
         {
             SQLiteDataReader reader = null;
             SQLiteCommand command = connection.CreateCommand();
@@ -218,14 +218,16 @@ namespace MovieRecommendation
             {
                 tableID.Add(Convert.ToInt32(reader["ID"]));
                 tableData.Add(reader["Genre_Name"].ToString());
+                prop.GenreAll.Add(reader["Genre_Name"].ToString());
             }
             reader.Close();
             Algorithms alg = new Algorithms();
             int mode = (int)Mode.Genre; //enumot használva beállítjuk a mode változó értékét Genre-re, amit castolással integerré alakítunk
             alg.tableFiller(ref movies, tableID, tableData, mode); //a tableFiller metódusnak átadjuk a műfajok azonosítóit és a műfajokat is, a mode változó értékébőúl pedig tudni fogja hogy a movies lista melyik adattagját kell feltölteni a kapott adatokkal
+           // prop.GenreAll = tableData;
         }
 
-        public void GetKeyword(ref List<Movie> movies, List<int> tableID, List<string> tableData)
+        public void GetKeyword(ref List<Movie> movies, List<int> tableID, List<string> tableData, ref PropertiesForDecTree prop)
         {
             SQLiteDataReader reader = null;
             SQLiteCommand command = connection.CreateCommand();
@@ -236,14 +238,17 @@ namespace MovieRecommendation
             {
                 tableID.Add(Convert.ToInt32(reader["ID"]));
                 tableData.Add(reader["Keyword_Name"].ToString());
+                prop.KeywordAll.Add(reader["Keyword_Name"].ToString());
             }
             reader.Close();
             Algorithms alg = new Algorithms();
             int mode = (int)Mode.Keyword;
             alg.tableFiller(ref movies, tableID, tableData, mode);
+            //prop.KeywordAll = tableData;
+
         }
 
-        public void GetLanguage(ref List<Movie> movies, List<int> tableID, List<string> tableData)
+        public void GetLanguage(ref List<Movie> movies, List<int> tableID, List<string> tableData, ref PropertiesForDecTree prop)
         {
             SQLiteDataReader reader = null;
             SQLiteCommand command = connection.CreateCommand();
@@ -259,9 +264,10 @@ namespace MovieRecommendation
             Algorithms alg = new Algorithms();
             int mode = (int)Mode.Language;
             alg.tableFiller(ref movies, tableID, tableData, mode);
+            prop.LanguageAll = tableData;
         }
 
-        public void GetDirector(ref List<Movie> movies, List<int> tableID, List<string> tableData)
+        public void GetDirector(ref List<Movie> movies, List<int> tableID, List<string> tableData, ref PropertiesForDecTree prop)
         {
             SQLiteDataReader reader = null;
             SQLiteCommand command = connection.CreateCommand();
@@ -277,9 +283,10 @@ namespace MovieRecommendation
             Algorithms alg = new Algorithms();
             int mode = (int)Mode.Director;
             alg.tableFiller(ref movies, tableID, tableData, mode);
+            prop.DirectorAll = tableData;
         }
 
-        public void GetCountry(ref List<Movie> movies, List<int> tableID, List<string> tableData)
+        public void GetCountry(ref List<Movie> movies, List<int> tableID, List<string> tableData, ref PropertiesForDecTree prop)
         {
             SQLiteDataReader reader = null;
             SQLiteCommand command = connection.CreateCommand();
@@ -295,6 +302,7 @@ namespace MovieRecommendation
             Algorithms alg = new Algorithms();
             int mode = (int)Mode.Country;
             alg.tableFiller(ref movies, tableID, tableData, mode);
+            prop.CountryAll = tableData;
         }
     }
 }

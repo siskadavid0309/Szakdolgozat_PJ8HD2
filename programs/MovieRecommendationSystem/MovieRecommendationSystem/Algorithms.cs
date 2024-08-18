@@ -16,6 +16,103 @@ namespace MovieRecommendationSystem
     }
     internal class Algorithms
     {
+        public void InitFillContains(ref PropertiesForDecTree prop, List<Movie> movies)
+        {
+            prop.GenreAll = new List<string>();
+            prop.KeywordAll = new List<string>();
+            prop.LanguageAll = new List<string>();
+            prop.DirectorAll = new List<string>();
+            prop.CountryAll = new List<string>();
+            
+           
+
+           
+        }
+
+        public void FillContains(ref PropertiesForDecTree prop, List<Movie> movies)
+        {
+            prop.GenreContains = new int[movies.Count][];
+            for (int i = 0; i < movies.Count; i++)
+            {
+                prop.GenreContains[i] = new int[prop.GenreAll.Count];
+            }
+
+            prop.KeywordContains = new int[movies.Count][];
+            for (int i = 0; i < movies.Count; i++)
+            {
+                prop.KeywordContains[i] = new int[prop.KeywordAll.Count];
+            }
+
+            prop.LanguageContains = new int[movies.Count][];
+            for (int i = 0; i < movies.Count; i++)
+            {
+                prop.LanguageContains[i] = new int[prop.LanguageAll.Count];
+            }
+
+            prop.DirectorContains = new int[movies.Count][];
+            for (int i = 0; i < movies.Count; i++)
+            {
+                prop.DirectorContains[i] = new int[prop.DirectorAll.Count];
+            }
+
+            prop.CountryContains = new int[movies.Count][];
+            for (int i = 0; i < movies.Count; i++)
+            {
+                prop.CountryContains[i] = new int[prop.CountryAll.Count];
+            }
+
+
+
+            for (int i = 0; i < movies.Count; i++)
+            {
+                for (int j = 0; j < prop.GenreAll.Count; j++)
+                {
+                    for (int k = 0; k < movies[i].GenreString.Count; k++)
+                    {
+
+                        if (movies[i].GenreString[k].Contains(prop.GenreAll[j]))
+                        {
+                            prop.GenreContains[i][j] = 1;
+                            break;
+                        }
+                        else
+                        {
+                            prop.GenreContains[i][j] = 0;
+                        }
+                    }
+                }
+            }
+
+            for (int i = 0; i < movies.Count; i++)
+            {
+                for (int j = 0; j < prop.KeywordAll.Count; j++)
+                {
+                    for (int k = 0; k < movies[i].KeywordString.Count; k++)
+                    {
+
+                        if (movies[i].KeywordString[k].Contains(prop.KeywordAll[j]))
+                        {
+                            prop.KeywordContains[i][j] = 1;
+                            break;
+                        }
+                        else
+                        {
+                            prop.KeywordContains[i][j] = 0;
+                        }
+                    }
+                }
+            }
+            Console.WriteLine(prop.GenreAll[0]);
+            for (int i = 0; i < prop.GenreContains.Length; i++)
+            {
+                Console.WriteLine(prop.GenreContains[i].Length);
+            }
+            //Console.WriteLine(prop.KeywordAll[0]);
+            for (int i = 0; i < prop.KeywordContains.Length; i++)
+            {
+                Console.WriteLine(prop.KeywordContains[i].Length);
+            }
+        }
 
         public void InitLists(ref List<Movie> movies)
         {
@@ -167,6 +264,23 @@ namespace MovieRecommendationSystem
             tableID.Clear();
             tableData.Clear();
         }
-
+        /*
+        public void Test(List<Movie> movies)
+        {
+           int darab = movies.Count;
+            Console.WriteLine(darab);
+            
+            int index = 0;
+            Console.WriteLine(movies[index].Id);
+            Console.WriteLine(movies[index].Title);
+            Console.WriteLine(movies[index].Released);
+            Console.WriteLine(movies[index].Runtime);
+            Console.WriteLine(movies[index].Popularity);
+            for (int i = 0; i < movies[index].Genre.Count; i++) 
+            {
+                Console.WriteLine(movies[index].Genre[i]);
+            }
+        }
+        */
     }
 }

@@ -32,24 +32,36 @@ namespace MovieRecommendationSystem
             SqlConnector conn = new SqlConnector(databasePath);
             Algorithms alg = new Algorithms();
             HandmadeLanguageDecTree tree = new HandmadeLanguageDecTree();
-            CreateTree createTree = new CreateTree();
+            PropertiesForDecTree properties =new PropertiesForDecTree();
             movies = conn.collectMovie();
             alg.InitLists(ref movies);
+            alg.InitFillContains( ref properties, movies);
             conn.FillupGenre(ref movies);
             conn.FillupKeywords(ref movies);
             conn.FillupDirector(ref movies);
             conn.FillupLanguage(ref movies);
             conn.FillupCountry(ref movies);
 
-            conn.GetGenre(ref movies, tableID, tableData);
-            conn.GetKeyword(ref movies, tableID, tableData);
-            conn.GetDirector(ref movies, tableID, tableData);
-            conn.GetLanguage(ref movies, tableID, tableData);
-            conn.GetCountry(ref movies, tableID, tableData);
+            conn.GetGenre(ref movies, tableID, tableData,ref properties);
+            conn.GetKeyword(ref movies, tableID, tableData, ref properties);
+            conn.GetDirector(ref movies, tableID, tableData, ref properties);
+            conn.GetLanguage(ref movies, tableID, tableData, ref properties);
+            conn.GetCountry(ref movies, tableID, tableData, ref properties);
             dataGridView1.DataSource= movies;
             tree.Show();
             tree.MainJson();
-
+            //createTree.BuildTree(movies);
+            DecTreeForLanguage dectree= new DecTreeForLanguage();
+            DecTreeForGender gender= new DecTreeForGender();
+            DecTreeForDirector director= new DecTreeForDirector();
+            DecTreeForTmdb tmdb= new DecTreeForTmdb();
+            //gender.BuildTree(movies, properties);
+            alg.FillContains(ref properties, movies);
+            //gender.BuildTree(movies, properties);
+            //director.BuildTree(movies, properties);
+            tmdb.BuildTree(movies, properties);
+            //dectree.Build(movies);
+            //dectree.Build2(movies);
         }
 
         public string CreatePath()

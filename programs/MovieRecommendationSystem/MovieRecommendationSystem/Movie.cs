@@ -47,5 +47,7 @@ namespace MovieRecommendationSystem
         public string LanguageStringWithCommas => string.Join(", ", LanguageString);
         public string DirectorStringWithCommas => string.Join(", ", DirectorString);
         public string CountryStringWithCommas => string.Join(", ", CountryString);
+
+
     }
 }
