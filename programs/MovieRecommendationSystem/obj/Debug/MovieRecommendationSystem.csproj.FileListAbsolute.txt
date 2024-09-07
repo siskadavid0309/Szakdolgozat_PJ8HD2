@@ -1,0 +1,117 @@
+C:\Users\siskad\source\repos\MovieRecommendationSystem\MovieRecommendationSystem\bin\Debug\MovieRecommendationSystem.exe.config
+C:\Users\siskad\source\repos\MovieRecommendationSystem\MovieRecommendationSystem\bin\Debug\MovieRecommendationSystem.exe
+C:\Users\siskad\source\repos\MovieRecommendationSystem\MovieRecommendationSystem\bin\Debug\MovieRecommendationSystem.pdb
+C:\Users\siskad\source\repos\MovieRecommendationSystem\MovieRecommendationSystem\bin\Debug\EntityFramework.dll
+C:\Users\siskad\source\repos\MovieRecommendationSystem\MovieRecommendationSystem\bin\Debug\EntityFramework.SqlServer.dll
+C:\Users\siskad\source\repos\MovieRecommendationSystem\MovieRecommendationSystem\bin\Debug\System.Data.SQLite.dll
+C:\Users\siskad\source\repos\MovieRecommendationSystem\MovieRecommendationSystem\bin\Debug\System.Data.SQLite.EF6.dll
+C:\Users\siskad\source\repos\MovieRecommendationSystem\MovieRecommendationSystem\bin\Debug\System.Data.SQLite.Linq.dll
+C:\Users\siskad\source\repos\MovieRecommendationSystem\MovieRecommendationSystem\bin\Debug\EntityFramework.xml
+C:\Users\siskad\source\repos\MovieRecommendationSystem\MovieRecommendationSystem\bin\Debug\EntityFramework.SqlServer.xml
+C:\Users\siskad\source\repos\MovieRecommendationSystem\MovieRecommendationSystem\bin\Debug\System.Data.SQLite.xml
+C:\Users\siskad\source\repos\MovieRecommendationSystem\MovieRecommendationSystem\obj\Debug\MovieRecommendationSystem.csproj.AssemblyReference.cache
+C:\Users\siskad\source\repos\MovieRecommendationSystem\MovieRecommendationSystem\obj\Debug\MovieRecommendationSystem.csproj.SuggestedBindingRedirects.cache
+C:\Users\siskad\source\repos\MovieRecommendationSystem\MovieRecommendationSystem\obj\Debug\MovieRecommendationSystem.Properties.Resources.resources
+C:\Users\siskad\source\repos\MovieRecommendationSystem\MovieRecommendationSystem\obj\Debug\MovieRecommendationSystem.csproj.GenerateResource.cache
+C:\Users\siskad\source\repos\MovieRecommendationSystem\MovieRecommendationSystem\obj\Debug\MovieRecommendationSystem.csproj.CoreCompileInputs.cache
+C:\Users\siskad\source\repos\MovieRecommendationSystem\MovieRecommendationSystem\obj\Debug\MovieRecommendationSystem.csproj.CopyComplete
+C:\Users\siskad\source\repos\MovieRecommendationSystem\MovieRecommendationSystem\obj\Debug\MovieRecommendationSystem.exe
+C:\Users\siskad\source\repos\MovieRecommendationSystem\MovieRecommendationSystem\obj\Debug\MovieRecommendationSystem.pdb
+C:\Users\siskad\source\repos\MovieRecommendationSystem\MovieRecommendationSystem\obj\Debug\MovieRecommendationSystem.Form1.resources
+C:\Users\siskad\source\repos\MovieRecommendationSystem\MovieRecommendationSystem\bin\Debug\Newtonsoft.Json.dll
+C:\Users\siskad\source\repos\MovieRecommendationSystem\MovieRecommendationSystem\bin\Debug\Newtonsoft.Json.xml
+C:\Users\siskad\source\repos\MovieRecommendationSystem\MovieRecommendationSystem\obj\Debug\MovieRecommendationSystem.DecTree.resources
+C:\Users\siskad\source\repos\MovieRecommendationSystem másolata (2)\MovieRecommendationSystem\bin\Debug\MovieRecommendationSystem.exe.config
+C:\Users\siskad\source\repos\MovieRecommendationSystem másolata (2)\MovieRecommendationSystem\bin\Debug\MovieRecommendationSystem.exe
+C:\Users\siskad\source\repos\MovieRecommendationSystem másolata (2)\MovieRecommendationSystem\bin\Debug\MovieRecommendationSystem.pdb
+C:\Users\siskad\source\repos\MovieRecommendationSystem másolata (2)\MovieRecommendationSystem\bin\Debug\EntityFramework.dll
+C:\Users\siskad\source\repos\MovieRecommendationSystem másolata (2)\MovieRecommendationSystem\bin\Debug\EntityFramework.SqlServer.dll
+C:\Users\siskad\source\repos\MovieRecommendationSystem másolata (2)\MovieRecommendationSystem\bin\Debug\Newtonsoft.Json.dll
+C:\Users\siskad\source\repos\MovieRecommendationSystem másolata (2)\MovieRecommendationSystem\bin\Debug\System.Data.SQLite.dll
+C:\Users\siskad\source\repos\MovieRecommendationSystem másolata (2)\MovieRecommendationSystem\bin\Debug\System.Data.SQLite.EF6.dll
+C:\Users\siskad\source\repos\MovieRecommendationSystem másolata (2)\MovieRecommendationSystem\bin\Debug\System.Data.SQLite.Linq.dll
+C:\Users\siskad\source\repos\MovieRecommendationSystem másolata (2)\MovieRecommendationSystem\bin\Debug\EntityFramework.xml
+C:\Users\siskad\source\repos\MovieRecommendationSystem másolata (2)\MovieRecommendationSystem\bin\Debug\EntityFramework.SqlServer.xml
+C:\Users\siskad\source\repos\MovieRecommendationSystem másolata (2)\MovieRecommendationSystem\bin\Debug\Newtonsoft.Json.xml
+C:\Users\siskad\source\repos\MovieRecommendationSystem másolata (2)\MovieRecommendationSystem\bin\Debug\System.Data.SQLite.xml
+C:\Users\siskad\source\repos\MovieRecommendationSystem másolata (2)\MovieRecommendationSystem\obj\Debug\MovieRecommendationSystem.csproj.AssemblyReference.cache
+C:\Users\siskad\source\repos\MovieRecommendationSystem másolata (2)\MovieRecommendationSystem\obj\Debug\MovieRecommendationSystem.csproj.SuggestedBindingRedirects.cache
+C:\Users\siskad\source\repos\MovieRecommendationSystem másolata (2)\MovieRecommendationSystem\obj\Debug\MovieRecommendationSystem.DecTree.resources
+C:\Users\siskad\source\repos\MovieRecommendationSystem másolata (2)\MovieRecommendationSystem\obj\Debug\MovieRecommendationSystem.Form1.resources
+C:\Users\siskad\source\repos\MovieRecommendationSystem másolata (2)\MovieRecommendationSystem\obj\Debug\MovieRecommendationSystem.Properties.Resources.resources
+C:\Users\siskad\source\repos\MovieRecommendationSystem másolata (2)\MovieRecommendationSystem\obj\Debug\MovieRecommendationSystem.csproj.GenerateResource.cache
+C:\Users\siskad\source\repos\MovieRecommendationSystem másolata (2)\MovieRecommendationSystem\obj\Debug\MovieRecommendationSystem.csproj.CoreCompileInputs.cache
+C:\Users\siskad\source\repos\MovieRecommendationSystem másolata (2)\MovieRecommendationSystem\obj\Debug\MovieRecommendationSystem.csproj.CopyComplete
+C:\Users\siskad\source\repos\MovieRecommendationSystem másolata (2)\MovieRecommendationSystem\obj\Debug\MovieRecommendationSystem.exe
+C:\Users\siskad\source\repos\MovieRecommendationSystem másolata (2)\MovieRecommendationSystem\obj\Debug\MovieRecommendationSystem.pdb
+C:\Users\siskad\source\repos\backup_fontos_movierecsys\MovieRecommendationSystem\bin\Debug\MovieRecommendationSystem.exe.config
+C:\Users\siskad\source\repos\backup_fontos_movierecsys\MovieRecommendationSystem\bin\Debug\MovieRecommendationSystem.exe
+C:\Users\siskad\source\repos\backup_fontos_movierecsys\MovieRecommendationSystem\bin\Debug\MovieRecommendationSystem.pdb
+C:\Users\siskad\source\repos\backup_fontos_movierecsys\MovieRecommendationSystem\bin\Debug\EntityFramework.dll
+C:\Users\siskad\source\repos\backup_fontos_movierecsys\MovieRecommendationSystem\bin\Debug\EntityFramework.SqlServer.dll
+C:\Users\siskad\source\repos\backup_fontos_movierecsys\MovieRecommendationSystem\bin\Debug\Newtonsoft.Json.dll
+C:\Users\siskad\source\repos\backup_fontos_movierecsys\MovieRecommendationSystem\bin\Debug\System.Data.SQLite.dll
+C:\Users\siskad\source\repos\backup_fontos_movierecsys\MovieRecommendationSystem\bin\Debug\System.Data.SQLite.EF6.dll
+C:\Users\siskad\source\repos\backup_fontos_movierecsys\MovieRecommendationSystem\bin\Debug\System.Data.SQLite.Linq.dll
+C:\Users\siskad\source\repos\backup_fontos_movierecsys\MovieRecommendationSystem\bin\Debug\EntityFramework.xml
+C:\Users\siskad\source\repos\backup_fontos_movierecsys\MovieRecommendationSystem\bin\Debug\EntityFramework.SqlServer.xml
+C:\Users\siskad\source\repos\backup_fontos_movierecsys\MovieRecommendationSystem\bin\Debug\Newtonsoft.Json.xml
+C:\Users\siskad\source\repos\backup_fontos_movierecsys\MovieRecommendationSystem\bin\Debug\System.Data.SQLite.xml
+C:\Users\siskad\source\repos\backup_fontos_movierecsys\MovieRecommendationSystem\obj\Debug\MovieRecommendationSystem.csproj.AssemblyReference.cache
+C:\Users\siskad\source\repos\backup_fontos_movierecsys\MovieRecommendationSystem\obj\Debug\MovieRecommendationSystem.csproj.SuggestedBindingRedirects.cache
+C:\Users\siskad\source\repos\backup_fontos_movierecsys\MovieRecommendationSystem\obj\Debug\MovieRecommendationSystem.Properties.Resources.resources
+C:\Users\siskad\source\repos\backup_fontos_movierecsys\MovieRecommendationSystem\obj\Debug\MovieRecommendationSystem.csproj.GenerateResource.cache
+C:\Users\siskad\source\repos\backup_fontos_movierecsys\MovieRecommendationSystem\obj\Debug\MovieRecommendationSystem.csproj.CoreCompileInputs.cache
+C:\Users\siskad\source\repos\backup_fontos_movierecsys\MovieRecommendationSystem\obj\Debug\MovieRecommendationSystem.csproj.CopyComplete
+C:\Users\siskad\source\repos\backup_fontos_movierecsys\MovieRecommendationSystem\obj\Debug\MovieRecommendationSystem.exe
+C:\Users\siskad\source\repos\backup_fontos_movierecsys\MovieRecommendationSystem\obj\Debug\MovieRecommendationSystem.pdb
+C:\Users\siskad\source\repos\backup_fontos_movierecsys\MovieRecommendationSystem\bin\Debug\FastTreeNative.dll
+C:\Users\siskad\source\repos\backup_fontos_movierecsys\MovieRecommendationSystem\bin\Debug\LdaNative.dll
+C:\Users\siskad\source\repos\backup_fontos_movierecsys\MovieRecommendationSystem\bin\Debug\CpuMathNative.dll
+C:\Users\siskad\source\repos\backup_fontos_movierecsys\MovieRecommendationSystem\bin\Debug\Microsoft.Bcl.Numerics.dll
+C:\Users\siskad\source\repos\backup_fontos_movierecsys\MovieRecommendationSystem\bin\Debug\Microsoft.ML.Core.dll
+C:\Users\siskad\source\repos\backup_fontos_movierecsys\MovieRecommendationSystem\bin\Debug\Microsoft.ML.CpuMath.dll
+C:\Users\siskad\source\repos\backup_fontos_movierecsys\MovieRecommendationSystem\bin\Debug\Microsoft.ML.Data.dll
+C:\Users\siskad\source\repos\backup_fontos_movierecsys\MovieRecommendationSystem\bin\Debug\Microsoft.ML.DataView.dll
+C:\Users\siskad\source\repos\backup_fontos_movierecsys\MovieRecommendationSystem\bin\Debug\Microsoft.ML.dll
+C:\Users\siskad\source\repos\backup_fontos_movierecsys\MovieRecommendationSystem\bin\Debug\Microsoft.ML.FastTree.dll
+C:\Users\siskad\source\repos\backup_fontos_movierecsys\MovieRecommendationSystem\bin\Debug\Microsoft.ML.KMeansClustering.dll
+C:\Users\siskad\source\repos\backup_fontos_movierecsys\MovieRecommendationSystem\bin\Debug\Microsoft.ML.PCA.dll
+C:\Users\siskad\source\repos\backup_fontos_movierecsys\MovieRecommendationSystem\bin\Debug\Microsoft.ML.StandardTrainers.dll
+C:\Users\siskad\source\repos\backup_fontos_movierecsys\MovieRecommendationSystem\bin\Debug\Microsoft.ML.Transforms.dll
+C:\Users\siskad\source\repos\backup_fontos_movierecsys\MovieRecommendationSystem\bin\Debug\System.Buffers.dll
+C:\Users\siskad\source\repos\backup_fontos_movierecsys\MovieRecommendationSystem\bin\Debug\System.CodeDom.dll
+C:\Users\siskad\source\repos\backup_fontos_movierecsys\MovieRecommendationSystem\bin\Debug\System.Collections.Immutable.dll
+C:\Users\siskad\source\repos\backup_fontos_movierecsys\MovieRecommendationSystem\bin\Debug\System.Memory.dll
+C:\Users\siskad\source\repos\backup_fontos_movierecsys\MovieRecommendationSystem\bin\Debug\System.Numerics.Tensors.dll
+C:\Users\siskad\source\repos\backup_fontos_movierecsys\MovieRecommendationSystem\bin\Debug\System.Numerics.Vectors.dll
+C:\Users\siskad\source\repos\backup_fontos_movierecsys\MovieRecommendationSystem\bin\Debug\System.Runtime.CompilerServices.Unsafe.dll
+C:\Users\siskad\source\repos\backup_fontos_movierecsys\MovieRecommendationSystem\bin\Debug\System.Threading.Channels.dll
+C:\Users\siskad\source\repos\backup_fontos_movierecsys\MovieRecommendationSystem\bin\Debug\System.Threading.Tasks.Extensions.dll
+C:\Users\siskad\source\repos\backup_fontos_movierecsys\MovieRecommendationSystem\bin\Debug\Microsoft.Bcl.Numerics.xml
+C:\Users\siskad\source\repos\backup_fontos_movierecsys\MovieRecommendationSystem\bin\Debug\Microsoft.ML.xml
+C:\Users\siskad\source\repos\backup_fontos_movierecsys\MovieRecommendationSystem\bin\Debug\Microsoft.ML.Core.xml
+C:\Users\siskad\source\repos\backup_fontos_movierecsys\MovieRecommendationSystem\bin\Debug\Microsoft.ML.CpuMath.xml
+C:\Users\siskad\source\repos\backup_fontos_movierecsys\MovieRecommendationSystem\bin\Debug\Microsoft.ML.Data.xml
+C:\Users\siskad\source\repos\backup_fontos_movierecsys\MovieRecommendationSystem\bin\Debug\Microsoft.ML.DataView.xml
+C:\Users\siskad\source\repos\backup_fontos_movierecsys\MovieRecommendationSystem\bin\Debug\Microsoft.ML.FastTree.xml
+C:\Users\siskad\source\repos\backup_fontos_movierecsys\MovieRecommendationSystem\bin\Debug\Microsoft.ML.KMeansClustering.xml
+C:\Users\siskad\source\repos\backup_fontos_movierecsys\MovieRecommendationSystem\bin\Debug\Microsoft.ML.PCA.xml
+C:\Users\siskad\source\repos\backup_fontos_movierecsys\MovieRecommendationSystem\bin\Debug\Microsoft.ML.StandardTrainers.xml
+C:\Users\siskad\source\repos\backup_fontos_movierecsys\MovieRecommendationSystem\bin\Debug\Microsoft.ML.Transforms.xml
+C:\Users\siskad\source\repos\backup_fontos_movierecsys\MovieRecommendationSystem\bin\Debug\System.Buffers.xml
+C:\Users\siskad\source\repos\backup_fontos_movierecsys\MovieRecommendationSystem\bin\Debug\System.Collections.Immutable.xml
+C:\Users\siskad\source\repos\backup_fontos_movierecsys\MovieRecommendationSystem\bin\Debug\System.Memory.xml
+C:\Users\siskad\source\repos\backup_fontos_movierecsys\MovieRecommendationSystem\bin\Debug\System.Numerics.Tensors.xml
+C:\Users\siskad\source\repos\backup_fontos_movierecsys\MovieRecommendationSystem\bin\Debug\System.Numerics.Vectors.xml
+C:\Users\siskad\source\repos\backup_fontos_movierecsys\MovieRecommendationSystem\bin\Debug\System.Runtime.CompilerServices.Unsafe.xml
+C:\Users\siskad\source\repos\backup_fontos_movierecsys\MovieRecommendationSystem\bin\Debug\System.Threading.Channels.xml
+C:\Users\siskad\source\repos\backup_fontos_movierecsys\MovieRecommendationSystem\bin\Debug\System.Threading.Tasks.Extensions.xml
+C:\Users\siskad\source\repos\backup_fontos_movierecsys\MovieRecommendationSystem\obj\Debug\MovieRecommendationSystem.Main.resources
+C:\Users\siskad\source\repos\backup_fontos_movierecsys\MovieRecommendationSystem\obj\Debug\MovieRecommendationSystem.HandmadeLanguageDecTree.resources
+C:\Users\siskad\source\repos\backup_fontos_movierecsys\MovieRecommendationSystem\bin\Debug\TableInsertsLibrary.dll
+C:\Users\siskad\source\repos\backup_fontos_movierecsys\MovieRecommendationSystem\bin\Debug\TableInsertsLibrary.pdb
+C:\Users\siskad\source\repos\backup_fontos_movierecsys\MovieRecommendationSystem\bin\Debug\TableInsertsLibrary.dll.config
+C:\Users\siskad\source\repos\backup_fontos_movierecsys\MovieRecommendationSystem\obj\Debug\MovieRecommendationSystem.ShowTable.resources
+C:\Users\siskad\source\repos\backup_fontos_movierecsys\MovieRecommendationSystem\obj\Debug\MovieRecommendationSystem.ManageMovie.resources
+C:\Users\siskad\source\repos\backup_fontos_movierecsys\MovieRecommendationSystem\obj\Debug\MovieRecommendationSystem.ProgressBar.resources
