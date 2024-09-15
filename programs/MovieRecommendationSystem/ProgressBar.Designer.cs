@@ -57,6 +57,7 @@
             this.ClientSize = new System.Drawing.Size(461, 228);
             this.Controls.Add(this.label1);
             this.Controls.Add(this.progressBarForDBupdate);
+            this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedSingle;
             this.Name = "ProgressBar";
             this.Text = "ProgressBar";
             this.ResumeLayout(false);

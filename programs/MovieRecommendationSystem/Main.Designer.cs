@@ -32,7 +32,7 @@
             this.ShowTable = new System.Windows.Forms.Button();
             this.ChangeDB = new System.Windows.Forms.Button();
             this.ManageMoviesButton = new System.Windows.Forms.Button();
-            this.progressBar = new System.Windows.Forms.ProgressBar();
+            this.buttonRecommendationSystem = new System.Windows.Forms.Button();
             ((System.ComponentModel.ISupportInitialize)(this.dataGridView1)).BeginInit();
             this.SuspendLayout();
             // 
@@ -76,21 +76,22 @@
             this.ManageMoviesButton.UseVisualStyleBackColor = true;
             this.ManageMoviesButton.Click += new System.EventHandler(this.ManageMoviesButton_Click);
             // 
-            // progressBar
+            // buttonRecommendationSystem
             // 
-            this.progressBar.Location = new System.Drawing.Point(267, 287);
-            this.progressBar.Name = "progressBar";
-            this.progressBar.Size = new System.Drawing.Size(236, 23);
-            this.progressBar.Style = System.Windows.Forms.ProgressBarStyle.Marquee;
-            this.progressBar.TabIndex = 4;
-            this.progressBar.Visible = false;
+            this.buttonRecommendationSystem.Location = new System.Drawing.Point(37, 171);
+            this.buttonRecommendationSystem.Name = "buttonRecommendationSystem";
+            this.buttonRecommendationSystem.Size = new System.Drawing.Size(100, 37);
+            this.buttonRecommendationSystem.TabIndex = 4;
+            this.buttonRecommendationSystem.Text = "Recommendation System";
+            this.buttonRecommendationSystem.UseVisualStyleBackColor = true;
+            this.buttonRecommendationSystem.Click += new System.EventHandler(this.buttonRecommendationSystem_Click);
             // 
             // Main
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(800, 450);
-            this.Controls.Add(this.progressBar);
+            this.Controls.Add(this.buttonRecommendationSystem);
             this.Controls.Add(this.ManageMoviesButton);
             this.Controls.Add(this.ChangeDB);
             this.Controls.Add(this.ShowTable);
@@ -109,7 +110,7 @@
         private System.Windows.Forms.Button ShowTable;
         private System.Windows.Forms.Button ChangeDB;
         private System.Windows.Forms.Button ManageMoviesButton;
-        private System.Windows.Forms.ProgressBar progressBar;
+        private System.Windows.Forms.Button buttonRecommendationSystem;
     }
 }
 

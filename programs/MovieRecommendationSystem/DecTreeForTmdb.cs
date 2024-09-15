@@ -21,7 +21,7 @@ namespace MovieRecommendationSystem
             //A tanító adatokat tartalmazó lista létrehozása és feltöltése, ez esetben az adatbázis első 20 darab film megfelelő adataival
             var movies = new List<Tmdb>();
 
-            for (int i = 20; i < moviesL.Count; i++) 
+            for (int i = 20; i < moviesL.Count; i++)
             {
                 Tmdb newTmdb = new Tmdb
                 {
@@ -58,7 +58,7 @@ namespace MovieRecommendationSystem
 
             var trainingPipeline = dataProcessPipeline.Append(trainer);
 
-            
+
             var model = trainingPipeline.Fit(data); // Modell tanítása a Fit() metódussal
 
             // A betanított modell kiértékelése
@@ -83,4 +83,6 @@ namespace MovieRecommendationSystem
             Console.WriteLine($"Predicted TmdbScore: {prediction.PredictedTmdb}");
         }
     }
+
 }
+

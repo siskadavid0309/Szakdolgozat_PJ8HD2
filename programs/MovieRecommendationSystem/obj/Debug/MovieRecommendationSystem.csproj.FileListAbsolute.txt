@@ -115,3 +115,6 @@ C:\Users\siskad\source\repos\backup_fontos_movierecsys\MovieRecommendationSystem
 C:\Users\siskad\source\repos\backup_fontos_movierecsys\MovieRecommendationSystem\obj\Debug\MovieRecommendationSystem.ShowTable.resources
 C:\Users\siskad\source\repos\backup_fontos_movierecsys\MovieRecommendationSystem\obj\Debug\MovieRecommendationSystem.ManageMovie.resources
 C:\Users\siskad\source\repos\backup_fontos_movierecsys\MovieRecommendationSystem\obj\Debug\MovieRecommendationSystem.ProgressBar.resources
+C:\Users\siskad\source\repos\backup_fontos_movierecsys\MovieRecommendationSystem\obj\Debug\MovieRecommendationSystem.SetPriority.resources
+C:\Users\siskad\source\repos\backup_fontos_movierecsys\MovieRecommendationSystem\obj\Debug\MovieRecommendationSystem.QuestionsControl.resources
+C:\Users\siskad\source\repos\backup_fontos_movierecsys\MovieRecommendationSystem\obj\Debug\MovieRecommendationSystem.RecommendationSystem.resources

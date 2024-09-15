@@ -16,6 +16,7 @@ namespace MovieRecommendationSystem
 {
     public partial class Main : Form
     {
+
         private List<Movie> movies=new List<Movie>();
        // private List<Language> movie=new List<Language>();
         public List<int> tableID = new List<int>();
@@ -36,6 +37,7 @@ namespace MovieRecommendationSystem
             Algorithms alg = new Algorithms();
             HandmadeLanguageDecTree tree = new HandmadeLanguageDecTree();
             PropertiesForDecTree properties =new PropertiesForDecTree();
+            MeasureAccuracy measure= new MeasureAccuracy();
             //alg.LoadTableInserts(ref moviesTI, databasePath);
             movies = conn.collectMovie();
             alg.InitLists(ref movies);
@@ -64,9 +66,13 @@ namespace MovieRecommendationSystem
             alg.FillContains(ref properties, movies);
             //gender.BuildTree(movies, properties);
             //director.BuildTree(movies, properties);
-            tmdb.BuildTree(movies, properties);
-            //dectree.Build(movies);
-            //dectree.Build2(movies);
+            //tmdb.BuildTree(movies, properties);
+            // méréses cucc measure.MeasureAll(movies, properties);
+            
+            //SetPriority setPriority= new SetPriority();
+            //setPriority.Show();
+
+
 
         }
         /// <summary>
@@ -182,6 +188,12 @@ namespace MovieRecommendationSystem
         {
             ManageMovie manageMovie = new ManageMovie(movies);
             manageMovie.Show();
+        }
+
+        private void buttonRecommendationSystem_Click(object sender, EventArgs e)
+        {
+            RecommendationSystem recommendationSystem = new RecommendationSystem(movies);
+            recommendationSystem.Show();
         }
     }
 }
