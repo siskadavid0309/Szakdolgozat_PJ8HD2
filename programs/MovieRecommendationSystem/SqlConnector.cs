@@ -258,12 +258,13 @@ namespace MovieRecommendation
             {
                 tableID.Add(Convert.ToInt32(reader["ID"]));
                 tableData.Add(reader["Language_Name"].ToString());
+                prop.LanguageAll.Add(reader["Language_Name"].ToString());
             }
             reader.Close();
             Algorithms alg = new Algorithms();
             int mode = (int)Mode.Language;
             alg.tableFiller(ref movies, tableID, tableData, mode);
-            prop.LanguageAll = tableData;
+            //prop.LanguageAll = tableData;
         }
 
         public void GetDirector(ref List<Movie> movies, List<int> tableID, List<string> tableData, ref PropertiesForDecTree prop)
@@ -277,12 +278,13 @@ namespace MovieRecommendation
             {
                 tableID.Add(Convert.ToInt32(reader["ID"]));
                 tableData.Add(reader["Director_Name"].ToString());
+                prop.DirectorAll.Add(reader["Director_Name"].ToString());
             }
             reader.Close();
             Algorithms alg = new Algorithms();
             int mode = (int)Mode.Director;
             alg.tableFiller(ref movies, tableID, tableData, mode);
-            prop.DirectorAll = tableData;
+            //prop.DirectorAll = tableData;
         }
 
         public void GetCountry(ref List<Movie> movies, List<int> tableID, List<string> tableData, ref PropertiesForDecTree prop)
@@ -296,12 +298,13 @@ namespace MovieRecommendation
             {
                 tableID.Add(Convert.ToInt32(reader["ID"]));
                 tableData.Add(reader["Country_Name"].ToString());
+                prop.CountryAll.Add(reader["Country_Name"].ToString());
             }
             reader.Close();
             Algorithms alg = new Algorithms();
             int mode = (int)Mode.Country;
             alg.tableFiller(ref movies, tableID, tableData, mode);
-            prop.CountryAll = tableData;
+           // prop.CountryAll = tableData;
         }
 
         public void UpdateCommand(string cmd)

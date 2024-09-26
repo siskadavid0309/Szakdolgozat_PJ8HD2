@@ -99,14 +99,14 @@ namespace MovieRecommendationSystem
                 double learningRate = random.NextDouble() * (0.2 - 0.01) + 0.01; // learningRate: 0.01-től 0.2-ig
                 */
                 int leaves = random.Next(2, 10); // numberOfLeaves: 2-től 30-ig
-                int trees = random.Next(20, 200); // numberOfTrees: 20-tól 200-ig
-                int minExample = random.Next(3, 10); // minimumExampleCountPerLeaf: 1-től 10-ig
+                int trees = random.Next(200, 300); // numberOfTrees: 20-tól 200-ig
+                int minExample = random.Next(1, 2); // minimumExampleCountPerLeaf: 1-től 10-ig
                 double learningRate = random.NextDouble() * (0.2 - 0.01) + 0.01;
                 var mlContext = new MLContext();
                 //A tanító adatokat tartalmazó lista létrehozása és feltöltése, ez esetben az adatbázis első 20 darab film megfelelő adataival
                 var movies = new List<Tmdb>();
 
-                for (int i = 0; i < 40; i++)
+                for (int i = 0; i < 20; i++)
                 {
                     Tmdb newTmdb = new Tmdb
                     {
@@ -278,7 +278,7 @@ namespace MovieRecommendationSystem
                 //A tanító adatokat tartalmazó lista létrehozása és feltöltése, ez esetben az adatbázis első 20 darab film megfelelő adataival
                 var movies = new List<Tmdb>();
 
-                for (int i = 0; i < 40; i++)
+                for (int i = 0; i < 20; i++)
                 {
                     Tmdb newTmdb = new Tmdb
                     {

@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace MovieRecommendationSystem
 {
-    internal class PropertiesForDecTree
+    public class PropertiesForDecTree
     {
         public List<string> GenreAll { get; set; }
         public List<string> KeywordAll { get; set; }

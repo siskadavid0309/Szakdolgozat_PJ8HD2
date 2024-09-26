@@ -13,9 +13,11 @@ namespace MovieRecommendationSystem
     public partial class RecommendationSystem : Form
     {
         private List<Movie> movies = new List<Movie>();
-        public RecommendationSystem(List<Movie> moviesFromMain)
+        private PropertiesForDecTree properties = new PropertiesForDecTree();
+        public RecommendationSystem(List<Movie> moviesFromMain, PropertiesForDecTree propertiesFromMain)
         {
             movies=moviesFromMain;
+            properties=propertiesFromMain;
             InitializeComponent();
             LoadPriorityControl();
         }
@@ -55,10 +57,26 @@ namespace MovieRecommendationSystem
             QuestionsControl questionsControl = new QuestionsControl();
             questionsControl.Dock = DockStyle.Fill; // Teljesen kitölti a panelt
 
-            questionsControl.SetPriorityList(selectedList);
-            questionsControl.SetMoviesList(movies);
+            questionsControl.SetLists(selectedList, movies, properties);
             // Hozzáadjuk a panelhez
             panelContainer.Controls.Add(questionsControl);
+
+            questionsControl.FinishButtonClicked += QuestionsControl_FinishButtonClicked;
+        }
+
+        private void LoadResults()
+        {
+            panelContainer.Controls.Clear();
+            Results results = new Results(movies);
+            results.Dock = DockStyle.Fill; // Teljesen kitölti a panelt
+            panelContainer.Controls.Add(results);
+
+        }
+        private void QuestionsControl_FinishButtonClicked(object sender, EventArgs e)
+        {
+            // Amikor a felhasználó a következő gombra kattint
+            QuestionsControl questionsControl = (QuestionsControl)sender;
+            LoadResults();
         }
     }
 }

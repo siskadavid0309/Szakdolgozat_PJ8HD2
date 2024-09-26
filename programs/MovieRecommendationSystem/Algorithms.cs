@@ -157,7 +157,7 @@ namespace MovieRecommendationSystem
                     }
                 }
             }
-
+            /*
             for (int i = 0; i < movies.Count; i++)
             {
                 for (int j = 0; j < prop.LanguageAll.Count; j++)
@@ -177,7 +177,7 @@ namespace MovieRecommendationSystem
                     }
                 }
             }
-
+            */
             for (int i = 0; i < movies.Count; i++)
             {
                 for (int j = 0; j < prop.DirectorAll.Count; j++)
@@ -207,17 +207,18 @@ namespace MovieRecommendationSystem
 
                         if (movies[i].CountryString[k].Contains(prop.CountryAll[j]))
                         {
-                            prop.DirectorContains[i][j] = 1;
+                            prop.CountryContains[i][j] = 1;
                             break;
                         }
                         else
                         {
-                            prop.DirectorContains[i][j] = 0;
+                            prop.CountryContains[i][j] = 0;
                         }
                     }
                 }
             }
-
+            Console.WriteLine(prop.DirectorAll.Count);
+            /*
             Console.WriteLine(prop.GenreAll[0]);
             for (int i = 0; i < prop.GenreContains.Length; i++)
             {
@@ -227,7 +228,7 @@ namespace MovieRecommendationSystem
             for (int i = 0; i < prop.KeywordContains.Length; i++)
             {
                 Console.WriteLine(prop.KeywordContains[i].Length);
-            }
+            }*/
         }
 
         public void InitLists(ref List<Movie> movies)
@@ -380,23 +381,43 @@ namespace MovieRecommendationSystem
             tableID.Clear();
             tableData.Clear();
         }
-        /*
-        public void Test(List<Movie> movies)
+
+        public void IsBlockbuster(ref List<Movie> movies)
         {
-           int darab = movies.Count;
-            Console.WriteLine(darab);
-            
-            int index = 0;
-            Console.WriteLine(movies[index].Id);
-            Console.WriteLine(movies[index].Title);
-            Console.WriteLine(movies[index].Released);
-            Console.WriteLine(movies[index].Runtime);
-            Console.WriteLine(movies[index].Popularity);
-            for (int i = 0; i < movies[index].Genre.Count; i++) 
+            long difference = 0;
+            for(int i = 0;i < movies.Count;i++)
             {
-                Console.WriteLine(movies[index].Genre[i]);
+                difference = movies[i].Revenue - movies[i].Budget;
+                if (difference > 0)
+                {
+                    movies[i].IsBlockbuster = true;
+                }
+                else
+                {
+                    movies[i].IsBlockbuster=false;
+                }
             }
         }
-        */
+
+        public void IsPopular(ref List<Movie> movies)
+        {
+            double avg = 0;
+            for (int i = 0; i < movies.Count; i++)
+            {
+                avg += movies[i].Popularity;
+            }
+            avg = avg / movies.Count;
+            for (int i = 0; i < movies.Count; i++)
+            {
+                if (movies[i].Popularity > avg)
+                {
+                    movies[i].IsPopular = true;
+                }
+                else
+                {
+                    movies[i].IsPopular = false;
+                }
+            }
+        }
     }
 }

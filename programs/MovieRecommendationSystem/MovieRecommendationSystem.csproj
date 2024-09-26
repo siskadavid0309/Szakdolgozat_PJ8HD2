@@ -30,7 +30,7 @@
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
-    <PlatformTarget>AnyCPU</PlatformTarget>
+    <PlatformTarget>x64</PlatformTarget>
     <DebugType>pdbonly</DebugType>
     <Optimize>true</Optimize>
     <OutputPath>bin\Release\</OutputPath>
@@ -141,6 +141,7 @@
     <Compile Include="DecTreeForTmdb.cs" />
     <Compile Include="Director.cs" />
     <Compile Include="DirectorPredict.cs" />
+    <Compile Include="FeaturesForCheckbox.cs" />
     <Compile Include="Gender.cs" />
     <Compile Include="GenderPredict.cs" />
     <Compile Include="HandmadeLanguageDecTree.cs">
@@ -150,6 +151,8 @@
       <DependentUpon>HandmadeLanguageDecTree.cs</DependentUpon>
     </Compile>
     <Compile Include="DecTreeForLanguage.cs" />
+    <Compile Include="LearningMovie.cs" />
+    <Compile Include="LoadQuestions.cs" />
     <Compile Include="Main.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -158,6 +161,8 @@
     </Compile>
     <Compile Include="LanguagePredict.cs" />
     <Compile Include="Language.cs" />
+    <Compile Include="MainClass.cs" />
+    <Compile Include="MainDecTree.cs" />
     <Compile Include="ManageMovie.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -166,6 +171,7 @@
     </Compile>
     <Compile Include="MeasureAccuracy.cs" />
     <Compile Include="Movie.cs" />
+    <Compile Include="PredictedScore.cs" />
     <Compile Include="PriorityListItem.cs" />
     <Compile Include="Program.cs" />
     <Compile Include="ProgressBar.cs">
@@ -176,6 +182,7 @@
     </Compile>
     <Compile Include="PropertiesForDecTree.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="Question.cs" />
     <Compile Include="QuestionsControl.cs">
       <SubType>UserControl</SubType>
     </Compile>
@@ -187,6 +194,12 @@
     </Compile>
     <Compile Include="RecommendationSystem.Designer.cs">
       <DependentUpon>RecommendationSystem.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Results.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="Results.Designer.cs">
+      <DependentUpon>Results.cs</DependentUpon>
     </Compile>
     <Compile Include="SetPriority.cs">
       <SubType>UserControl</SubType>
@@ -229,6 +242,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="RecommendationSystem.resx">
       <DependentUpon>RecommendationSystem.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Results.resx">
+      <DependentUpon>Results.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="SetPriority.resx">
       <DependentUpon>SetPriority.cs</DependentUpon>

@@ -118,3 +118,4 @@ C:\Users\siskad\source\repos\backup_fontos_movierecsys\MovieRecommendationSystem
 C:\Users\siskad\source\repos\backup_fontos_movierecsys\MovieRecommendationSystem\obj\Debug\MovieRecommendationSystem.SetPriority.resources
 C:\Users\siskad\source\repos\backup_fontos_movierecsys\MovieRecommendationSystem\obj\Debug\MovieRecommendationSystem.QuestionsControl.resources
 C:\Users\siskad\source\repos\backup_fontos_movierecsys\MovieRecommendationSystem\obj\Debug\MovieRecommendationSystem.RecommendationSystem.resources
+C:\Users\siskad\source\repos\backup_fontos_movierecsys\MovieRecommendationSystem\obj\Debug\MovieRecommendationSystem.Results.resources

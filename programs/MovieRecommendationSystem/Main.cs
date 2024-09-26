@@ -22,6 +22,7 @@ namespace MovieRecommendationSystem
         public List<int> tableID = new List<int>();
         public List<string> tableData = new List<string>();
         private List<MovieTI> moviesTI = new List<MovieTI>();
+        private PropertiesForDecTree properties = new PropertiesForDecTree();
         public Main()
         {
             InitializeComponent();
@@ -36,7 +37,7 @@ namespace MovieRecommendationSystem
             SqlConnector conn = new SqlConnector(databasePath);
             Algorithms alg = new Algorithms();
             HandmadeLanguageDecTree tree = new HandmadeLanguageDecTree();
-            PropertiesForDecTree properties =new PropertiesForDecTree();
+            //PropertiesForDecTree properties =new PropertiesForDecTree();
             MeasureAccuracy measure= new MeasureAccuracy();
             //alg.LoadTableInserts(ref moviesTI, databasePath);
             movies = conn.collectMovie();
@@ -54,7 +55,8 @@ namespace MovieRecommendationSystem
             conn.GetLanguage(ref movies, tableID, tableData, ref properties);
             conn.GetCountry(ref movies, tableID, tableData, ref properties);
             alg.InitArraysForFillContains(ref properties, movies);
-            
+            alg.IsBlockbuster(ref movies);
+            alg.IsPopular(ref movies);
             tree.Show();
             tree.MainJson();
             //createTree.BuildTree(movies);
@@ -67,7 +69,7 @@ namespace MovieRecommendationSystem
             //gender.BuildTree(movies, properties);
             //director.BuildTree(movies, properties);
             //tmdb.BuildTree(movies, properties);
-            // méréses cucc measure.MeasureAll(movies, properties);
+             //méréses cucc measure.MeasureAll(movies, properties);
             
             //SetPriority setPriority= new SetPriority();
             //setPriority.Show();
@@ -85,7 +87,7 @@ namespace MovieRecommendationSystem
             SqlConnector conn = new SqlConnector(databasePath);
             Algorithms alg = new Algorithms();
             HandmadeLanguageDecTree tree = new HandmadeLanguageDecTree();
-            PropertiesForDecTree properties = new PropertiesForDecTree();
+           // PropertiesForDecTree properties = new PropertiesForDecTree();
             alg.LoadTableInserts(ref moviesTI, databasePath); // A TableInserts program metódushívásait összefogó metódus meghívása
             movies = conn.collectMovie(); // a filmeket tároló lista újra feltöltése már naprakész adatokkal
             alg.InitLists(ref movies);
@@ -102,7 +104,8 @@ namespace MovieRecommendationSystem
             conn.GetLanguage(ref movies, tableID, tableData, ref properties);
             conn.GetCountry(ref movies, tableID, tableData, ref properties);
             alg.InitArraysForFillContains(ref properties, movies);
-
+            alg.IsBlockbuster(ref movies);
+            alg.IsPopular(ref movies);
             // tree.Show();
             //tree.MainJson();
             //createTree.BuildTree(movies);
@@ -192,7 +195,7 @@ namespace MovieRecommendationSystem
 
         private void buttonRecommendationSystem_Click(object sender, EventArgs e)
         {
-            RecommendationSystem recommendationSystem = new RecommendationSystem(movies);
+            RecommendationSystem recommendationSystem = new RecommendationSystem(movies, properties);
             recommendationSystem.Show();
         }
     }

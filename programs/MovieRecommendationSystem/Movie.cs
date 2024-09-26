@@ -20,6 +20,9 @@ namespace MovieRecommendationSystem
         public double Popularity { get; set; }
         public long Budget { get; set; }
         public long Revenue { get; set; }
+        public bool IsBlockbuster { get; set; }
+        public bool IsPopular { get; set; }
+        public double Score { get; set; }
 
         /// <summary>
         /// A kapcsolótáblák adatait felhasználva ezekbe az adattagokba kerülnek az egyes adatokat, pl. műfajokat azonosító integerek (id-k)

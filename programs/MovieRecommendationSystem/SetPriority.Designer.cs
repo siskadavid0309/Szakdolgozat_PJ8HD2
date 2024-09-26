@@ -38,12 +38,14 @@
             this.buttonMoveBack = new System.Windows.Forms.Button();
             this.buttonMoveBackAll = new System.Windows.Forms.Button();
             this.buttonNext = new System.Windows.Forms.Button();
+            this.labelSelected = new System.Windows.Forms.Label();
+            this.labelOriginal = new System.Windows.Forms.Label();
             this.SuspendLayout();
             // 
             // listBoxOriginal
             // 
             this.listBoxOriginal.FormattingEnabled = true;
-            this.listBoxOriginal.Location = new System.Drawing.Point(49, 95);
+            this.listBoxOriginal.Location = new System.Drawing.Point(18, 95);
             this.listBoxOriginal.Name = "listBoxOriginal";
             this.listBoxOriginal.Size = new System.Drawing.Size(236, 264);
             this.listBoxOriginal.TabIndex = 0;
@@ -51,7 +53,7 @@
             // listBoxSelected
             // 
             this.listBoxSelected.FormattingEnabled = true;
-            this.listBoxSelected.Location = new System.Drawing.Point(507, 95);
+            this.listBoxSelected.Location = new System.Drawing.Point(366, 95);
             this.listBoxSelected.Name = "listBoxSelected";
             this.listBoxSelected.Size = new System.Drawing.Size(236, 264);
             this.listBoxSelected.TabIndex = 0;
@@ -59,16 +61,16 @@
             // labelQuestion
             // 
             this.labelQuestion.AutoSize = true;
-            this.labelQuestion.Location = new System.Drawing.Point(46, 32);
+            this.labelQuestion.Location = new System.Drawing.Point(15, 30);
             this.labelQuestion.Name = "labelQuestion";
-            this.labelQuestion.Size = new System.Drawing.Size(657, 13);
+            this.labelQuestion.Size = new System.Drawing.Size(399, 26);
             this.labelQuestion.TabIndex = 1;
             this.labelQuestion.Text = "Select the features of the movies, that are important for you from the box on the" +
-    " left, and put them in order by priority in the box on the right!";
+    " left,\r\n and put them in order by priority in the box on the right!";
             // 
             // buttonMove
             // 
-            this.buttonMove.Location = new System.Drawing.Point(362, 192);
+            this.buttonMove.Location = new System.Drawing.Point(269, 181);
             this.buttonMove.Name = "buttonMove";
             this.buttonMove.Size = new System.Drawing.Size(75, 23);
             this.buttonMove.TabIndex = 2;
@@ -78,7 +80,7 @@
             // 
             // buttonMoveAll
             // 
-            this.buttonMoveAll.Location = new System.Drawing.Point(362, 221);
+            this.buttonMoveAll.Location = new System.Drawing.Point(269, 210);
             this.buttonMoveAll.Name = "buttonMoveAll";
             this.buttonMoveAll.Size = new System.Drawing.Size(75, 23);
             this.buttonMoveAll.TabIndex = 3;
@@ -88,7 +90,7 @@
             // 
             // buttonMoveUp
             // 
-            this.buttonMoveUp.Location = new System.Drawing.Point(362, 163);
+            this.buttonMoveUp.Location = new System.Drawing.Point(269, 152);
             this.buttonMoveUp.Name = "buttonMoveUp";
             this.buttonMoveUp.Size = new System.Drawing.Size(75, 23);
             this.buttonMoveUp.TabIndex = 4;
@@ -98,7 +100,7 @@
             // 
             // buttonMoveDown
             // 
-            this.buttonMoveDown.Location = new System.Drawing.Point(362, 310);
+            this.buttonMoveDown.Location = new System.Drawing.Point(269, 299);
             this.buttonMoveDown.Name = "buttonMoveDown";
             this.buttonMoveDown.Size = new System.Drawing.Size(75, 23);
             this.buttonMoveDown.TabIndex = 5;
@@ -108,7 +110,7 @@
             // 
             // buttonMoveBack
             // 
-            this.buttonMoveBack.Location = new System.Drawing.Point(362, 250);
+            this.buttonMoveBack.Location = new System.Drawing.Point(269, 239);
             this.buttonMoveBack.Name = "buttonMoveBack";
             this.buttonMoveBack.Size = new System.Drawing.Size(75, 23);
             this.buttonMoveBack.TabIndex = 6;
@@ -118,7 +120,7 @@
             // 
             // buttonMoveBackAll
             // 
-            this.buttonMoveBackAll.Location = new System.Drawing.Point(362, 279);
+            this.buttonMoveBackAll.Location = new System.Drawing.Point(269, 268);
             this.buttonMoveBackAll.Name = "buttonMoveBackAll";
             this.buttonMoveBackAll.Size = new System.Drawing.Size(75, 23);
             this.buttonMoveBackAll.TabIndex = 7;
@@ -128,7 +130,7 @@
             // 
             // buttonNext
             // 
-            this.buttonNext.Location = new System.Drawing.Point(668, 406);
+            this.buttonNext.Location = new System.Drawing.Point(527, 383);
             this.buttonNext.Name = "buttonNext";
             this.buttonNext.Size = new System.Drawing.Size(75, 23);
             this.buttonNext.TabIndex = 8;
@@ -136,10 +138,30 @@
             this.buttonNext.UseVisualStyleBackColor = true;
             this.buttonNext.Click += new System.EventHandler(this.buttonNext_Click);
             // 
+            // labelSelected
+            // 
+            this.labelSelected.AutoSize = true;
+            this.labelSelected.Location = new System.Drawing.Point(363, 79);
+            this.labelSelected.Name = "labelSelected";
+            this.labelSelected.Size = new System.Drawing.Size(148, 13);
+            this.labelSelected.TabIndex = 9;
+            this.labelSelected.Text = "Choosed properties by priority:\r\n";
+            // 
+            // labelOriginal
+            // 
+            this.labelOriginal.AutoSize = true;
+            this.labelOriginal.Location = new System.Drawing.Point(15, 79);
+            this.labelOriginal.Name = "labelOriginal";
+            this.labelOriginal.Size = new System.Drawing.Size(109, 13);
+            this.labelOriginal.TabIndex = 10;
+            this.labelOriginal.Text = "Choosable properties:\r\n";
+            // 
             // SetPriority
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
+            this.Controls.Add(this.labelOriginal);
+            this.Controls.Add(this.labelSelected);
             this.Controls.Add(this.buttonNext);
             this.Controls.Add(this.buttonMoveBackAll);
             this.Controls.Add(this.buttonMoveBack);
@@ -151,7 +173,7 @@
             this.Controls.Add(this.listBoxSelected);
             this.Controls.Add(this.listBoxOriginal);
             this.Name = "SetPriority";
-            this.Size = new System.Drawing.Size(829, 462);
+            this.Size = new System.Drawing.Size(634, 430);
             this.Load += new System.EventHandler(this.SetPriority_Load);
             this.ResumeLayout(false);
             this.PerformLayout();
@@ -171,5 +193,7 @@
         private System.Windows.Forms.Button buttonMoveBack;
         private System.Windows.Forms.Button buttonMoveBackAll;
         private System.Windows.Forms.Button buttonNext;
+        private System.Windows.Forms.Label labelSelected;
+        private System.Windows.Forms.Label labelOriginal;
     }
 }

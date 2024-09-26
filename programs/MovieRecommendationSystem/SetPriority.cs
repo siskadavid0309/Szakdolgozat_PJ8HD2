@@ -74,6 +74,7 @@ namespace MovieRecommendationSystem
             originalList.Add(new PriorityListItem { Id = (int)Features.Language, Title = "Language of a movie", Priority = 0 });
             originalList.Add(new PriorityListItem { Id = (int)Features.TmdbScore, Title = "Tmdb score of a movie", Priority = 0 });
             originalList.Add(new PriorityListItem { Id = (int)Features.Popularity, Title = "Popularity of a movie", Priority = 0 });
+            originalList.Add(new PriorityListItem { Id = (int)Features.Country, Title = "Production country of a movie", Priority = 0 });
             originalList.Add(new PriorityListItem { Id = (int)Features.Blockbuster, Title = "The movie should be a blockbuster", Priority = 0 });
 
             listBoxOriginal.DataSource = new BindingSource(originalList, null);
@@ -164,9 +165,13 @@ namespace MovieRecommendationSystem
 
         private void buttonNext_Click(object sender, EventArgs e)
         {
-            if (NextButtonClicked != null)
+            if (NextButtonClicked != null && selectedList.Count!=0)
             {
                 NextButtonClicked(this, EventArgs.Empty);
+            }
+            else
+            {
+                MessageBox.Show("Select at least one item from the list!", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
             }
         }
 
