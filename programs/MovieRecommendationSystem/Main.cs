@@ -66,11 +66,17 @@ namespace MovieRecommendationSystem
             DecTreeForTmdb tmdb= new DecTreeForTmdb();
             //gender.BuildTree(movies, properties);
             alg.FillContains(ref properties, movies);
+
+            //dectree.CompareToHandmadeDecTree(movies);
+
             //gender.BuildTree(movies, properties);
             //director.BuildTree(movies, properties);
-            //tmdb.BuildTree(movies, properties);
-             //méréses cucc measure.MeasureAll(movies, properties);
-            
+            tmdb.BuildTree(movies, properties);
+            //méréses cucc measure.MeasureAll(movies, properties);
+
+            //gender.BuildTree(movies, properties);
+            //director.BuildTree(movies, properties);
+
             //SetPriority setPriority= new SetPriority();
             //setPriority.Show();
 
@@ -115,6 +121,7 @@ namespace MovieRecommendationSystem
             DecTreeForTmdb tmdb = new DecTreeForTmdb();
             //gender.BuildTree(movies, properties);
             alg.FillContains(ref properties, movies);
+            
             //gender.BuildTree(movies, properties);
             //director.BuildTree(movies, properties);
            // tmdb.BuildTree(movies, properties);
@@ -132,10 +139,6 @@ namespace MovieRecommendationSystem
 
         }
         
-        private void dataGridView1_CellContentClick(object sender, DataGridViewCellEventArgs e)
-        {
-
-        }
 
         /// <summary>
         /// A Table gomb megnyomásakor lefutó metódus   

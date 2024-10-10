@@ -7,6 +7,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
+using System.Xml.Serialization;
 using TableInsertsLibrary;
 
 namespace MovieRecommendationSystem
@@ -48,8 +49,27 @@ namespace MovieRecommendationSystem
             dataGridView1.DataSource= moviesToShow;
             Controls.Add(dataGridView1);
             Console.WriteLine(moviesToShow[0].Title);
+            ChangeFieldName(dataGridView1);
+            dataGridView1.ReadOnly = true;
 
 
+        }
+
+        public void ChangeFieldName(DataGridView dataGridView)
+        {
+            dataGridView.Columns[0].HeaderText = "ID";
+            dataGridView.Columns[2].HeaderText = "Year of release";
+            dataGridView.Columns[3].HeaderText = "Runtime (Minutes)";
+            dataGridView.Columns[4].HeaderText = "Gender of the protagonist (1 is female, 2 is male)";
+            /*dataGridView.Columns[0].HeaderText = "Film Cím";
+            dataGridView.Columns[0].HeaderText = "Film Cím";
+            dataGridView.Columns[0].HeaderText = "Film Cím";
+            dataGridView.Columns[0].HeaderText = "Film Cím";
+            dataGridView.Columns[0].HeaderText = "Film Cím";
+            dataGridView.Columns[0].HeaderText = "Film Cím";*/
+            dataGridView.AutoSizeColumnsMode = DataGridViewAutoSizeColumnsMode.DisplayedCells;
+            //dataGridView.Columns["Genre"].HeaderText = "Műfaj";
+            //dataGridView.Columns["Runtime"].HeaderText = "Futási Idő (perc)";
         }
     }
 }

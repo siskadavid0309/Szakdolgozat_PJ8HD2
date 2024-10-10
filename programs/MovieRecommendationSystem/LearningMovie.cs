@@ -6,6 +6,9 @@ using System.Threading.Tasks;
 
 namespace MovieRecommendationSystem
 {
+    /// <summary>
+    /// A tanítóhalmaz filmjeihez létrehozott típus
+    /// </summary>
     public class LearningMovie
     {
 

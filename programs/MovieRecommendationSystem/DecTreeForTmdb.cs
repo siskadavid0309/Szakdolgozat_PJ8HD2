@@ -71,7 +71,7 @@ namespace MovieRecommendationSystem
 
             // Egy darab film Tmdb pontszámának megbecslése a modell használatával
             var predictionEngine = mlContext.Model.CreatePredictionEngine<Tmdb, TmdbPredict>(model, inputSchemaDefinition: schemaDef);
-            int film = 19;
+            /*int film = 19;
             Console.WriteLine(moviesL[film].Title);
             var testMovie = new Tmdb  // A becsléshez használt adattagok feltöltése a megbecsülendő film megfelelő adataival
             {
@@ -80,7 +80,18 @@ namespace MovieRecommendationSystem
             };
             var prediction = predictionEngine.Predict(testMovie); // A tényleges becslés elvégzése
 
-            Console.WriteLine($"Predicted TmdbScore: {prediction.PredictedTmdb}");
+            Console.WriteLine($"Predicted TmdbScore: {prediction.PredictedTmdb}");*/
+            for (int i = 59; i < 79; i++)
+            {
+                var testMovie = new Tmdb
+                {
+                    Genre = prop.GenreContains[i],
+                    Keyword = prop.KeywordContains[i],
+                };
+                var prediction = predictionEngine.Predict(testMovie);
+                Console.WriteLine($"Title:{moviesL[i].Title} Predicted Tmdb: {prediction.PredictedTmdb}");
+
+            }
         }
     }
 

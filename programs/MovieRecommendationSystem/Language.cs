@@ -14,4 +14,14 @@ namespace MovieRecommendationSystem
         public float TmdbScore { get; set; }
         public string Lang { get; set; }
     }
+
+    internal class LanguageForCompareToHandmadeDecTree
+    {
+        public int GenderOfProtagonist { get; set; }
+        public float TmdbScore { get; set; }
+        public float Popularity { get; set; }
+        public long Budget { get; set; }
+        public int NumberOfRatings { get; set; }
+        public string Lang { get; set; }
+    }
 }

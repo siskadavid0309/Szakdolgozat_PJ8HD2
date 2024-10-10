@@ -10,13 +10,14 @@ using System.Threading.Tasks;
 using System.Windows.Forms;
 using TableInsertsLibrary;
 using static System.Windows.Forms.VisualStyles.VisualStyleElement;
+using static System.Windows.Forms.VisualStyles.VisualStyleElement.ProgressBar;
 
 namespace MovieRecommendationSystem
 {
     public partial class QuestionsControl : UserControl
     {
         private List<Question> questionsList = new List<Question>();
-        private List<PriorityListItem> receivedList;
+        private List<PriorityListItem> receivedPriorityList;
         private List<Movie> movies;
         private List<LearningMovie> learningMovies = new List<LearningMovie>();
         PropertiesForDecTree properties;
@@ -33,6 +34,191 @@ namespace MovieRecommendationSystem
             InitializeComponent();
         }
 
+        /// <summary>
+        /// A kérdések összeállítása
+        /// </summary>
+        public void CreateQuestions()
+        {
+
+            Question temp = new Question
+            {
+                Title = "What is the lowest Tmdb score below which you will not watch a movie?\n\nPlease set the value with the slider, or write it into the box!",
+                Type = (int)Features.TmdbScore
+            };
+
+            questionsList.Add(temp);
+
+            temp = new Question
+            {
+                Title = "Which languages do you prefer in a movie?\n\nPlease select the languages with the checkboxes!",
+                Type = (int)Features.Language
+            };
+            questionsList.Add(temp);
+
+            temp = new Question
+            {
+                Title = "Does it important for you to be the movie a blockbuster?\n\nGive your answer by selecting the appropriate checkbox!",
+                Type = (int)Features.Blockbuster
+            };
+
+            questionsList.Add(temp);
+
+            temp = new Question
+            {
+                Title = "Do you prefer the female protagonists over the male protagonists?\n\nGive your answer by selecting the appropriate checkbox!",
+                Type = (int)Features.GenderOfProtagonist
+            };
+
+            questionsList.Add(temp);
+
+            temp = new Question
+            {
+                Title = "Do you have a favourite director from the list?\n\nIf you have, please select them with the checkboxes!",
+                Type = (int)Features.Director
+            };
+
+            questionsList.Add(temp);
+
+            temp = new Question
+            {
+                Title = "Do you have any things/objects that you like in a movie?\n\nIf you have, please select them with the checkboxes!",
+                Type = (int)Features.Keyword
+            };
+
+            questionsList.Add(temp);
+
+            temp = new Question
+            {
+                Title = "Do you have a favourite actress/actor from the list?\n\nIf you have, please select them with the checkboxes!",
+                Type = (int)Features.MainActor
+            };
+
+            questionsList.Add(temp);
+
+            temp = new Question
+            {
+                Title = "Which genres are your favourite?\n\nPlease select the genres with the checkboxes!",
+                Type = (int)Features.Genre
+            };
+
+            questionsList.Add(temp);
+
+            temp = new Question
+            {
+                Title = "Is that important for you to be the movie popular?\n\nGive your answer by selecting the appropriate checkbox!",
+                Type = (int)Features.Popularity
+            };
+
+            questionsList.Add(temp);
+
+            temp = new Question
+            {
+                Title = "What is the range of years you want to watch movies?\n\nPlease set the minimum and maximum values with the sliders, or write them into the boxes!",
+                Type = (int)Features.Released
+            };
+
+
+            questionsList.Add(temp);
+
+            temp = new Question
+            {
+                Title = "What's the range of playtime you want to watch a movie?\n\nPlease set the minimum and maximum values with the sliders, or write them into the boxes!",
+                Type = (int)Features.Runtime
+            };
+
+            questionsList.Add(temp);
+
+
+            temp = new Question
+            {
+                Title = "Which countries' movies do you like?\n\nPlease select the countries with the checkboxes!",
+                Type = (int)Features.Country
+            };
+
+            questionsList.Add(temp);
+        }
+
+        /// <summary>
+        /// A kérdések megjelenítése a beállított prioritási lista segítségével
+        /// </summary>
+        public void LoadQuestion()
+        {
+
+            for (int i = 0; i < questionsList.Count; i++)
+            {
+                if (receivedPriorityList[currentIndex].Id == questionsList[i].Type)
+                {
+                    labelQuestion.Text = questionsList[i].Title;
+                }
+            }
+        }
+
+        /// <summary>
+        /// A véletlenszerű tanítóhalmaz kialakítása
+        /// </summary>
+        public void CreateLearningData()
+        {
+            Random rndm = new Random();
+            int startIndex = rndm.Next(0, movies.Count - 30);
+            int endIndex = startIndex + 30;
+            for (int i = startIndex; i < endIndex; i++)
+            {
+                LearningMovie newMovie = new LearningMovie();
+
+                newMovie.Genre = properties.GenreContains[i];
+                newMovie.GenreString = movies[i].GenreString;
+                FillupFeaturesForCheckbox(featuresForCheckbox.Genre, movies[i].GenreString);
+
+                newMovie.Keyword = properties.KeywordContains[i];
+                newMovie.KeywordString = movies[i].KeywordString;
+                FillupFeaturesForCheckbox(featuresForCheckbox.Keyword, movies[i].KeywordString);
+
+                newMovie.Released = movies[i].Released;
+
+                newMovie.Runtime = movies[i].Runtime;
+
+                newMovie.GenderOfProtagonist = movies[i].GenderOfProtagonist;
+
+                newMovie.MainActor = movies[i].MainActor;
+                FillupFeaturesForCheckbox(featuresForCheckbox.MainActor, movies[i].MainActor);
+
+                newMovie.Director = properties.DirectorContains[i];
+                newMovie.DirectorString = movies[i].DirectorString;
+                FillupFeaturesForCheckbox(featuresForCheckbox.Director, movies[i].DirectorString);
+
+                newMovie.Language = properties.LanguageContains[i];
+                newMovie.LanguageString = movies[i].LanguageString;
+                FillupFeaturesForCheckbox(featuresForCheckbox.Language, movies[i].LanguageString);
+
+                newMovie.ProductionCountry = properties.CountryContains[i];
+                newMovie.CountryString = movies[i].CountryString;
+                FillupFeaturesForCheckbox(featuresForCheckbox.Country, movies[i].CountryString);
+
+                newMovie.TmdbScore = movies[i].TmdbScore;
+
+                newMovie.IsPopular = movies[i].IsPopular;
+
+                newMovie.Blockbuster = movies[i].IsBlockbuster;
+
+                learningMovies.Add(newMovie);
+            }
+
+            Console.WriteLine("StartIndex: " + startIndex);
+            Console.WriteLine("EndIndex: " + endIndex);
+        }
+
+        public void FillupFeaturesForCheckbox(List<string> features, string movie)
+        {
+            if (!features.Contains(movie))
+            {
+                features.Add(movie);
+            }
+        }
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="featureSelector"></param>
+        /// <param name="score"></param>
         public void ModifyScoreForTrackbar(Func<LearningMovie, double> featureSelector, double score)
         {
             for (int i = 0; i < learningMovies.Count; i++)
@@ -48,9 +234,12 @@ namespace MovieRecommendationSystem
                 }
             }
         }
+        /// <summary>
+        /// A pontszámok frissítését végző metódus
+        /// </summary>
         public void UpdateScore()
         {
-            if (receivedList[currentIndex].Id == (int)Features.GenderOfProtagonist)
+            if (receivedPriorityList[currentIndex].Id == (int)Features.GenderOfProtagonist)
             {
                 string temp = "";
                 if (checkedListBox.CheckedItems[0].ToString().Contains("True"))
@@ -71,9 +260,9 @@ namespace MovieRecommendationSystem
                     selectedFromCheckbox.Add(checkedListBox.CheckedItems[i].ToString());
                 }
             }
-            double score = (receivedList.Count - receivedList[currentIndex].Priority) * 0.1;
+            double score = (receivedPriorityList.Count - receivedPriorityList[currentIndex].Priority) * 0.1;
 
-            switch (receivedList[currentIndex].Id)
+            switch (receivedPriorityList[currentIndex].Id)
             {
 
                 case (int)Features.Genre:
@@ -134,6 +323,11 @@ namespace MovieRecommendationSystem
 
         }
 
+        /// <summary>
+        /// Az adott válaszokkal összehasonlítjuk a filmek adott tulajdonságát, a pontszámukat pedig egyezés esetén megnöveljük
+        /// </summary>
+        /// <param name="featureSelector">a learningMovies lista kiválasztott adattagja, amelyben aktuálisan keresni fogunk</param>
+        /// <param name="score">az UpdateScore metódusban kiszámolt pontszám, amellyel az egyező filmek értékeit növeljük</param>
         public void ModifyScore(Func<LearningMovie, List<string>> featureSelector, double score)
         {
             for (int i = 0; i < selectedFromCheckbox.Count; i++)
@@ -193,61 +387,12 @@ namespace MovieRecommendationSystem
         }
         public void SetLists(List<PriorityListItem> priorityList, List<Movie> moviesFromRecSys, PropertiesForDecTree propertiesFromRexSys)
         {
-            receivedList = priorityList;
+            receivedPriorityList = priorityList;
             movies = moviesFromRecSys;
             properties = propertiesFromRexSys;
         }
 
-        public void CreateLearningData()
-        {
-            Random rndm = new Random();
-            int startIndex = rndm.Next(0, movies.Count - 30);
-            int endIndex = startIndex + 30;
-            for (int i = startIndex; i < endIndex; i++)
-            {
-                LearningMovie newMovie = new LearningMovie();
-
-                newMovie.Genre = properties.GenreContains[i];
-                newMovie.GenreString = movies[i].GenreString;
-                FillupFeaturesForCheckbox(featuresForCheckbox.Genre, movies[i].GenreString);
-
-                newMovie.Keyword = properties.KeywordContains[i];
-                newMovie.KeywordString = movies[i].KeywordString;
-                FillupFeaturesForCheckbox(featuresForCheckbox.Keyword, movies[i].KeywordString);
-
-                newMovie.Released = movies[i].Released;
-
-                newMovie.Runtime = movies[i].Runtime;
-
-                newMovie.GenderOfProtagonist = movies[i].GenderOfProtagonist;
-
-                newMovie.MainActor = movies[i].MainActor;
-                FillupFeaturesForCheckbox(featuresForCheckbox.MainActor, movies[i].MainActor);
-
-                newMovie.Director = properties.DirectorContains[i];
-                newMovie.DirectorString = movies[i].DirectorString;
-                FillupFeaturesForCheckbox(featuresForCheckbox.Director, movies[i].DirectorString);
-
-                newMovie.Language = properties.LanguageContains[i];
-                newMovie.LanguageString = movies[i].LanguageString;
-                FillupFeaturesForCheckbox(featuresForCheckbox.Language, movies[i].LanguageString);
-
-                newMovie.ProductionCountry = properties.CountryContains[i];
-                newMovie.CountryString = movies[i].CountryString;
-                FillupFeaturesForCheckbox(featuresForCheckbox.Country, movies[i].CountryString);
-
-                newMovie.TmdbScore = movies[i].TmdbScore;
-
-                newMovie.IsPopular = movies[i].IsPopular;
-
-                newMovie.Blockbuster = movies[i].IsBlockbuster;
-
-                learningMovies.Add(newMovie);
-            }
-
-            Console.WriteLine("StartIndex: "+ startIndex);
-            Console.WriteLine("EndIndex: "+ endIndex);
-        }
+       
 
         public void FillupFeaturesForCheckbox(List<string> features, List<string> movie)
         {
@@ -260,13 +405,6 @@ namespace MovieRecommendationSystem
             }
         }
 
-        public void FillupFeaturesForCheckbox(List<string> features, string movie)
-        {
-            if (!features.Contains(movie))
-            {
-                features.Add(movie);
-            }
-        }
 
         public void InitFeaturesForCheckbox()
         {
@@ -284,9 +422,9 @@ namespace MovieRecommendationSystem
             CreateLearningData(); 
             CreateQuestions();
             LoadQuestion();
-            LoadAnswers(receivedList[currentIndex].Id);
+            LoadAnswers(receivedPriorityList[currentIndex].Id);
   
-            if (receivedList.Count == 1)
+            if (receivedPriorityList.Count == 1)
             {
                 buttonNext.Visible = false;
                 buttonFinish.Visible = true;
@@ -301,7 +439,9 @@ namespace MovieRecommendationSystem
                 checkedListBox.Items.Add(featuresForCheckbox.MainActor[i]);
             }
         }
-
+        /// <summary>
+        /// A felhasználó kedvenc dolgainak kiválasztása kérdéstípus esetében a műfajokhoz kapcsolódó válaszlehetőségek betöltése
+        /// </summary>
         public void GenreQuestion()
         {
             checkedListBox.Items.Clear();
@@ -316,7 +456,9 @@ namespace MovieRecommendationSystem
             SetTrackbarProperties(trackBarMin, textBoxTrackbarMin, 100, 900, 500, true, false,
                 new int[] { 115, 174 }, new int[] { 278, 225 }, new int[] { 112, 220 }, new int[] { 479, 220 }, labelSliderMinMin, labelSliderMinMax);
         }
-
+        /// <summary>
+        /// A csúszkás válaszlehetőséggel rendelkező kérdések közül a megjelenés évének esetében meghívandó metódus a válaszokhoz
+        /// </summary>
         public void ReleasedQuestion()
         {           
             SetTrackbarProperties(trackBarMax, textBoxTrackbarMax, 1950, 2024, 2001, false, true,
@@ -333,6 +475,9 @@ namespace MovieRecommendationSystem
                 new int[] { 96, 131 }, new int[] { 197, 286 }, new int[] { 93, 179 }, new int[] { 451, 179 }, labelSliderMinMin, labelSliderMinMax);
         }
 
+        /// <summary>
+        /// Az igaz/hamis kérdések esetében meghívandó algoritmus a válaszokhoz
+        /// </summary>
         public void QuestionTrueOrFalse()
         {
             trueOrFalse = true;
@@ -363,7 +508,10 @@ namespace MovieRecommendationSystem
                 FilterCheckedListBox(searchText);
             }
         }
-
+        /// <summary>
+        /// Kereső a Keywords jellemzőhöz kapcsolódó kérdéshez
+        /// </summary>
+        /// <param name="searchText">A keresett kifejezés</param>
         private void FilterCheckedListBox(string searchText)
         {
 
@@ -431,17 +579,7 @@ namespace MovieRecommendationSystem
             }
         }
 
-        public void LoadQuestion()
-        {
-
-                for (int i = 0; i < questionsList.Count; i++)
-                {
-                    if (receivedList[currentIndex].Id == questionsList[i].Type)
-                    {
-                        labelQuestion.Text = questionsList[i].Title;
-                    }
-                }          
-        }
+        
 
         public void LoadAnswers(int id)
         {
@@ -487,9 +625,14 @@ namespace MovieRecommendationSystem
             }
         }
 
+        /// <summary>
+        /// A Next gomb megnyomásakor lefutó metódus
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private void buttonNext_Click(object sender, EventArgs e)
         {
-            if (currentIndex < receivedList.Count - 1)
+            if (currentIndex < receivedPriorityList.Count - 1)
             {
                 
                 UpdateScore();
@@ -518,9 +661,9 @@ namespace MovieRecommendationSystem
                     trueOrFalse = false;
                 }
                 LoadQuestion();
-                LoadAnswers(receivedList[currentIndex].Id);
+                LoadAnswers(receivedPriorityList[currentIndex].Id);
 
-                if (currentIndex == receivedList.Count - 1)
+                if (currentIndex == receivedPriorityList.Count - 1)
                 {
                     buttonNext.Visible = false;
                     buttonFinish.Visible = true;
@@ -530,119 +673,23 @@ namespace MovieRecommendationSystem
            
         }
 
-        public void CreateQuestions()
-        {
 
-            Question temp = new Question
-            {
-                Id = 1,
-                Title = "What is the lowest Tmdb score below which you will not watch a movie?\n\nPlease set the value with the slider, or write it into the box!",
-                Type = (int)Features.TmdbScore
-            };
-
-            questionsList.Add(temp);
-
-            temp = new Question
-            {
-                Id = 2,
-                Title = "Which languages do you prefer in a movie?\n\nPlease select the languages with the checkboxes!",
-                Type = (int)Features.Language
-            };
-            questionsList.Add(temp);
-
-            temp = new Question
-            {
-                Id = 3,
-                Title = "Does it important for you to be the movie a blockbuster?\n\nGive your answer by selecting the appropriate checkbox!",
-                Type = (int)Features.Blockbuster
-            };
-
-            questionsList.Add(temp);
-
-            temp = new Question
-            {
-                Id = 4,
-                Title = "Do you prefer the female protagonists over the male protagonists?\n\nGive your answer by selecting the appropriate checkbox!",
-                Type = (int)Features.GenderOfProtagonist
-            };
-
-            questionsList.Add(temp);
-
-            temp = new Question
-            {
-                Id = 5,
-                Title = "Do you have a favourite director from the list?\n\nIf you have, please select them with the checkboxes!",
-                Type = (int)Features.Director
-            };
-
-            questionsList.Add(temp);
-
-            temp = new Question
-            {
-                Id = 6,
-                Title = "Do you have any things/objects that you like in a movie?\n\nIf you have, please select them with the checkboxes!",
-                Type = (int)Features.Keyword
-            };
-
-            questionsList.Add(temp);
-
-            temp = new Question
-            {
-                Id = 7,
-                Title = "Do you have a favourite actress/actor from the list?\n\nIf you have, please select them with the checkboxes!",
-                Type = (int)Features.MainActor
-            };
-
-            questionsList.Add(temp);
-
-            temp = new Question
-            {
-                Id = 8,
-                Title = "Which genres are your favourite?\n\nPlease select the genres with the checkboxes!",
-                Type = (int)Features.Genre
-            };
-
-            questionsList.Add(temp);
-
-            temp = new Question
-            {
-                Id = 9,
-                Title = "Is that important for you to be the movie popular?\n\nGive your answer by selecting the appropriate checkbox!",
-                Type = (int)Features.Popularity
-            };
-
-            questionsList.Add(temp);
-
-            temp = new Question
-            {
-                Id = 10,
-                Title = "What is the range of years you want to watch movies?\n\nPlease set the minimum and maximum values with the sliders, or write them into the boxes!",
-                Type = (int)Features.Released
-            };
-
-
-            questionsList.Add(temp);
-
-            temp = new Question
-            {
-                Id = 11,
-                Title = "What's the range of playtime you want to watch a movie?\n\nPlease set the minimum and maximum values with the sliders, or write them into the boxes!",
-                Type = (int)Features.Runtime
-            };
-
-            questionsList.Add(temp);
-
-
-            temp = new Question
-            {
-                Id = 12,
-                Title = "Which countries' movies do you like?\n\nPlease select the countries with the checkboxes!",
-                Type = (int)Features.Country
-            };
-
-            questionsList.Add(temp);
-        }
-        
+        /// <summary>
+        /// A trackbarok tulajdonságainak beállítását végző metódus
+        /// </summary>
+        /// <param name="trackbar">A csúszka, amelynek a jellemzőit módosítjuk</param>
+        /// <param name="textbox">A csúszkához tartozó textbox</param>
+        /// <param name="min">A beállítható minimum érték</param>
+        /// <param name="max">A beállítható maximum érték</param>
+        /// <param name="startValue">A beállítandó kezdőérték</param>
+        /// <param name="scaleInput">Annak beállítása, hogy kell-e arányosítani a beállított értékeket</param>
+        /// <param name="rangeInput">Annak beállítása, hogy tartományt adunk-e meg, vagy csak alsó/felső határértéket</param>
+        /// <param name="trackbarLocation">A csúszka helyzetének beállítása</param>
+        /// <param name="textboxLocation">A csúszkához tartozó textbox helyzetének beállítása</param>
+        /// <param name="labelMinLocation">A beállítható minimum értéket megjelenítő címke helyzete</param>
+        /// <param name="labelMaxLocation">A beállítható maximum értéket megjelenítő címke helyzete</param>
+        /// <param name="labelMin">A beállítható minimum értéket megjelenítő címke értéke</param>
+        /// <param name="labelMax">A beállítható maximum értéket megjelenítő címke értéke</param>
         public void SetTrackbarProperties(System.Windows.Forms.TrackBar trackbar, System.Windows.Forms.TextBox textbox,
             int min, int max, int startValue, bool scaleInput, bool rangeInput, int[] trackbarLocation, int[] textboxLocation, 
             int[] labelMinLocation, int[] labelMaxLocation, Label labelMin, Label labelMax)
@@ -687,14 +734,19 @@ namespace MovieRecommendationSystem
                 trackBarMin.Value = int.Parse(textBoxTrackbarMin.Text);
                 if(trackBarMin.Value > trackBarMax.Value&&checkValueError==true)
                 {
-                    MessageBox.Show("Error", "Check the input data!", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                    MessageBox.Show("Check the input data!", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
                     trackBarMin.Value = trackBarMax.Value;
                 }
             }
 
 
         }
-
+        /// <summary>
+        /// A maximum értéket beállító trackbar értékének megváltozásakor lefutó metódus, elvégzi a textbox tartalmának
+        /// frissítését és a két csúszka értékének egymáshoz képest való ellenőrzését
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private void trackBarMax_ValueChanged(object sender, EventArgs e)
         {
             if (scale == true)
@@ -741,7 +793,12 @@ namespace MovieRecommendationSystem
         {
             CheckInputError(trackBarMax, textBoxTrackbarMin, textBoxTrackbarMax);
         }
-
+        /// <summary>
+        /// A csúszkák esetében a textboxba beírt értékek ellenőrzése, és helyes érték esetén a trackbar értékének frissítése
+        /// </summary>
+        /// <param name="trackbarToChange">A trackbar, aminek az értékét módosítani szeretnénk</param>
+        /// <param name="textboxFrom">A trackbarhoz tartozó textbox, amibe az érték belekerült</param>
+        /// <param name="textbox">A másik trackbar, aminek az értékét felhasználjuk hibás érték megadásakor</param>
         public void CheckInputError(System.Windows.Forms.TrackBar trackbarToChange,
             System.Windows.Forms.TextBox textboxFrom, System.Windows.Forms.TextBox textbox)
         {
@@ -771,7 +828,11 @@ namespace MovieRecommendationSystem
                 }
             }
         }
-
+        /// <summary>
+        /// A finish gomb megnyomásakor lefutó metódus
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private void buttonFinish_Click(object sender, EventArgs e)
         {
             UpdateScore();
@@ -790,7 +851,11 @@ namespace MovieRecommendationSystem
             string searchText=textBoxSearch.Text.ToLower();
             FilterCheckedListBox(searchText);
         }
-
+        /// <summary>
+        /// Annak kezelése, hogy csak egy checkbox lehessen bepipálva igaz/hamis kérdések esetében
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private void checkedListBox_ItemCheck(object sender, ItemCheckEventArgs e)
         {
             if (trueOrFalse)

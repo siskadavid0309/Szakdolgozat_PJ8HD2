@@ -6,9 +6,11 @@ using System.Threading.Tasks;
 
 namespace MovieRecommendationSystem
 {
+    /// <summary>
+    /// Osztály létrehozása a kérdésekhez
+    /// </summary>
     internal class Question
     {
-        public int Id {get;set;}
         public string Title {get;set;}
         public int Type {get;set;}
     }

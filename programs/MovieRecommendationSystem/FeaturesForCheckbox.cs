@@ -6,13 +6,12 @@ using System.Threading.Tasks;
 
 namespace MovieRecommendationSystem
 {
+    /// <summary>
+    /// Adattagok, amelyekben filmekben a válaszlehetőségként szolgáló adatai tárolódnak
+    /// </summary>
     internal class FeaturesForCheckbox
     {
-        //public int GenderOfProtagonist { get; set; }
         public List<string> MainActor { get; set; }
-        //public bool IsPopular { get; set; }
-        //public bool Blockbuster { get; set; }
-
         public List<string> Genre { get; set; }
         public List<string> Keyword { get; set; }
         public List<string> Language { get; set; }

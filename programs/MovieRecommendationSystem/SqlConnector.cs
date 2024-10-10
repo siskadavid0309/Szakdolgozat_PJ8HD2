@@ -222,8 +222,9 @@ namespace MovieRecommendation
             }
             reader.Close();
             Algorithms alg = new Algorithms();
-            int mode = (int)Mode.Genre; //enumot használva beállítjuk a mode változó értékét Genre-re, amit castolással integerré alakítunk
-            alg.tableFiller(ref movies, tableID, tableData, mode); //a tableFiller metódusnak átadjuk a műfajok azonosítóit és a műfajokat is, a mode változó értékébőúl pedig tudni fogja hogy a movies lista melyik adattagját kell feltölteni a kapott adatokkal
+            //int mode = (int)Mode.Genre; //enumot használva beállítjuk a mode változó értékét Genre-re, amit castolással integerré alakítunk
+            //alg.tableFiller(ref movies, tableID, tableData, mode); //a tableFiller metódusnak átadjuk a műfajok azonosítóit és a műfajokat is, a mode változó értékébőúl pedig tudni fogja hogy a movies lista melyik adattagját kell feltölteni a kapott adatokkal
+            alg.GenreToString(ref movies,tableID,tableData);
         }
 
         public void GetKeyword(ref List<Movie> movies, List<int> tableID, List<string> tableData, ref PropertiesForDecTree prop)
@@ -241,8 +242,9 @@ namespace MovieRecommendation
             }
             reader.Close();
             Algorithms alg = new Algorithms();
-            int mode = (int)Mode.Keyword;
-            alg.tableFiller(ref movies, tableID, tableData, mode);
+            //int mode = (int)Mode.Keyword;
+            //alg.tableFiller(ref movies, tableID, tableData, mode);
+            alg.KeywordToString(ref movies, tableID, tableData);
             //prop.KeywordAll = tableData;
 
         }
@@ -262,8 +264,9 @@ namespace MovieRecommendation
             }
             reader.Close();
             Algorithms alg = new Algorithms();
-            int mode = (int)Mode.Language;
-            alg.tableFiller(ref movies, tableID, tableData, mode);
+            //int mode = (int)Mode.Language;
+            //alg.tableFiller(ref movies, tableID, tableData, mode);
+            alg.LanguageToString(ref movies, tableID, tableData);
             //prop.LanguageAll = tableData;
         }
 
@@ -282,8 +285,9 @@ namespace MovieRecommendation
             }
             reader.Close();
             Algorithms alg = new Algorithms();
-            int mode = (int)Mode.Director;
-            alg.tableFiller(ref movies, tableID, tableData, mode);
+            //int mode = (int)Mode.Director;
+            //alg.tableFiller(ref movies, tableID, tableData, mode);
+            alg.DirectorToString(ref movies, tableID, tableData);
             //prop.DirectorAll = tableData;
         }
 
@@ -302,9 +306,10 @@ namespace MovieRecommendation
             }
             reader.Close();
             Algorithms alg = new Algorithms();
-            int mode = (int)Mode.Country;
-            alg.tableFiller(ref movies, tableID, tableData, mode);
-           // prop.CountryAll = tableData;
+            //int mode = (int)Mode.Country;
+            //alg.tableFiller(ref movies, tableID, tableData, mode);
+            alg.CountryToString(ref movies, tableID, tableData);
+            // prop.CountryAll = tableData;
         }
 
         public void UpdateCommand(string cmd)

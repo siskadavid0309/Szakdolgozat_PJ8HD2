@@ -248,35 +248,6 @@ namespace MovieRecommendationSystem
                 movies[i].CountryString = new List<string>();
             }
         }
-        /// <summary>
-        /// A movies lista GenreString, Keywordstring, stb. adattagjainak feltöltése a korábban már eltárolt azonosító integerek (id-k) segítségevel, melyeket a switch case-ben használunk
-        /// </summary>
-        /// <param name="movies"></param>
-        /// <param name="tableID">Az aktuális adat id-jait tartalmazó lista</param>
-        /// <param name="tableData">Az aktuális adatokat ténylegesen tartalmazó lista, amelyek majd a megfelelő adattagba kerülnek </param>
-        /// <param name="mode">Meghatározza hogy melyik adattagot kell feltölteni</param>
-        public void tableFiller(ref List<Movie> movies, List<int> tableID, List<string> tableData, int mode)
-        {
-            switch(mode)
-            {
-                case (int)Mode.Genre:
-                    GenreToString(ref movies, tableID, tableData);
-                    break;
-                case (int)Mode.Keyword:
-                    KeywordToString(ref movies, tableID, tableData);
-                    break;
-                case (int)Mode.Language:
-                    LanguageToString(ref movies, tableID, tableData);
-                    break;
-                case (int)Mode.Director:
-                    DirectorToString(ref movies, tableID, tableData);
-                    break;
-                case (int)Mode.Country:
-                    CountryToString(ref movies, tableID, tableData);
-                    break;
-            }
-
-        }
         
         /// <summary>
         /// A GenreString adattag tényleges feltöltése az egyes filmek esetén
@@ -419,5 +390,10 @@ namespace MovieRecommendationSystem
                 }
             }
         }
+
+        /*public double Efficiency(List<Movie>movies,  )
+        {
+
+        }*/
     }
 }

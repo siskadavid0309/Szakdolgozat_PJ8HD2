@@ -66,13 +66,13 @@ namespace MovieRecommendationSystem
                     }
                 }
             }
-            else if (node.Type == JTokenType.Array) //Ha az aktuális csomópont tömb, akkor szintén minden elemet külön dolgoz fel
+           /* else if (node.Type == JTokenType.Array) //Ha az aktuális csomópont tömb, akkor szintén minden elemet külön dolgoz fel
             {
                 foreach (var item in node)
                 {
                     ParseNode(dot, item, parentName);
                 }
-            }
+            }*/
             else
             {
                 string leafName = Guid.NewGuid().ToString();
