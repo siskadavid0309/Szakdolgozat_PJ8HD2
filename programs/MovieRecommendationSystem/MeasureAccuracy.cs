@@ -86,6 +86,7 @@ namespace MovieRecommendationSystem
             List<float> predictedTmdbs = new List<float>();
             Random random = new Random();
             double bestRSquared = double.MinValue;
+            List<float> bestPredictions = new List<float>();
             int bestLeaves = 0;
             int bestTrees = 0;
             int bestMinExample = 0;
@@ -98,10 +99,10 @@ namespace MovieRecommendationSystem
                 int minExample = random.Next(2, 10); // minimumExampleCountPerLeaf: 1-től 10-ig
                 double learningRate = random.NextDouble() * (0.2 - 0.01) + 0.01; // learningRate: 0.01-től 0.2-ig
                 */
-                int leaves = random.Next(2, 10); // numberOfLeaves: 2-től 30-ig
+                int leaves = random.Next(6, 10); // numberOfLeaves: 2-től 30-ig
                 int trees = random.Next(200, 300); // numberOfTrees: 20-tól 200-ig
                 int minExample = random.Next(1, 2); // minimumExampleCountPerLeaf: 1-től 10-ig
-                double learningRate = random.NextDouble() * (0.2 - 0.01) + 0.01;
+                double learningRate = random.NextDouble() * (0.1 - 0.01) + 0.01;
                 var mlContext = new MLContext();
                 //A tanító adatokat tartalmazó lista létrehozása és feltöltése, ez esetben az adatbázis első 20 darab film megfelelő adataival
                 var movies = new List<Tmdb>();
@@ -176,6 +177,8 @@ namespace MovieRecommendationSystem
                 if (bestRSquared < RSquare(moviesL, predictedTmdbs))
                 {
                     bestRSquared = RSquare(moviesL, predictedTmdbs);
+                    bestPredictions.Clear();
+                    bestPredictions = predictedTmdbs;
                 }
             }
             Console.WriteLine();
@@ -186,6 +189,10 @@ namespace MovieRecommendationSystem
             Console.WriteLine("LearningRate: " + bestLearningRate);
 
             Console.WriteLine("R^2 FasttreeTuned: " + bestRSquared);
+            for (int i = 0;i < bestPredictions.Count; i++)
+            {
+                Console.WriteLine(moviesL[i].Title+": "+ bestPredictions[i]);
+            }
         }
 
         public void Sdca(List<Movie> moviesL, PropertiesForDecTree prop)
@@ -265,13 +272,16 @@ namespace MovieRecommendationSystem
             List<float> predictedTmdbs = new List<float>();
             Random random = new Random();
             double bestRSquared = double.MinValue;
+            List<float> bestPredictions = new List<float>();
             int bestmaxIterations = 0;
             float bestl2Regularization = 0;
 
             for (int j = 0; j < 200; j++) // 100 véletlenszerű keresés
             {
-                int maxIterations = random.Next(10, 1000); // MaximumNumberOfIterations: 10-től 1000-ig
-                double l2Regularization = random.NextDouble() * (1 - 0.0001) + 0.0001; // L2Regularization: 0.0001-től 1-ig
+                int maxIterations = random.Next(100, 500); // MaximumNumberOfIterations: 10-től 1000-ig
+                double l2Regularization = random.NextDouble() * (0.1 - 0.0001) + 0.0001;
+
+
                 //double biasLearningRate = random.NextDouble() * (1 - 0.01) + 0.01;
 
                 var mlContext = new MLContext();
@@ -343,6 +353,8 @@ namespace MovieRecommendationSystem
                 if (bestRSquared < RSquare(moviesL, predictedTmdbs))
                 {
                     bestRSquared = RSquare(moviesL, predictedTmdbs);
+                    bestPredictions.Clear();
+                    bestPredictions = predictedTmdbs;
                 }
             }
             Console.WriteLine();
@@ -351,6 +363,10 @@ namespace MovieRecommendationSystem
 
 
             Console.WriteLine("R^2 SdcaTuned: " + bestRSquared);
+            for (int i = 0; i < bestPredictions.Count; i++)
+            {
+                Console.WriteLine(moviesL[i].Title + ": " + bestPredictions[i]);
+            }
         }
 
         public void LbfgsPoissonRegression(List<Movie> moviesL, PropertiesForDecTree prop)

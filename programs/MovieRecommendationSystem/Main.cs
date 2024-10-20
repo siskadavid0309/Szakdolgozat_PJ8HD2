@@ -71,8 +71,8 @@ namespace MovieRecommendationSystem
 
             //gender.BuildTree(movies, properties);
             //director.BuildTree(movies, properties);
-            tmdb.BuildTree(movies, properties);
-            //méréses cucc measure.MeasureAll(movies, properties);
+            //tmdb.BuildTree(movies, properties);
+             //measure.MeasureAll(movies, properties);
 
             //gender.BuildTree(movies, properties);
             //director.BuildTree(movies, properties);
