@@ -59,7 +59,7 @@
             this.Controls.Add(this.progressBarForDBupdate);
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedSingle;
             this.Name = "ProgressBar";
-            this.Text = "ProgressBar";
+            this.Text = "Information";
             this.ResumeLayout(false);
             this.PerformLayout();
 

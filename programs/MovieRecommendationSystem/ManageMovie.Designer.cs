@@ -568,7 +568,7 @@
             this.Controls.Add(this.cboxTitle);
             this.Controls.Add(this.labelQuestion);
             this.Name = "ManageMovie";
-            this.Text = "ManageMovie";
+            this.Text = "Manage Movies";
             this.Load += new System.EventHandler(this.ManageMovie_Load);
             this.ResumeLayout(false);
             this.PerformLayout();

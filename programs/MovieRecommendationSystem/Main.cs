@@ -36,7 +36,7 @@ namespace MovieRecommendationSystem
             string databasePath = CreatePath();
             SqlConnector conn = new SqlConnector(databasePath);
             Algorithms alg = new Algorithms();
-            HandmadeLanguageDecTree tree = new HandmadeLanguageDecTree();
+
             //PropertiesForDecTree properties =new PropertiesForDecTree();
             MeasureAccuracy measure= new MeasureAccuracy();
             //alg.LoadTableInserts(ref moviesTI, databasePath);
@@ -57,8 +57,7 @@ namespace MovieRecommendationSystem
             alg.InitArraysForFillContains(ref properties, movies);
             alg.IsBlockbuster(ref movies);
             alg.IsPopular(ref movies);
-            tree.Show();
-            tree.MainJson();
+
             //createTree.BuildTree(movies);
             DecTreeForLanguage dectree= new DecTreeForLanguage();
             DecTreeForGender gender= new DecTreeForGender();
@@ -66,7 +65,7 @@ namespace MovieRecommendationSystem
             DecTreeForTmdb tmdb= new DecTreeForTmdb();
             //gender.BuildTree(movies, properties);
             alg.FillContains(ref properties, movies);
-
+            LoadPicture();
             //dectree.CompareToHandmadeDecTree(movies);
 
             //gender.BuildTree(movies, properties);
@@ -158,33 +157,50 @@ namespace MovieRecommendationSystem
         /// <param name="e"></param>
         private async void ChangeDB_Click(object sender, EventArgs e)
         {
+            bool update = false;
+            SqlConnector conn = new SqlConnector();
             OpenFileDialog openFileDialog = new OpenFileDialog(); // Fájltallózó intéző ablak létrehozása
             openFileDialog.Title = "Select the database file";
+            openFileDialog.Filter = "db files (*.db)|*.db|All files (*.*)|*.*";
             DialogResult result = openFileDialog.ShowDialog(); // A létrehozott ablak megjelenítése
             if (result == DialogResult.OK) // Ha a felhasználó kiválasztja az adott betallózandó fájlt
             {
                 string source=openFileDialog.FileName; // Eltárolja a választott fájl elérési útvonalát
                 string destination = AppDomain.CurrentDomain.BaseDirectory;
                 string destinationFilePath = Path.Combine(destination, "movies.db"); //Beállítja célútvonalnak a program saját könyvtárát, és a bemásolandó fájl nevét movies.db-re
+                string originalStructure = "";
+                string newStructure = "";
                 try
                 {
-                    File.Copy(source, destinationFilePath, true); // A betallózott fájlt eredeti helyéről a program saját könyvtárába másolja, ezzel lecserélve a régi movies.db fájlt
+                    originalStructure=conn.GetDbStructure(destinationFilePath);
+                    newStructure=conn.GetDbStructure(source);
+                    if (originalStructure == newStructure)
+                    {
+                        File.Copy(source, destinationFilePath, true); // A betallózott fájlt eredeti helyéről a program saját könyvtárába másolja, ezzel lecserélve a régi movies.db fájlt
+                        update = true;
+                    }
+                    else
+                    {
+                        MessageBox.Show("Database structure mismatch!", "Error!", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                    }
                 }
                 catch 
                 {
                     MessageBox.Show("Error");
                 }
+                if (update)
+                {
+                    ProgressBar progressBar = new ProgressBar();
+                    progressBar.Show(); // Progress bar megjelenítése ami jelzi a felhasználó felé, hogy az adatbázis frissítése történik
+                    try
+                    {
+                        await Task.Run(() => Loader()); // Aszinkron módban futtatva meghívja az osztály Loader() metódusát annak érdekében, hogy a feltöltés alatt ne fagyjon meg a program
+                    }
+                    finally
+                    {
 
-                ProgressBar progressBar = new ProgressBar();
-                progressBar.Show(); // Progress bar megjelenítése ami jelzi a felhasználó felé, hogy az adatbázis frissítése történik
-                try
-                {
-                    await Task.Run(() => Loader()); // Aszinkron módban futtatva meghívja az osztály Loader() metódusát annak érdekében, hogy a feltöltés alatt ne fagyjon meg a program
-                }
-                finally
-                {
-                    
-                    progressBar.Visible = false; //Ha lefutott a Loader metódus, tehát lényegében a lista és adatbázis frissítés, akkor a progress bar eltűnik
+                        progressBar.Visible = false; //Ha lefutott a Loader metódus, tehát lényegében a lista és adatbázis frissítés, akkor a progress bar eltűnik
+                    }
                 }
 
             }
@@ -200,6 +216,22 @@ namespace MovieRecommendationSystem
         {
             RecommendationSystem recommendationSystem = new RecommendationSystem(movies, properties);
             recommendationSystem.Show();
+        }
+
+        private void buttonDecisionTree_Click(object sender, EventArgs e)
+        {
+            HandmadeLanguageDecTree tree = new HandmadeLanguageDecTree();
+            tree.Show();
+            tree.MainJson();
+        }
+
+        public void LoadPicture()
+        {
+            string path = AppDomain.CurrentDomain.BaseDirectory;
+            string filename = "main.png";
+            path=Path.Combine(path, filename);
+            pictureBoxMain.Image = Image.FromFile(path);
+            pictureBoxMain.SizeMode=PictureBoxSizeMode.StretchImage;
         }
     }
 }

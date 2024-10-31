@@ -14,6 +14,9 @@ namespace MovieRecommendation
     {
         private SQLiteConnection connection;
 
+        public SqlConnector()
+        {
+        }
         public SqlConnector(string databasePath)
         {
             if (System.IO.File.Exists(databasePath))
@@ -318,5 +321,34 @@ namespace MovieRecommendation
             command.CommandText = cmd;
             command.ExecuteNonQuery();
         }
-    }
+
+
+// Add this method to query the tables in sqlite_master and store the names in a list
+        public string GetDbStructure(string databaseFilePath)
+            {
+            string structure= "";
+                string connectionString = $"Data Source={databaseFilePath}";
+
+            using (SQLiteConnection connection = new SQLiteConnection(connectionString))
+            {
+                connection.Open();
+                SQLiteCommand command = connection.CreateCommand();
+                //command.CommandText= "SELECT name FROM sqlite_master;";
+                command.CommandText = "SELECT sql FROM sqlite_master where name=\"Movies\"";
+
+               try{ SQLiteDataReader reader = command.ExecuteReader();
+                {
+                    while (reader.Read())
+                    {
+                        structure=reader.GetString(0); // Read each table name and add it to the list
+                    }
+                }
+                }
+                catch { MessageBox.Show("Table \"Movies\" not found!","Error!", MessageBoxButtons.OK, MessageBoxIcon.Error); }
+                }
+            Console.WriteLine(structure);
+                return structure;
+            }
+
+        }
 }

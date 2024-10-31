@@ -40,17 +40,16 @@ namespace MovieRecommendationSystem
         private void ShowTable_Load(object sender, EventArgs e)
         {
            
-            DataGridView dataGridView1 = new DataGridView
+            DataGridView MovieDetailsTable = new DataGridView
             {
                 AutoGenerateColumns = true, // Automatikusan generálja az oszlopokat az adatforrás alapján
                 Dock = DockStyle.Fill // Kitölti a teljes formot
             };
-            dataGridView1.AutoGenerateColumns = true;
-            dataGridView1.DataSource= moviesToShow;
-            Controls.Add(dataGridView1);
-            Console.WriteLine(moviesToShow[0].Title);
-            ChangeFieldName(dataGridView1);
-            dataGridView1.ReadOnly = true;
+           // MovieDetailsTable.AutoGenerateColumns = true;
+            MovieDetailsTable.DataSource= moviesToShow;
+            Controls.Add(MovieDetailsTable);
+            ChangeFieldName(MovieDetailsTable);
+            MovieDetailsTable.ReadOnly = true;
 
 
         }
@@ -61,15 +60,22 @@ namespace MovieRecommendationSystem
             dataGridView.Columns[2].HeaderText = "Year of release";
             dataGridView.Columns[3].HeaderText = "Runtime (Minutes)";
             dataGridView.Columns[4].HeaderText = "Gender of the protagonist (1 is female, 2 is male)";
-            /*dataGridView.Columns[0].HeaderText = "Film Cím";
-            dataGridView.Columns[0].HeaderText = "Film Cím";
-            dataGridView.Columns[0].HeaderText = "Film Cím";
-            dataGridView.Columns[0].HeaderText = "Film Cím";
-            dataGridView.Columns[0].HeaderText = "Film Cím";
-            dataGridView.Columns[0].HeaderText = "Film Cím";*/
+            dataGridView.Columns[5].HeaderText = "Main actor";
+            dataGridView.Columns[6].HeaderText = "TMDB Score";
+            dataGridView.Columns[7].HeaderText = "Number of ratings";
+            dataGridView.Columns[8].HeaderText = "Popularity";
+            dataGridView.Columns[9].HeaderText = "Budget";
+            dataGridView.Columns[10].HeaderText = "Revenue";
+            dataGridView.Columns[11].HeaderText = "Is it a blockbuster?";
+            dataGridView.Columns[11].HeaderText = "Is it a blockbuster?";
+            dataGridView.Columns[12].HeaderText = "Is it popular?";
+            dataGridView.Columns[14].HeaderText = "Genres";
+            dataGridView.Columns[15].HeaderText = "Keywords";
+            dataGridView.Columns[16].HeaderText = "Languages";
+            dataGridView.Columns[17].HeaderText = "Directors";
+            dataGridView.Columns[18].HeaderText = "Production countries";
+
             dataGridView.AutoSizeColumnsMode = DataGridViewAutoSizeColumnsMode.DisplayedCells;
-            //dataGridView.Columns["Genre"].HeaderText = "Műfaj";
-            //dataGridView.Columns["Runtime"].HeaderText = "Futási Idő (perc)";
         }
     }
 }

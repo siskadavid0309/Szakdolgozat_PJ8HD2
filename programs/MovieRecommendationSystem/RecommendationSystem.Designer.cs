@@ -45,7 +45,7 @@
             this.ClientSize = new System.Drawing.Size(646, 422);
             this.Controls.Add(this.panelContainer);
             this.Name = "RecommendationSystem";
-            this.Text = "RecommendationSystem";
+            this.Text = "Recommendation system";
             this.ResumeLayout(false);
 
         }
