@@ -9,7 +9,6 @@ namespace MovieRecommendationSystem
     internal class LoadQuestions
     {
         public List<Question> questionsList = new List<Question>();
-        
 
         public void AddToQuestionsList(Question question)
         {

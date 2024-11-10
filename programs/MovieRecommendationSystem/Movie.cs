@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace MovieRecommendationSystem
 {
-    
+
     public class Movie
     {
         public int Id { get; set; }
@@ -36,11 +36,11 @@ namespace MovieRecommendationSystem
         /// <summary>
         /// Az azonosító integereket (id)-kat felhasználva ezekbe a string listákba kerülnek a filmekhez kapcsolódó tényleges adatok
         /// </summary>
-        public List<string> GenreString {get; set;}
-        public List<string> KeywordString {get; set;}
-        public List<string> LanguageString {get; set;}
-        public List<string> DirectorString {get; set;}
-        public List<string> CountryString {get; set;}
+        public List<string> GenreString { get; set; }
+        public List<string> KeywordString { get; set; }
+        public List<string> LanguageString { get; set; }
+        public List<string> DirectorString { get; set; }
+        public List<string> CountryString { get; set; }
 
         /// <summary>
         /// Az előző listák felhasználásával a listákban szereplő adatok vesszővel történő összefűzése táblázatos megjelenítéshez
@@ -51,7 +51,7 @@ namespace MovieRecommendationSystem
             get => string.Join(", ", GenreString);
             set
             {
-                
+
                 GenreString = value.Split(',').Select(s => s.Trim()).ToList(); // GenreString adattag frissítése a GenreStringWithCommas széttagolásával
             }
         }

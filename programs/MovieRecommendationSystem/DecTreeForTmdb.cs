@@ -42,23 +42,21 @@ namespace MovieRecommendationSystem
 
             // A betültött adatok átalakítása megfelelő formába
             var dataProcessPipeline = mlContext.Transforms.Conversion.ConvertType(nameof(Tmdb.TmdbScore), nameof(Tmdb.TmdbScore), DataKind.Single)
-                .Append(mlContext.Transforms.Conversion.ConvertType("KeywordEncoded", nameof(Tmdb.Keyword), DataKind.Single))
-                .Append(mlContext.Transforms.Conversion.ConvertType("GenreFloat", nameof(Tmdb.Genre), DataKind.Single))
-                .Append(mlContext.Transforms.Concatenate("Features", "KeywordEncoded", "GenreFloat"))
-                .AppendCacheCheckpoint(mlContext);
+            .Append(mlContext.Transforms.Conversion.ConvertType("KeywordEncoded", nameof(Tmdb.Keyword), DataKind.Single))
+            .Append(mlContext.Transforms.Conversion.ConvertType("GenreFloat", nameof(Tmdb.Genre), DataKind.Single))
+            .Append(mlContext.Transforms.Concatenate("Features", "KeywordEncoded", "GenreFloat"))
+            .AppendCacheCheckpoint(mlContext);
 
             // A modell típusának beállítása, amely ebben az esetben regressziót használó FastTree, és paramétereinek értékének beállítása
             var trainer = mlContext.Regression.Trainers.FastTree(
-                labelColumnName: nameof(Tmdb.TmdbScore),
-                featureColumnName: "Features",
-                numberOfLeaves: 20,
-                numberOfTrees: 150,
-                minimumExampleCountPerLeaf: 8
-            );
+            labelColumnName: nameof(Tmdb.TmdbScore),
+            featureColumnName: "Features",
+            numberOfLeaves: 20,
+            numberOfTrees: 150,
+            minimumExampleCountPerLeaf: 8
+        );
 
             var trainingPipeline = dataProcessPipeline.Append(trainer);
-
-
             var model = trainingPipeline.Fit(data); // Modell tanítása a Fit() metódussal
 
             // A betanított modell kiértékelése
@@ -71,16 +69,7 @@ namespace MovieRecommendationSystem
 
             // Egy darab film Tmdb pontszámának megbecslése a modell használatával
             var predictionEngine = mlContext.Model.CreatePredictionEngine<Tmdb, TmdbPredict>(model, inputSchemaDefinition: schemaDef);
-            /*int film = 19;
-            Console.WriteLine(moviesL[film].Title);
-            var testMovie = new Tmdb  // A becsléshez használt adattagok feltöltése a megbecsülendő film megfelelő adataival
-            {
-                Genre = prop.GenreContains[film],
-                Keyword = prop.KeywordContains[film]
-            };
-            var prediction = predictionEngine.Predict(testMovie); // A tényleges becslés elvégzése
 
-            Console.WriteLine($"Predicted TmdbScore: {prediction.PredictedTmdb}");*/
             for (int i = 59; i < 79; i++)
             {
                 var testMovie = new Tmdb
@@ -94,6 +83,5 @@ namespace MovieRecommendationSystem
             }
         }
     }
-
 }
 

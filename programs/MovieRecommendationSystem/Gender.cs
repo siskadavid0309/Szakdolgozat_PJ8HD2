@@ -13,8 +13,8 @@ namespace MovieRecommendationSystem
         public string MainActor { get; set; }
         public float TmdbScore { get; set; }
         public float Popularity { get; set; }
-         [VectorType(17)]
-        public int[] Genre {get; set; }
+        [VectorType(17)]
+        public int[] Genre { get; set; }
         public int GenderOfProtagonist { get; set; }
 
     }

@@ -19,13 +19,11 @@ namespace MovieRecommendationSystem
         private List<Movie> moviesForModify;
         private Movie selectedMovie;
         private bool inputError;
-        
+
         public ManageMovie()
         {
             InitializeComponent();
         }
-
-
 
         // Új konstruktor, amely elfogad egy Movies példányt
         public ManageMovie(List<Movie> movies)
@@ -36,7 +34,6 @@ namespace MovieRecommendationSystem
 
         private void ManageMovie_Load(object sender, EventArgs e)
         {
-
             SetCboxDetails();
         }
 
@@ -53,7 +50,7 @@ namespace MovieRecommendationSystem
 
         private void cboxTitle_SelectedIndexChanged(object sender, EventArgs e)
         {
-           FillupTextboxes();
+            FillupTextboxes();
         }
 
         /// <summary>
@@ -92,15 +89,20 @@ namespace MovieRecommendationSystem
 
             if (IsEmpty() == false) // Mezők ürességének ellenőrzése
             {
-                
+
                 GetFromTextboxes(ref selectedMovie); // A mezőkből az adatok kiolvasása
-                   
+
                 if (inputError == false)
                 {
                     SqlConnector conn = new SqlConnector(Path.Combine(AppDomain.CurrentDomain.BaseDirectory, "movies.db"));
                     string command;
-                    command = string.Format("UPDATE Movies SET Title= \"{0}\", Genre= \"{1}\", Released= \"{2}\", Runtime= {3}, Gender_of_the_protagonist={4}, Main_actor=\"{5}\", Keywords=\"{6}\", Director=\"{7}\", Language=\"{8}\", Production_countries=\"{9}\", Tmdb_score={10}, Number_of_ratings={11}, Popularity={12}, Budget={13}, Revenue={14} WHERE ID={15}",
-                        selectedMovie.Title, selectedMovie.GenreStringWithCommas, selectedMovie.Released, selectedMovie.Runtime, selectedMovie.GenderOfProtagonist, selectedMovie.MainActor, selectedMovie.KeywordStringWithCommas, selectedMovie.DirectorStringWithCommas, selectedMovie.LanguageStringWithCommas, selectedMovie.CountryStringWithCommas, selectedMovie.TmdbScore.ToString(System.Globalization.CultureInfo.InvariantCulture), selectedMovie.NumberOfRatings, selectedMovie.Popularity.ToString(System.Globalization.CultureInfo.InvariantCulture), selectedMovie.Budget, selectedMovie.Revenue, selectedMovie.Id);
+                    command = string.Format("UPDATE Movies SET Title= \"{0}\", Genre= \"{1}\", Released= \"{2}\", Runtime= {3}, Gender_of_the_protagonist={4}," +
+                        " Main_actor=\"{5}\", Keywords=\"{6}\", Director=\"{7}\", Language=\"{8}\", Production_countries=\"{9}\", Tmdb_score={10}, Number_of_ratings={11}," +
+                        " Popularity={12}, Budget={13}, Revenue={14} WHERE ID={15}",
+                        selectedMovie.Title, selectedMovie.GenreStringWithCommas, selectedMovie.Released, selectedMovie.Runtime, selectedMovie.GenderOfProtagonist,
+                        selectedMovie.MainActor, selectedMovie.KeywordStringWithCommas, selectedMovie.DirectorStringWithCommas, selectedMovie.LanguageStringWithCommas,
+                        selectedMovie.CountryStringWithCommas, selectedMovie.TmdbScore.ToString(System.Globalization.CultureInfo.InvariantCulture), selectedMovie.NumberOfRatings,
+                        selectedMovie.Popularity.ToString(System.Globalization.CultureInfo.InvariantCulture), selectedMovie.Budget, selectedMovie.Revenue, selectedMovie.Id);
                     conn.UpdateCommand(command); // Az összekészített SQL utasítás végrehajtása
                     Main main = new Main();
                     ProgressBar progressBar = new ProgressBar();
@@ -116,27 +118,27 @@ namespace MovieRecommendationSystem
                 }
             }
         }
-          /// <summary>
-          /// Egy címke megjelenítése ha az egér a textBoxGenre-en áll
-          /// </summary>
-          /// <param name="sender"></param>
-          /// <param name="e"></param>
+        /// <summary>
+        /// Egy címke megjelenítése ha az egér a textBoxGenre-en áll
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private void textBoxGenre_MouseEnter(object sender, EventArgs e)
-          {
-              // Amikor az egér a TextBox fölé ér, megjelenítjük a label-t
-              labelGenreHint.Visible = true;
-          }
+        {
+            // Amikor az egér a TextBox fölé ér, megjelenítjük a label-t
+            labelGenreHint.Visible = true;
+        }
 
         /// <summary>
         /// A címke eltüntetése ha az egér már nem áll a textBoxGenre-ön
         /// </summary>
         /// <param name="sender"></param>
         /// <param name="e"></param>
-         private void textBoxGenre_MouseLeave(object sender, EventArgs e)
-         {
-             // Amikor az egér elhagyja a TextBox-ot, elrejtjük a label-t
-             labelGenreHint.Visible = false;
-         }
+        private void textBoxGenre_MouseLeave(object sender, EventArgs e)
+        {
+            // Amikor az egér elhagyja a TextBox-ot, elrejtjük a label-t
+            labelGenreHint.Visible = false;
+        }
 
         private void textBoxGenderOfTheProtagonist_MouseEnter(object sender, EventArgs e)
         {
@@ -156,7 +158,6 @@ namespace MovieRecommendationSystem
         private void textBoxKeywords_MouseLeave(object sender, EventArgs e)
         {
             labelKeywordHint.Visible = false;
-
         }
 
         private void textBoxDirector_MouseEnter(object sender, EventArgs e)
@@ -167,7 +168,6 @@ namespace MovieRecommendationSystem
         private void textBoxDirector_MouseLeave(object sender, EventArgs e)
         {
             labelDirectorHint.Visible = false;
-
         }
 
         private void textBoxLanguage_MouseEnter(object sender, EventArgs e)
@@ -189,7 +189,6 @@ namespace MovieRecommendationSystem
         private void textBoxCountries_MouseLeave(object sender, EventArgs e)
         {
             labelCountriesHint.Visible = false;
-
         }
 
         private void textBoxTmdb_MouseEnter(object sender, EventArgs e)
@@ -217,18 +216,23 @@ namespace MovieRecommendationSystem
         private async void buttonAdd_Click(object sender, EventArgs e)
         {
 
-            Movie temp= new Movie();
+            Movie temp = new Movie();
             if (IsEmpty() == false)
             {
                 GetFromTextboxes(ref temp);
                 temp.Id = moviesForModify[moviesForModify.Count - 1].Id + 1;
                 if (inputError == false)
                 {
-                    
+
                     SqlConnector conn = new SqlConnector(Path.Combine(AppDomain.CurrentDomain.BaseDirectory, "movies.db"));
                     string command;
-                    command = string.Format("INSERT INTO Movies (ID, Title, Genre, Released, Runtime, Gender_of_the_protagonist, Main_actor, Keywords, Director, Language, Production_countries, Tmdb_score, Number_of_ratings, Popularity, Budget, Revenue) VALUES( {0},\"{1}\", \"{2}\", \"{3}\", {4}, {5}, \"{6}\", \"{7}\", \"{8}\", \"{9}\", \"{10}\", {11}, {12}, {13}, {14}, {15})",
-                       moviesForModify[moviesForModify.Count - 1].Id+1, temp.Title, temp.GenreStringWithCommas, temp.Released, temp.Runtime, temp.GenderOfProtagonist, temp.MainActor, temp.KeywordStringWithCommas, temp.DirectorStringWithCommas, temp.LanguageStringWithCommas, temp.CountryStringWithCommas, temp.TmdbScore.ToString(System.Globalization.CultureInfo.InvariantCulture), temp.NumberOfRatings, temp.Popularity.ToString(System.Globalization.CultureInfo.InvariantCulture), temp.Budget, temp.Revenue, temp.Id);
+                    command = string.Format("INSERT INTO Movies (ID, Title, Genre, Released, Runtime, Gender_of_the_protagonist," +
+                        " Main_actor, Keywords, Director, Language, Production_countries, Tmdb_score, Number_of_ratings, Popularity, Budget, Revenue)" +
+                        " VALUES( {0},\"{1}\", \"{2}\", \"{3}\", {4}, {5}, \"{6}\", \"{7}\", \"{8}\", \"{9}\", \"{10}\", {11}, {12}, {13}, {14}, {15})",
+                       moviesForModify[moviesForModify.Count - 1].Id + 1, temp.Title, temp.GenreStringWithCommas, temp.Released, temp.Runtime,
+                       temp.GenderOfProtagonist, temp.MainActor, temp.KeywordStringWithCommas, temp.DirectorStringWithCommas, temp.LanguageStringWithCommas,
+                       temp.CountryStringWithCommas, temp.TmdbScore.ToString(System.Globalization.CultureInfo.InvariantCulture), temp.NumberOfRatings,
+                       temp.Popularity.ToString(System.Globalization.CultureInfo.InvariantCulture), temp.Budget, temp.Revenue, temp.Id);
                     moviesForModify.Add(temp);
                     conn.UpdateCommand(command);
                     Main main = new Main();
@@ -244,7 +248,7 @@ namespace MovieRecommendationSystem
                     {
                         progressBar.Visible = false;
                     }
-                    
+
                 }
             }
         }
@@ -259,8 +263,8 @@ namespace MovieRecommendationSystem
                     {
 
                         moviesForModify.RemoveAt(i);
-                        
-                        
+
+
                     }
                     catch
                     {
@@ -272,11 +276,11 @@ namespace MovieRecommendationSystem
 
 
             SqlConnector conn = new SqlConnector(Path.Combine(AppDomain.CurrentDomain.BaseDirectory, "movies.db"));
-            SqlConnectorTI connTI= new SqlConnectorTI(Path.Combine(AppDomain.CurrentDomain.BaseDirectory, "movies.db"));
-            FillUpsTI fillUps= new FillUpsTI();
+            SqlConnectorTI connTI = new SqlConnectorTI(Path.Combine(AppDomain.CurrentDomain.BaseDirectory, "movies.db"));
+            FillUpsTI fillUps = new FillUpsTI();
             connTI.ExecuteInserts(fillUps.UpdateDB());
             string command;
-            command = string.Format("DELETE FROM Movies WHERE ID={0}",selectedMovie.Id);
+            command = string.Format("DELETE FROM Movies WHERE ID={0}", selectedMovie.Id);
             conn.UpdateCommand(command);
             Main main = new Main();
             ProgressBar progressBar = new ProgressBar();
@@ -336,12 +340,11 @@ namespace MovieRecommendationSystem
         /// <param name="selectedMovie">A kiolvasott adatokat a selectedMovie-ban tároljuk el</param>
         public void GetFromTextboxes(ref Movie selectedMovie)
         {
-             inputError = false;
+            inputError = false;
             if (IsEmpty() == false)
             {
                 try
                 {
-
                     selectedMovie.Title = textBoxTitle.Text;
                     selectedMovie.GenreStringWithCommas = textBoxGenre.Text;
                     selectedMovie.Released = int.Parse(textBoxReleased.Text);
@@ -362,29 +365,28 @@ namespace MovieRecommendationSystem
                 {
                     MessageBox.Show("Check the input data!", "Error",
                         MessageBoxButtons.OK, MessageBoxIcon.Error);
-                    inputError= true;
+                    inputError = true;
                 }
-                
+
             }
-            
+
         }
-        
+
         /// <summary>
         /// A textboxok tartalmának ellenőrzése abból a szempontból, hogy üres-e bármelyik
         /// </summary>
         /// <returns>Az ellenőrzés eredményét adja vissza: igaz esetén van üres, hamis esetén nincs</returns>
         public bool IsEmpty()
         {
-            bool status=false;
-            if (string.IsNullOrEmpty(textBoxTitle.Text)|| string.IsNullOrEmpty(textBoxGenre.Text)|| string.IsNullOrEmpty(textBoxReleased.Text) || string.IsNullOrEmpty(textBoxRuntime.Text)
-                || string.IsNullOrEmpty(textBoxGenderOfTheProtagonist.Text ) || string.IsNullOrEmpty(textBoxMainActor.Text) || string.IsNullOrEmpty(textBoxKeywords.Text)
+            bool status = false;
+            if (string.IsNullOrEmpty(textBoxTitle.Text) || string.IsNullOrEmpty(textBoxGenre.Text) || string.IsNullOrEmpty(textBoxReleased.Text) || string.IsNullOrEmpty(textBoxRuntime.Text)
+                || string.IsNullOrEmpty(textBoxGenderOfTheProtagonist.Text) || string.IsNullOrEmpty(textBoxMainActor.Text) || string.IsNullOrEmpty(textBoxKeywords.Text)
                 || string.IsNullOrEmpty(textBoxDirector.Text) || string.IsNullOrEmpty(textBoxLanguage.Text) || string.IsNullOrEmpty(textBoxCountries.Text)
                 || string.IsNullOrEmpty(textBoxTmdbScore.Text) || string.IsNullOrEmpty(textBoxNumberOfRatings.Text) || string.IsNullOrEmpty(textBoxPopularity.Text)
                 || string.IsNullOrEmpty(textBoxBudget.Text) || string.IsNullOrEmpty(textBoxRevenue.Text))
             {
                 status = true;
-                MessageBox.Show("There are empty fields!", "Error",
-                            MessageBoxButtons.OK, MessageBoxIcon.Error);
+                MessageBox.Show("There are empty fields!", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
             }
             return status;
         }

@@ -199,20 +199,15 @@ namespace TableInsertsLibrary
         {
 
             SQLiteCommand command = connection.CreateCommand();
-            //try
             {
-                
+
                 for (int i = 0; i < cmds.Count; i++)
                 {
                     command.CommandText = cmds[i];
                     command.ExecuteNonQuery();
                 }
-                
+
             }
-           /*catch
-            {
-                Console.WriteLine("An error occurred during table upload");
-            }*/
         }
     }
 }

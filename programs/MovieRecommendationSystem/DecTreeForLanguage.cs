@@ -13,7 +13,7 @@ using System.Threading.Tasks;
 namespace MovieRecommendationSystem
 {
     internal class DecTreeForLanguage
-    {   
+    {
 
         public void CompareToHandmadeDecTree(List<Movie> moviesL)
         {
@@ -25,14 +25,15 @@ namespace MovieRecommendationSystem
 
             for (int i = 80; i < moviesL.Count; i++)
             {
-                LanguageForCompareToHandmadeDecTree newLanguage = new LanguageForCompareToHandmadeDecTree 
-                { 
-                    Budget= moviesL[i].Budget,
+                LanguageForCompareToHandmadeDecTree newLanguage = new LanguageForCompareToHandmadeDecTree
+                {
+                    Budget = moviesL[i].Budget,
                     Popularity = (float)moviesL[i].Popularity,
                     NumberOfRatings = moviesL[i].NumberOfRatings,
                     GenderOfProtagonist = moviesL[i].GenderOfProtagonist,
                     TmdbScore = (float)moviesL[i].TmdbScore,
-                    Lang = moviesL[i].LanguageStringWithCommas };
+                    Lang = moviesL[i].LanguageStringWithCommas
+                };
                 movies.Add(newLanguage);
             }
             // Az adatok betöltése IDataView formátumba
@@ -43,25 +44,17 @@ namespace MovieRecommendationSystem
                 .Append(mlContext.Transforms.NormalizeMeanVariance("BudgetNormalized", "BudgetFloat"))
                 .Append(mlContext.Transforms.NormalizeMeanVariance("PopularityNormalized", nameof(LanguageForCompareToHandmadeDecTree.Popularity)))
                 .Append(mlContext.Transforms.Conversion.ConvertType("NumberOfRatingsFloat", nameof(LanguageForCompareToHandmadeDecTree.NumberOfRatings), DataKind.Single))
-                .Append(mlContext.Transforms.Concatenate("Features",
-                    "GenderOfProtagonistEncoded",
-                    "BudgetNormalized",
-                    "PopularityNormalized",
-                    nameof(LanguageForCompareToHandmadeDecTree.TmdbScore),
-                    "NumberOfRatingsFloat"))
+                .Append(mlContext.Transforms.Concatenate("Features", "GenderOfProtagonistEncoded", "BudgetNormalized", "PopularityNormalized",
+                nameof(LanguageForCompareToHandmadeDecTree.TmdbScore), "NumberOfRatingsFloat"))
                 .AppendCacheCheckpoint(mlContext);
 
-
-
-
             var trainer = mlContext.MulticlassClassification.Trainers.OneVersusAll(
-    mlContext.BinaryClassification.Trainers.FastTree(
-        labelColumnName: "Label",
-        featureColumnName: "Features",
-        numberOfLeaves: 5,
-        numberOfTrees: 30,
-        minimumExampleCountPerLeaf: 1
-    //learningRate: 0.1
+            mlContext.BinaryClassification.Trainers.FastTree(
+            labelColumnName: "Label",
+            featureColumnName: "Features",
+            numberOfLeaves: 5,
+            numberOfTrees: 30,
+            minimumExampleCountPerLeaf: 1
     )
 );
             var trainingPipeline = dataProcessPipeline
@@ -81,7 +74,7 @@ namespace MovieRecommendationSystem
 
             // Egy példa előrejelzés
             var predictionEngine = mlContext.Model.CreatePredictionEngine<LanguageForCompareToHandmadeDecTree, LanguagePredict>(model);
-            //int film = 91;
+
             for (int i = 59; i < 79; i++)
             {
                 var testMovie = new LanguageForCompareToHandmadeDecTree
@@ -105,9 +98,7 @@ namespace MovieRecommendationSystem
 
         }
 
-
-
-        }
-
     }
+
+}
 

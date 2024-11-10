@@ -31,7 +31,6 @@ namespace MovieRecommendationSystem
             InitializeComponent();
         }
 
-            
         /// <summary>
         /// A ShowTable osztály példányosításakor, tehát az ablak megnyílásakor lefutó metódus 
         /// </summary>
@@ -39,18 +38,17 @@ namespace MovieRecommendationSystem
         /// <param name="e"></param>
         private void ShowTable_Load(object sender, EventArgs e)
         {
-           
+
             DataGridView MovieDetailsTable = new DataGridView
             {
                 AutoGenerateColumns = true, // Automatikusan generálja az oszlopokat az adatforrás alapján
                 Dock = DockStyle.Fill // Kitölti a teljes formot
             };
-           // MovieDetailsTable.AutoGenerateColumns = true;
-            MovieDetailsTable.DataSource= moviesToShow;
+
+            MovieDetailsTable.DataSource = moviesToShow;
             Controls.Add(MovieDetailsTable);
             ChangeFieldName(MovieDetailsTable);
             MovieDetailsTable.ReadOnly = true;
-
 
         }
 
@@ -74,7 +72,6 @@ namespace MovieRecommendationSystem
             dataGridView.Columns[16].HeaderText = "Languages";
             dataGridView.Columns[17].HeaderText = "Directors";
             dataGridView.Columns[18].HeaderText = "Production countries";
-
             dataGridView.AutoSizeColumnsMode = DataGridViewAutoSizeColumnsMode.DisplayedCells;
         }
     }

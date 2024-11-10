@@ -21,7 +21,7 @@ namespace TableInserts
         }
 
         public static void Genre_Movie(SqlConnector conn, List<int> id, List<Movie> movies,
-             List<int> finalMovieID, List<int> finalDataID, List<string> cmds)
+             List<int> finalMovieId, List<int> finalDataId, List<string> cmds)
         {
             
             Algorithms alg= new Algorithms();
@@ -31,8 +31,8 @@ namespace TableInserts
             data = alg.Matches(data);
             alg.GenerateId(ref id, data);
 
-            alg.CreateData(id, data, movies, ref finalMovieID, ref finalDataID, mode);
-            fill.MoviesGenres(finalMovieID, finalDataID, ref cmds);
+            alg.CreateData(id, data, movies, ref finalMovieId, ref finalDataId, mode);
+            fill.MoviesGenres(finalMovieId, finalDataId, ref cmds);
             conn.ExecuteInserts(cmds);
             cmds.Clear();
         }
@@ -50,7 +50,7 @@ namespace TableInserts
         }
 
         public static void Keyword_Movie(SqlConnector conn, List<int> id, List<Movie> movies,
-             List<int> finalMovieID, List<int> finalDataID, List<string> cmds)
+             List<int> finalMovieId, List<int> finalDataId, List<string> cmds)
         {
             Algorithms alg = new Algorithms();
             FillUps fill = new FillUps();
@@ -59,8 +59,8 @@ namespace TableInserts
             data = alg.Matches(data);
             alg.GenerateId(ref id, data);
 
-            alg.CreateData(id, data, movies, ref finalMovieID, ref finalDataID, mode);
-            fill.MoviesKeywords(finalMovieID, finalDataID, ref cmds);
+            alg.CreateData(id, data, movies, ref finalMovieId, ref finalDataId, mode);
+            fill.MoviesKeywords(finalMovieId, finalDataId, ref cmds);
             conn.ExecuteInserts(cmds);
             cmds.Clear();
         }
@@ -78,7 +78,7 @@ namespace TableInserts
         }
 
         public static void Language_Movie(SqlConnector conn, List<int> id, List<Movie> movies,
-             List<int> finalMovieID, List<int> finalDataID, List<string> cmds)
+             List<int> finalMovieId, List<int> finalDataId, List<string> cmds)
         {
             Algorithms alg = new Algorithms();
             FillUps fill = new FillUps();
@@ -87,8 +87,8 @@ namespace TableInserts
             data = alg.Matches(data);
             alg.GenerateId(ref id, data);
 
-            alg.CreateData(id, data, movies, ref finalMovieID, ref finalDataID, mode);
-            fill.MoviesLanguages(finalMovieID, finalDataID, ref cmds);
+            alg.CreateData(id, data, movies, ref finalMovieId, ref finalDataId, mode);
+            fill.MoviesLanguages(finalMovieId, finalDataId, ref cmds);
             conn.ExecuteInserts(cmds);
             cmds.Clear();
         }
@@ -106,7 +106,7 @@ namespace TableInserts
         }
 
         public static void Director_Movie(SqlConnector conn, List<int> id, List<Movie> movies,
-             List<int> finalMovieID, List<int> finalDataID, List<string> cmds)
+             List<int> finalMovieId, List<int> finalDataId, List<string> cmds)
         {
             Algorithms alg = new Algorithms();
             FillUps fill = new FillUps();
@@ -115,8 +115,8 @@ namespace TableInserts
             data = alg.Matches(data);
             alg.GenerateId(ref id, data);
 
-            alg.CreateData(id, data, movies, ref finalMovieID, ref finalDataID, mode);
-            fill.MoviesDirectors(finalMovieID, finalDataID, ref cmds);
+            alg.CreateData(id, data, movies, ref finalMovieId, ref finalDataId, mode);
+            fill.MoviesDirectors(finalMovieId, finalDataId, ref cmds);
             conn.ExecuteInserts(cmds);
             cmds.Clear();
         }
@@ -134,7 +134,7 @@ namespace TableInserts
         }
 
         public static void Country_Movie(SqlConnector conn, List<int> id, List<Movie> movies,
-             List<int> finalMovieID, List<int> finalDataID,List<string> cmds)
+             List<int> finalMovieId, List<int> finalDataId,List<string> cmds)
         {
             Algorithms alg = new Algorithms();
             FillUps fill = new FillUps();
@@ -143,14 +143,14 @@ namespace TableInserts
             data = alg.Matches(data);
             alg.GenerateId(ref id, data);
 
-            alg.CreateData(id, data, movies, ref finalMovieID, ref finalDataID, mode);
-            fill.MoviesCountries(finalMovieID, finalDataID, ref cmds);
+            alg.CreateData(id, data, movies, ref finalMovieId, ref finalDataId, mode);
+            fill.MoviesCountries(finalMovieId, finalDataId, ref cmds);
             conn.ExecuteInserts(cmds);
             cmds.Clear();
         }
 
         public void Options(SqlConnector conn, List<int> id, List<Movie> movies,
-     List<int> finalMovieID, List<int> finalDataID, List<string> cmds)
+     List<int> finalMovieId, List<int> finalDataId, List<string> cmds)
         {
             bool beolvasas = false;
             int szam = 0;
@@ -181,31 +181,31 @@ namespace TableInserts
                     Keyword(conn, id, cmds);
                     break;
                 case 1:
-                    Keyword_Movie(conn, id, movies, finalMovieID, finalDataID, cmds);
+                    Keyword_Movie(conn, id, movies, finalMovieId, finalDataId, cmds);
                     break;
                 case 2:
                     Language(conn, id, cmds);
                     break;
                 case 3:
-                    Language_Movie(conn, id, movies, finalMovieID, finalDataID, cmds);
+                    Language_Movie(conn, id, movies, finalMovieId, finalDataId, cmds);
                     break;
                 case 4:
                     Director(conn, id, cmds);
                     break;
                 case 5:
-                    Director_Movie(conn, id, movies, finalMovieID, finalDataID, cmds);
+                    Director_Movie(conn, id, movies, finalMovieId, finalDataId, cmds);
                     break;
                 case 6:
                     Country(conn, id, cmds);
                     break;
                 case 7:
-                    Country_Movie(conn, id, movies, finalMovieID, finalDataID, cmds);
+                    Country_Movie(conn, id, movies, finalMovieId, finalDataId, cmds);
                     break;
                 case 8:
                     Genre(conn, id, cmds);
                     break;
                 case 9:
-                    Genre_Movie(conn, id, movies, finalMovieID, finalDataID, cmds);
+                    Genre_Movie(conn, id, movies, finalMovieId, finalDataId, cmds);
                     break;
             }
         }

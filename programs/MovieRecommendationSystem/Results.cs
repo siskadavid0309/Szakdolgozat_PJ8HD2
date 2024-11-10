@@ -12,7 +12,7 @@ namespace MovieRecommendationSystem
 {
     public partial class Results : UserControl
     {
-        private List<Movie> movies=new List<Movie>();
+        private List<Movie> movies = new List<Movie>();
         public Results(List<Movie> moviesWithScores)
         {
             InitializeComponent();
@@ -26,7 +26,7 @@ namespace MovieRecommendationSystem
         }
 
         private void Results_Load(object sender, EventArgs e)
-        {          
+        {
             Sorting();
             for (int i = 0; i < 5; i++)
             {

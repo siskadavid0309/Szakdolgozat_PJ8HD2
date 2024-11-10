@@ -23,16 +23,12 @@ namespace MovieRecommendationSystem
         /// A prop változó lista adattagjainak inicializálása
         /// </summary>
         /// <param name="prop">PropertiesForDecTree típusú változó, a későbbiekben a becsléshez használatos listák, tömbök az adattagjai</param>
-        
+
         public void LoadTableInserts(ref List<MovieTI> moviesTI, string databasePath)
         {
             SqlConnectorTI conn = new SqlConnectorTI(databasePath);
             List<string> cmds = new List<string>();
-
-            //List<Movie> movies = new List<Movie>();
             TableTI table = new TableTI();
-
-
             List<int> id = new List<int>();
             List<int> finalMovieID = new List<int>();
             List<int> finalDataID = new List<int>();
@@ -96,7 +92,7 @@ namespace MovieRecommendationSystem
         /// <param name="prop">A PropertiesForDecTree osztály példányosításának adattagjait töltjük fel</param>
         /// <param name="movies">A filmeken megyünk végig, illetve azok adatait vizsgálva döntünk a 0 vagy 1 értékről</param>
         public void FillContains(ref PropertiesForDecTree prop, List<Movie> movies)
-        {        
+        {
 
             for (int i = 0; i < movies.Count; i++)
             {
@@ -157,27 +153,7 @@ namespace MovieRecommendationSystem
                     }
                 }
             }
-            /*
-            for (int i = 0; i < movies.Count; i++)
-            {
-                for (int j = 0; j < prop.LanguageAll.Count; j++)
-                {
-                    for (int k = 0; k < movies[i].LanguageString.Count; k++)
-                    {
 
-                        if (movies[i].LanguageString[k].Contains(prop.LanguageAll[j]))
-                        {
-                            prop.LanguageContains[i][j] = 1;
-                            break;
-                        }
-                        else
-                        {
-                            prop.LanguageContains[i][j] = 0;
-                        }
-                    }
-                }
-            }
-            */
             for (int i = 0; i < movies.Count; i++)
             {
                 for (int j = 0; j < prop.DirectorAll.Count; j++)
@@ -217,18 +193,7 @@ namespace MovieRecommendationSystem
                     }
                 }
             }
-            Console.WriteLine(prop.DirectorAll.Count);
-            /*
-            Console.WriteLine(prop.GenreAll[0]);
-            for (int i = 0; i < prop.GenreContains.Length; i++)
-            {
-                Console.WriteLine(prop.GenreContains[i].Length);
-            }
-            //Console.WriteLine(prop.KeywordAll[0]);
-            for (int i = 0; i < prop.KeywordContains.Length; i++)
-            {
-                Console.WriteLine(prop.KeywordContains[i].Length);
-            }*/
+
         }
 
         public void InitLists(ref List<Movie> movies)
@@ -248,7 +213,7 @@ namespace MovieRecommendationSystem
                 movies[i].CountryString = new List<string>();
             }
         }
-        
+
         /// <summary>
         /// A GenreString adattag tényleges feltöltése az egyes filmek esetén
         /// </summary>
@@ -356,7 +321,7 @@ namespace MovieRecommendationSystem
         public void IsBlockbuster(ref List<Movie> movies)
         {
             long difference = 0;
-            for(int i = 0;i < movies.Count;i++)
+            for (int i = 0; i < movies.Count; i++)
             {
                 difference = movies[i].Revenue - movies[i].Budget;
                 if (difference > 0)
@@ -365,7 +330,7 @@ namespace MovieRecommendationSystem
                 }
                 else
                 {
-                    movies[i].IsBlockbuster=false;
+                    movies[i].IsBlockbuster = false;
                 }
             }
         }
@@ -390,10 +355,5 @@ namespace MovieRecommendationSystem
                 }
             }
         }
-
-        /*public double Efficiency(List<Movie>movies,  )
-        {
-
-        }*/
     }
 }

@@ -16,8 +16,8 @@ namespace MovieRecommendationSystem
         private PropertiesForDecTree properties = new PropertiesForDecTree();
         public RecommendationSystem(List<Movie> moviesFromMain, PropertiesForDecTree propertiesFromMain)
         {
-            movies=moviesFromMain;
-            properties=propertiesFromMain;
+            movies = moviesFromMain;
+            properties = propertiesFromMain;
             InitializeComponent();
             LoadPriorityControl();
         }
@@ -44,7 +44,6 @@ namespace MovieRecommendationSystem
             // Amikor a felhasználó a következő gombra kattint
             SetPriority priorityControl = (SetPriority)sender;
             List<PriorityListItem> selectedList = priorityControl.GetSelectedList();
-           // questionsControl.SetPriorityList(selectedList);
             LoadQuestionsControl(selectedList);
         }
 

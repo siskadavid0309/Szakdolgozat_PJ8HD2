@@ -350,7 +350,7 @@ namespace MovieRecommendationSystem
 
                 for (int j = 0; j < learningMovies.Count; j++)
                 {
-                    if (featureSelector(learningMovies[j]) == selectedValue) 
+                    if (featureSelector(learningMovies[j]) == selectedValue)
                     {
                         learningMovies[j].Score += score;
                     }
@@ -392,8 +392,6 @@ namespace MovieRecommendationSystem
             properties = propertiesFromRexSys;
         }
 
-       
-
         public void FillupFeaturesForCheckbox(List<string> features, List<string> movie)
         {
             for (int i = 0; i < movie.Count; i++)
@@ -404,7 +402,6 @@ namespace MovieRecommendationSystem
                 }
             }
         }
-
 
         public void InitFeaturesForCheckbox()
         {
@@ -419,11 +416,11 @@ namespace MovieRecommendationSystem
         {
             SetScore();
             InitFeaturesForCheckbox();
-            CreateLearningData(); 
+            CreateLearningData();
             CreateQuestions();
             LoadQuestion();
             LoadAnswers(receivedPriorityList[currentIndex].Id);
-  
+
             if (receivedPriorityList.Count == 1)
             {
                 buttonNext.Visible = false;
@@ -434,7 +431,7 @@ namespace MovieRecommendationSystem
         public void MainActorQuestion()
         {
             checkedListBox.Items.Clear();
-            for( int i = 0;i < featuresForCheckbox.MainActor.Count; i++)
+            for (int i = 0; i < featuresForCheckbox.MainActor.Count; i++)
             {
                 checkedListBox.Items.Add(featuresForCheckbox.MainActor[i]);
             }
@@ -460,7 +457,7 @@ namespace MovieRecommendationSystem
         /// A csúszkás válaszlehetőséggel rendelkező kérdések közül a megjelenés évének esetében meghívandó metódus a válaszokhoz
         /// </summary>
         public void ReleasedQuestion()
-        {           
+        {
             SetTrackbarProperties(trackBarMax, textBoxTrackbarMax, 1950, 2024, 2001, false, true,
                 new int[] { 96, 210 }, new int[] { 317, 286 }, new int[] { 93, 258 }, new int[] { 451, 258 }, labelSliderMaxMin, labelSliderMaxMax);
             SetTrackbarProperties(trackBarMin, textBoxTrackbarMin, 1950, 2024, 2000, false, true,
@@ -518,8 +515,8 @@ namespace MovieRecommendationSystem
             string itemText;
             for (int i = 0; i < checkedListBox.Items.Count; i++)
             {
-                 itemText = checkedListBox.Items[i].ToString();
-                if (checkedListBox.GetItemChecked(i)==true)
+                itemText = checkedListBox.Items[i].ToString();
+                if (checkedListBox.GetItemChecked(i) == true)
                 {
                     if (!selectedFromCheckbox.Contains(itemText))
                     {
@@ -534,7 +531,7 @@ namespace MovieRecommendationSystem
 
             checkedListBox.Items.Clear();
 
-            for(int i = 0; i < featuresForCheckbox.Keyword.Count; i++)
+            for (int i = 0; i < featuresForCheckbox.Keyword.Count; i++)
             {
                 if (featuresForCheckbox.Keyword[i].ToLower().Contains(searchText))
                 {
@@ -544,7 +541,7 @@ namespace MovieRecommendationSystem
 
             for (int i = 0; i < checkedListBox.Items.Count; i++)
             {
-                 itemText = checkedListBox.Items[i].ToString();
+                itemText = checkedListBox.Items[i].ToString();
                 if (selectedFromCheckbox.Contains(itemText))
                 {
                     checkedListBox.SetItemChecked(i, true);
@@ -579,18 +576,16 @@ namespace MovieRecommendationSystem
             }
         }
 
-        
-
         public void LoadAnswers(int id)
         {
             //switch case szerkezettel kiválasztjuk melyik algoritmust fogjuk meghívni a válaszokkal. receivedlist aktuális elemét paraméterként átadjuk, switch case szerkezettel választunk
-            switch(id)
+            switch (id)
             {
                 case (int)Features.Genre:
                     GenreQuestion();
                     break;
                 case (int)Features.MainActor:
-                    MainActorQuestion(); 
+                    MainActorQuestion();
                     break;
                 case (int)Features.Blockbuster:
                     QuestionTrueOrFalse();
@@ -634,10 +629,10 @@ namespace MovieRecommendationSystem
         {
             if (currentIndex < receivedPriorityList.Count - 1)
             {
-                
+
                 UpdateScore();
                 currentIndex++;
-                if (trackBarMin.Visible == true || trackBarMax.Visible==true)
+                if (trackBarMin.Visible == true || trackBarMax.Visible == true)
                 {
                     trackBarMin.Visible = false;
                     trackBarMax.Visible = false;
@@ -668,11 +663,10 @@ namespace MovieRecommendationSystem
                     buttonNext.Visible = false;
                     buttonFinish.Visible = true;
                 }
-                
-            }
-           
-        }
 
+            }
+
+        }
 
         /// <summary>
         /// A trackbarok tulajdonságainak beállítását végző metódus
@@ -691,12 +685,12 @@ namespace MovieRecommendationSystem
         /// <param name="labelMin">A beállítható minimum értéket megjelenítő címke értéke</param>
         /// <param name="labelMax">A beállítható maximum értéket megjelenítő címke értéke</param>
         public void SetTrackbarProperties(System.Windows.Forms.TrackBar trackbar, System.Windows.Forms.TextBox textbox,
-            int min, int max, int startValue, bool scaleInput, bool rangeInput, int[] trackbarLocation, int[] textboxLocation, 
+            int min, int max, int startValue, bool scaleInput, bool rangeInput, int[] trackbarLocation, int[] textboxLocation,
             int[] labelMinLocation, int[] labelMaxLocation, Label labelMin, Label labelMax)
         {
-            checkValueError=false;
+            checkValueError = false;
             scale = scaleInput;
-            range= rangeInput;
+            range = rangeInput;
             checkedListBox.Visible = false;
             trackbar.Visible = true;
             textbox.Visible = true;
@@ -708,8 +702,8 @@ namespace MovieRecommendationSystem
             checkValueError = true;
             trackbar.Location = new Point(trackbarLocation[0], trackbarLocation[1]);
             textbox.Location = new Point(textboxLocation[0], textboxLocation[1]);
-            labelMin.Location=new Point(labelMinLocation[0], labelMinLocation[1]);
-            labelMax.Location= new Point(labelMaxLocation[0], labelMaxLocation[1]);
+            labelMin.Location = new Point(labelMinLocation[0], labelMinLocation[1]);
+            labelMax.Location = new Point(labelMaxLocation[0], labelMaxLocation[1]);
             if (scale)
             {
                 labelMin.Text = (min / 100).ToString();
@@ -724,21 +718,20 @@ namespace MovieRecommendationSystem
         private void trackBarMin_ValueChanged(object sender, EventArgs e)
         {
             if (scale == true)
-            { 
+            {
                 textBoxTrackbarMin.Text = "" + (float)(trackBarMin.Value) / 100;
-                
+
             }
             else
             {
                 textBoxTrackbarMin.Text = "" + trackBarMin.Value;
                 trackBarMin.Value = int.Parse(textBoxTrackbarMin.Text);
-                if(trackBarMin.Value > trackBarMax.Value&&checkValueError==true)
+                if (trackBarMin.Value > trackBarMax.Value && checkValueError == true)
                 {
                     MessageBox.Show("Check the input data!", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
                     trackBarMin.Value = trackBarMax.Value;
                 }
             }
-
 
         }
         /// <summary>
@@ -759,8 +752,8 @@ namespace MovieRecommendationSystem
                 trackBarMax.Value = int.Parse(textBoxTrackbarMax.Text);
                 if (trackBarMin.Value > trackBarMax.Value && checkValueError == true)
                 {
-                    
-                    MessageBox.Show("Error","Check the input data!",MessageBoxButtons.OK, MessageBoxIcon.Error);
+
+                    MessageBox.Show("Error", "Check the input data!", MessageBoxButtons.OK, MessageBoxIcon.Error);
                     trackBarMax.Value = trackBarMin.Value;
                 }
             }
@@ -810,7 +803,7 @@ namespace MovieRecommendationSystem
                 }
                 else
                 {
-                    trackbarToChange.Value = (int)(float.Parse(textbox.Text, CultureInfo.InvariantCulture) *100);
+                    trackbarToChange.Value = (int)(float.Parse(textbox.Text, CultureInfo.InvariantCulture) * 100);
                 }
             }
             catch
@@ -824,7 +817,7 @@ namespace MovieRecommendationSystem
                 else
                 {
                     trackbarToChange.Value = 500;
-                    textbox.Text = (trackbarToChange.Value/100).ToString();
+                    textbox.Text = (trackbarToChange.Value / 100).ToString();
                 }
             }
         }
@@ -847,8 +840,8 @@ namespace MovieRecommendationSystem
 
         private void buttonClear_Click(object sender, EventArgs e)
         {
-            textBoxSearch.Text= "";
-            string searchText=textBoxSearch.Text.ToLower();
+            textBoxSearch.Text = "";
+            string searchText = textBoxSearch.Text.ToLower();
             FilterCheckedListBox(searchText);
         }
         /// <summary>
@@ -862,7 +855,7 @@ namespace MovieRecommendationSystem
             {
                 for (int i = 0; i < checkedListBox.Items.Count; i++)
                 {
-                    if(i !=e.Index)
+                    if (i != e.Index)
                     {
                         checkedListBox.SetItemChecked(i, false);
                     }

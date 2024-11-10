@@ -18,13 +18,11 @@ namespace MovieRecommendationSystem
     public partial class SetPriority : UserControl
     {
         public event EventHandler NextButtonClicked;
-        private List<PriorityListItem> originalList= new List<PriorityListItem>();
-        private List<PriorityListItem> selectedList= new List<PriorityListItem>();
+        private List<PriorityListItem> originalList = new List<PriorityListItem>();
+        private List<PriorityListItem> selectedList = new List<PriorityListItem>();
         public SetPriority()
         {
             InitializeComponent();
-
-          
         }
 
         /// <summary>
@@ -119,7 +117,7 @@ namespace MovieRecommendationSystem
             {
                 var item = selectedList[selectedIndex]; //Egy átmeneti változóban tároljuk a mozgatni kívánt elemet
                 selectedList.RemoveAt(selectedIndex); //A listából töröljük az elemet a korábbi helyéről
-                selectedList.Insert(selectedIndex - 1, item); //Beszúrjuk az átmenetileg eltárolt elemet eggyel kisebb index használatábal, így a listboxban eggyel feljebb kerül
+                selectedList.Insert(selectedIndex - 1, item); //Beszúrjuk az átmenetileg eltárolt elemet eggyel kisebb index használatával, így a listboxban eggyel feljebb kerül
                 RefreshListBoxes(); // A listboxok frissítése
                 listBoxSelected.SelectedIndex = selectedIndex - 1; // Miután az elem megjelent eggyel feljebb a listboxban, átvisszük rá a kijelölést is, hogy ne az alatta lévő elem maradjon kijelölve.
             }
@@ -165,7 +163,7 @@ namespace MovieRecommendationSystem
 
         private void buttonNext_Click(object sender, EventArgs e)
         {
-            if (NextButtonClicked != null && selectedList.Count!=0)
+            if (NextButtonClicked != null && selectedList.Count != 0)
             {
                 NextButtonClicked(this, EventArgs.Empty);
             }

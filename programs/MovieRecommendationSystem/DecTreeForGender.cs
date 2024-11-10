@@ -31,26 +31,24 @@ namespace MovieRecommendationSystem
             // Az adatok előkészítése: kategóriák és numerikus jellemzők transzformációja
 
             var dataProcessPipeline = mlContext.Transforms.Conversion.MapValueToKey("Label", nameof(Gender.GenderOfProtagonist))
-                .Append(mlContext.Transforms.Categorical.OneHotEncoding("MainActorEncoded", nameof(Gender.MainActor)))
-                // Convert Genre from int[] to float[]
-                .Append(mlContext.Transforms.Conversion.ConvertType("GenreFloat", nameof(Gender.Genre), DataKind.Single))
-                // Concatenate all features
-                .Append(mlContext.Transforms.Concatenate("Features", "MainActorEncoded", nameof(Gender.TmdbScore), nameof(Gender.Popularity), "GenreFloat"))
-                .AppendCacheCheckpoint(mlContext);
+            .Append(mlContext.Transforms.Categorical.OneHotEncoding("MainActorEncoded", nameof(Gender.MainActor)))
+            .Append(mlContext.Transforms.Conversion.ConvertType("GenreFloat", nameof(Gender.Genre), DataKind.Single))
+            .Append(mlContext.Transforms.Concatenate("Features", "MainActorEncoded", nameof(Gender.TmdbScore), nameof(Gender.Popularity), "GenreFloat"))
+            .AppendCacheCheckpoint(mlContext);
 
 
             var trainer = mlContext.MulticlassClassification.Trainers.OneVersusAll(
-    mlContext.BinaryClassification.Trainers.FastTree(
-        labelColumnName: "Label",
-        featureColumnName: "Features",
-        numberOfLeaves: 50,
-        numberOfTrees: 7,
-        minimumExampleCountPerLeaf: 10
+            mlContext.BinaryClassification.Trainers.FastTree(
+            labelColumnName: "Label",
+            featureColumnName: "Features",
+            numberOfLeaves: 50,
+            numberOfTrees: 7,
+            minimumExampleCountPerLeaf: 10
     )
 );
             var trainingPipeline = dataProcessPipeline
-        .Append(trainer)
-        .Append(mlContext.Transforms.Conversion.MapKeyToValue("PredictedLabel"));
+            .Append(trainer)
+            .Append(mlContext.Transforms.Conversion.MapKeyToValue("PredictedLabel"));
 
             // Modell tanítása
             var model = trainingPipeline.Fit(data);
@@ -65,12 +63,7 @@ namespace MovieRecommendationSystem
 
             // Egy példa előrejelzés
             var predictionEngine = mlContext.Model.CreatePredictionEngine<Gender, GenderPredict>(model);
-            /*int film = 2;
-            Console.WriteLine(moviesL[film].Title);
-            var testMovie = new Gender { MainActor = moviesL[film].MainActor, TmdbScore = (float)moviesL[film].TmdbScore, Popularity = (float)moviesL[film].Popularity, Genre = prop.GenreContains[film] };
-            var prediction = predictionEngine.Predict(testMovie);
 
-            Console.WriteLine($"Predicted Gender: {prediction.PredictedGender}");*/
             for (int i = 0; i < 20; i++)
             {
                 var testMovie = new Gender
@@ -92,6 +85,6 @@ namespace MovieRecommendationSystem
             Console.WriteLine("Efficiency: " + efficiency);
 
         }
-        
+
     }
 }

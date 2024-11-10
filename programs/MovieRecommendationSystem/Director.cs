@@ -14,7 +14,5 @@ namespace MovieRecommendationSystem
         [VectorType(17)]
         public int[] Genre { get; set; }
         public string Dir { get; set; }
-
-        
     }
 }

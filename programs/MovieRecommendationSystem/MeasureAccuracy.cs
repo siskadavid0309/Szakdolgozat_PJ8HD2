@@ -77,9 +77,9 @@ namespace MovieRecommendationSystem
 
                 predictedTmdbs.Add(prediction.PredictedTmdb);
             }
-        
 
-        Console.WriteLine("R^2 Fasttree: " + RSquare(moviesL,predictedTmdbs));
+
+            Console.WriteLine("R^2 Fasttree: " + RSquare(moviesL, predictedTmdbs));
         }
         public void FasttreeTuned(List<Movie> moviesL, PropertiesForDecTree prop)
         {
@@ -91,17 +91,13 @@ namespace MovieRecommendationSystem
             int bestTrees = 0;
             int bestMinExample = 0;
             double bestLearningRate = 0;
- 
-            for (int j = 0; j < 200; j++) // 100 véletlenszerű keresés
+
+            for (int j = 0; j < 200; j++) // 200 véletlenszerű keresés
             {
-                /*int leaves = random.Next(10, 50); // numberOfLeaves: 2-től 100-ig
-                int trees = random.Next(40, 400); // numberOfTrees: 50-től 300-ig
-                int minExample = random.Next(2, 10); // minimumExampleCountPerLeaf: 1-től 10-ig
-                double learningRate = random.NextDouble() * (0.2 - 0.01) + 0.01; // learningRate: 0.01-től 0.2-ig
-                */
-                int leaves = random.Next(6, 10); // numberOfLeaves: 2-től 30-ig
-                int trees = random.Next(200, 300); // numberOfTrees: 20-tól 200-ig
-                int minExample = random.Next(1, 2); // minimumExampleCountPerLeaf: 1-től 10-ig
+
+                int leaves = random.Next(6, 10);
+                int trees = random.Next(200, 300);
+                int minExample = random.Next(1, 2);
                 double learningRate = random.NextDouble() * (0.1 - 0.01) + 0.01;
                 var mlContext = new MLContext();
                 //A tanító adatokat tartalmazó lista létrehozása és feltöltése, ez esetben az adatbázis első 20 darab film megfelelő adataival
@@ -128,10 +124,10 @@ namespace MovieRecommendationSystem
 
                 // A betültött adatok átalakítása megfelelő formába
                 var dataProcessPipeline = mlContext.Transforms.Conversion.ConvertType(nameof(Tmdb.TmdbScore), nameof(Tmdb.TmdbScore), DataKind.Single)
-                    .Append(mlContext.Transforms.Conversion.ConvertType("KeywordFloat", nameof(Tmdb.Keyword), DataKind.Single))
-                    .Append(mlContext.Transforms.Conversion.ConvertType("GenreFloat", nameof(Tmdb.Genre), DataKind.Single))
-                    .Append(mlContext.Transforms.Concatenate("Features", "KeywordFloat", "GenreFloat"))
-                    .AppendCacheCheckpoint(mlContext);
+                .Append(mlContext.Transforms.Conversion.ConvertType("KeywordFloat", nameof(Tmdb.Keyword), DataKind.Single))
+                .Append(mlContext.Transforms.Conversion.ConvertType("GenreFloat", nameof(Tmdb.Genre), DataKind.Single))
+                .Append(mlContext.Transforms.Concatenate("Features", "KeywordFloat", "GenreFloat"))
+                .AppendCacheCheckpoint(mlContext);
 
                 // A modell típusának beállítása, amely ebben az esetben regressziót használó FastTree, és paramétereinek értékének beállítása
                 var trainer = mlContext.Regression.Trainers.FastTree(
@@ -144,7 +140,6 @@ namespace MovieRecommendationSystem
                 );
 
                 var trainingPipeline = dataProcessPipeline.Append(trainer);
-
 
                 var model = trainingPipeline.Fit(data); // Modell tanítása a Fit() metódussal
 
@@ -170,7 +165,7 @@ namespace MovieRecommendationSystem
                         Keyword = prop.KeywordContains[i]
                     };
                     var prediction = predictionEngine.Predict(testMovie); // A tényleges becslés elvégzése
-                                                                         
+
 
                     predictedTmdbs.Add(prediction.PredictedTmdb);
                 }
@@ -189,16 +184,15 @@ namespace MovieRecommendationSystem
             Console.WriteLine("LearningRate: " + bestLearningRate);
 
             Console.WriteLine("R^2 FasttreeTuned: " + bestRSquared);
-            for (int i = 0;i < bestPredictions.Count; i++)
+            for (int i = 0; i < bestPredictions.Count; i++)
             {
-                Console.WriteLine(moviesL[i].Title+": "+ bestPredictions[i]);
+                Console.WriteLine(moviesL[i].Title + ": " + bestPredictions[i]);
             }
         }
 
         public void Sdca(List<Movie> moviesL, PropertiesForDecTree prop)
         {
             List<float> predictedTmdbs = new List<float>();
-
 
             var mlContext = new MLContext();
             //A tanító adatokat tartalmazó lista létrehozása és feltöltése, ez esetben az adatbázis első 20 darab film megfelelő adataival
@@ -225,19 +219,18 @@ namespace MovieRecommendationSystem
 
             // A betültött adatok átalakítása megfelelő formába
             var dataProcessPipeline = mlContext.Transforms.Conversion.ConvertType(nameof(Tmdb.TmdbScore), nameof(Tmdb.TmdbScore), DataKind.Single)
-                .Append(mlContext.Transforms.Conversion.ConvertType("KeywordFloat", nameof(Tmdb.Keyword), DataKind.Single))
-                .Append(mlContext.Transforms.Conversion.ConvertType("GenreFloat", nameof(Tmdb.Genre), DataKind.Single))
-                .Append(mlContext.Transforms.Concatenate("Features", "KeywordFloat", "GenreFloat"))
-                .AppendCacheCheckpoint(mlContext);
+            .Append(mlContext.Transforms.Conversion.ConvertType("KeywordFloat", nameof(Tmdb.Keyword), DataKind.Single))
+            .Append(mlContext.Transforms.Conversion.ConvertType("GenreFloat", nameof(Tmdb.Genre), DataKind.Single))
+            .Append(mlContext.Transforms.Concatenate("Features", "KeywordFloat", "GenreFloat"))
+            .AppendCacheCheckpoint(mlContext);
 
             // A modell típusának beállítása, amely ebben az esetben regressziót használó FastTree, és paramétereinek értékének beállítása
             var trainer = mlContext.Regression.Trainers.Sdca(
-                labelColumnName: nameof(Tmdb.TmdbScore),
-                featureColumnName: "Features"
-            );
+            labelColumnName: nameof(Tmdb.TmdbScore),
+            featureColumnName: "Features"
+        );
 
             var trainingPipeline = dataProcessPipeline.Append(trainer);
-
 
             var model = trainingPipeline.Fit(data); // Modell tanítása a Fit() metódussal
 
@@ -276,13 +269,10 @@ namespace MovieRecommendationSystem
             int bestmaxIterations = 0;
             float bestl2Regularization = 0;
 
-            for (int j = 0; j < 200; j++) // 100 véletlenszerű keresés
+            for (int j = 0; j < 200; j++) // 200 véletlenszerű keresés
             {
-                int maxIterations = random.Next(100, 500); // MaximumNumberOfIterations: 10-től 1000-ig
+                int maxIterations = random.Next(100, 500);
                 double l2Regularization = random.NextDouble() * (0.1 - 0.0001) + 0.0001;
-
-
-                //double biasLearningRate = random.NextDouble() * (1 - 0.01) + 0.01;
 
                 var mlContext = new MLContext();
                 //A tanító adatokat tartalmazó lista létrehozása és feltöltése, ez esetben az adatbázis első 20 darab film megfelelő adataival
@@ -335,7 +325,7 @@ namespace MovieRecommendationSystem
                 // Egy darab film Tmdb pontszámának megbecslése a modell használatával
                 var predictionEngine = mlContext.Model.CreatePredictionEngine<Tmdb, TmdbPredict>(model, inputSchemaDefinition: schemaDef);
 
-  
+
                 predictedTmdbs.Clear();
                 for (int i = 0; i < moviesL.Count; i++)
                 {
@@ -372,7 +362,6 @@ namespace MovieRecommendationSystem
         public void LbfgsPoissonRegression(List<Movie> moviesL, PropertiesForDecTree prop)
         {
             List<float> predictedTmdbs = new List<float>();
-
 
             var mlContext = new MLContext();
             //A tanító adatokat tartalmazó lista létrehozása és feltöltése, ez esetben az adatbázis első 20 darab film megfelelő adataival
@@ -437,7 +426,6 @@ namespace MovieRecommendationSystem
                 predictedTmdbs.Add(prediction.PredictedTmdb);
             }
 
-
             Console.WriteLine("R^2 LbfgsPoissonRegression: " + RSquare(moviesL, predictedTmdbs));
         }
 
@@ -447,15 +435,14 @@ namespace MovieRecommendationSystem
             Random random = new Random();
             double bestRSquared = double.MinValue;
 
-            for (int j = 0; j < 200; j++) // 100 véletlenszerű keresés
+            for (int j = 0; j < 200; j++) // 200 véletlenszerű keresés
             {
-                //int maxIterations = random.Next(10, 1000); // MaximumNumberOfIterations: 10-től 1000-ig
-                double l2Regularization = random.NextDouble() * (1 - 0.0001) + 0.0001; // L2Regularization: 0.0001-től 1-ig
-                double l1Regularization = random.NextDouble() * (1 - 0.0001) + 0.0001; // L1Regularization: 0.0001-től 1-ig
-                double optimizationTolerance = random.NextDouble() * (1 - 0.0001) + 0.0001; // OptimizationTolerance: 0.0001-től 1-ig
+                double l2Regularization = random.NextDouble() * (1 - 0.0001) + 0.0001;
+                double l1Regularization = random.NextDouble() * (1 - 0.0001) + 0.0001;
+                double optimizationTolerance = random.NextDouble() * (1 - 0.0001) + 0.0001;
 
                 var mlContext = new MLContext();
-                //A tanító adatokat tartalmazó lista létrehozása és feltöltése, ez esetben az adatbázis első 20 darab film megfelelő adataival
+                // A tanító adatokat tartalmazó lista létrehozása és feltöltése, ez esetben az adatbázis első 20 darab film megfelelő adataival
                 var movies = new List<Tmdb>();
 
                 for (int i = 0; i < 20; i++)
@@ -488,13 +475,12 @@ namespace MovieRecommendationSystem
                 var trainer = mlContext.Regression.Trainers.LbfgsPoissonRegression(
                     labelColumnName: nameof(Tmdb.TmdbScore),
                     featureColumnName: "Features",
-                    l2Regularization: (float)l2Regularization,        // generált L2 regularizációs érték
-                    l1Regularization: (float)l1Regularization,        // generált L1 regularizációs érték
-                    optimizationTolerance: (float)optimizationTolerance // generált tolerancia
+                    l2Regularization: (float)l2Regularization,
+                    l1Regularization: (float)l1Regularization,
+                    optimizationTolerance: (float)optimizationTolerance
                 );
 
                 var trainingPipeline = dataProcessPipeline.Append(trainer);
-
 
                 var model = trainingPipeline.Fit(data); // Modell tanítása a Fit() metódussal
 
@@ -506,7 +492,6 @@ namespace MovieRecommendationSystem
                 // Egy darab film Tmdb pontszámának megbecslése a modell használatával
                 var predictionEngine = mlContext.Model.CreatePredictionEngine<Tmdb, TmdbPredict>(model, inputSchemaDefinition: schemaDef);
 
-
                 predictedTmdbs.Clear();
                 for (int i = 0; i < moviesL.Count; i++)
                 {
@@ -517,7 +502,6 @@ namespace MovieRecommendationSystem
                         Keyword = prop.KeywordContains[i]
                     };
                     var prediction = predictionEngine.Predict(testMovie); // A tényleges becslés elvégzése
-
 
                     predictedTmdbs.Add(prediction.PredictedTmdb);
                 }
@@ -561,16 +545,16 @@ namespace MovieRecommendationSystem
 
             // A betültött adatok átalakítása megfelelő formába
             var dataProcessPipeline = mlContext.Transforms.Conversion.ConvertType(nameof(Tmdb.TmdbScore), nameof(Tmdb.TmdbScore), DataKind.Single)
-                .Append(mlContext.Transforms.Conversion.ConvertType("KeywordFloat", nameof(Tmdb.Keyword), DataKind.Single))
-                .Append(mlContext.Transforms.Conversion.ConvertType("GenreFloat", nameof(Tmdb.Genre), DataKind.Single))
-                .Append(mlContext.Transforms.Concatenate("Features", "KeywordFloat", "GenreFloat"))
-                .AppendCacheCheckpoint(mlContext);
+            .Append(mlContext.Transforms.Conversion.ConvertType("KeywordFloat", nameof(Tmdb.Keyword), DataKind.Single))
+            .Append(mlContext.Transforms.Conversion.ConvertType("GenreFloat", nameof(Tmdb.Genre), DataKind.Single))
+            .Append(mlContext.Transforms.Concatenate("Features", "KeywordFloat", "GenreFloat"))
+            .AppendCacheCheckpoint(mlContext);
 
             // A modell típusának beállítása, amely ebben az esetben regressziót használó FastTree, és paramétereinek értékének beállítása
             var trainer = mlContext.Regression.Trainers.Gam(
-                labelColumnName: nameof(Tmdb.TmdbScore),
-                featureColumnName: "Features"
-            );
+            labelColumnName: nameof(Tmdb.TmdbScore),
+            featureColumnName: "Features"
+        );
 
             var trainingPipeline = dataProcessPipeline.Append(trainer);
 
@@ -609,12 +593,11 @@ namespace MovieRecommendationSystem
             Random random = new Random();
             double bestRSquared = double.MinValue;
 
-            for (int j = 0; j < 200; j++) // 100 véletlenszerű keresés
+            for (int j = 0; j < 200; j++) // 200 véletlenszerű keresés
             {
-                //int maxIterations = random.Next(10, 1000); // MaximumNumberOfIterations: 10-től 1000-ig
-                int maxIterations = random.Next(10, 300); // MaximumNumberOfIterations: 10-től 300-ig
-                double learningRate = random.NextDouble() * (0.1 - 0.01) + 0.01; // LearningRate: 0.01-től 0.1-ig
-                int maxBins = random.Next(10, 100); // MaximumBinCountPerFeature: 10-től 100-ig
+                int maxIterations = random.Next(10, 300);
+                double learningRate = random.NextDouble() * (0.1 - 0.01) + 0.01;
+                int maxBins = random.Next(10, 100);
 
                 var mlContext = new MLContext();
                 //A tanító adatokat tartalmazó lista létrehozása és feltöltése, ez esetben az adatbázis első 20 darab film megfelelő adataival
@@ -641,19 +624,19 @@ namespace MovieRecommendationSystem
 
                 // A betültött adatok átalakítása megfelelő formába
                 var dataProcessPipeline = mlContext.Transforms.Conversion.ConvertType(nameof(Tmdb.TmdbScore), nameof(Tmdb.TmdbScore), DataKind.Single)
-                    .Append(mlContext.Transforms.Conversion.ConvertType("KeywordFloat", nameof(Tmdb.Keyword), DataKind.Single))
-                    .Append(mlContext.Transforms.Conversion.ConvertType("GenreFloat", nameof(Tmdb.Genre), DataKind.Single))
-                    .Append(mlContext.Transforms.Concatenate("Features", "KeywordFloat", "GenreFloat"))
-                    .AppendCacheCheckpoint(mlContext);
+                .Append(mlContext.Transforms.Conversion.ConvertType("KeywordFloat", nameof(Tmdb.Keyword), DataKind.Single))
+                .Append(mlContext.Transforms.Conversion.ConvertType("GenreFloat", nameof(Tmdb.Genre), DataKind.Single))
+                .Append(mlContext.Transforms.Concatenate("Features", "KeywordFloat", "GenreFloat"))
+                .AppendCacheCheckpoint(mlContext);
 
                 // A modell típusának beállítása, amely ebben az esetben regressziót használó FastTree, és paramétereinek értékének beállítása
                 var trainer = mlContext.Regression.Trainers.Gam(
-                    labelColumnName: nameof(Tmdb.TmdbScore),
-                    featureColumnName: "Features",
-                    numberOfIterations: maxIterations,
-                    learningRate: learningRate,
-                    maximumBinCountPerFeature: maxBins
-                );
+                labelColumnName: nameof(Tmdb.TmdbScore),
+                featureColumnName: "Features",
+                numberOfIterations: maxIterations,
+                learningRate: learningRate,
+                maximumBinCountPerFeature: maxBins
+            );
 
                 var trainingPipeline = dataProcessPipeline.Append(trainer);
 
@@ -663,7 +646,6 @@ namespace MovieRecommendationSystem
                 // A betanított modell kiértékelése
                 var predictions = model.Transform(data);
                 var metrics = mlContext.Regression.Evaluate(predictions, labelColumnName: nameof(Tmdb.TmdbScore));
-
 
                 // Egy darab film Tmdb pontszámának megbecslése a modell használatával
                 var predictionEngine = mlContext.Model.CreatePredictionEngine<Tmdb, TmdbPredict>(model, inputSchemaDefinition: schemaDef);
@@ -699,9 +681,9 @@ namespace MovieRecommendationSystem
             Random random = new Random();
             double bestRSquared = double.MinValue;
 
-            for (int j = 0; j < 200; j++) // 100 véletlenszerű keresés
+            for (int j = 0; j < 200; j++) // 200 véletlenszerű keresés
             {
-                double learningRate = random.NextDouble() * (0.1 - 0.0001) + 0.0001; // LearningRate: 0.0001-től 0.1-ig
+                double learningRate = random.NextDouble() * (0.1 - 0.0001) + 0.0001;
                 bool decreasingLearningRate = true;
 
                 var mlContext = new MLContext();
@@ -729,10 +711,10 @@ namespace MovieRecommendationSystem
 
                 // A betültött adatok átalakítása megfelelő formába
                 var dataProcessPipeline = mlContext.Transforms.Conversion.ConvertType(nameof(Tmdb.TmdbScore), nameof(Tmdb.TmdbScore), DataKind.Single)
-                    .Append(mlContext.Transforms.Conversion.ConvertType("KeywordFloat", nameof(Tmdb.Keyword), DataKind.Single))
-                    .Append(mlContext.Transforms.Conversion.ConvertType("GenreFloat", nameof(Tmdb.Genre), DataKind.Single))
-                    .Append(mlContext.Transforms.Concatenate("Features", "KeywordFloat", "GenreFloat"))
-                    .AppendCacheCheckpoint(mlContext);
+                .Append(mlContext.Transforms.Conversion.ConvertType("KeywordFloat", nameof(Tmdb.Keyword), DataKind.Single))
+                .Append(mlContext.Transforms.Conversion.ConvertType("GenreFloat", nameof(Tmdb.Genre), DataKind.Single))
+                .Append(mlContext.Transforms.Concatenate("Features", "KeywordFloat", "GenreFloat"))
+                .AppendCacheCheckpoint(mlContext);
 
                 // A modell típusának beállítása, amely ebben az esetben regressziót használó FastTree, és paramétereinek értékének beállítása
                 var trainer = mlContext.Regression.Trainers.OnlineGradientDescent(
@@ -811,16 +793,16 @@ namespace MovieRecommendationSystem
 
             // A betültött adatok átalakítása megfelelő formába
             var dataProcessPipeline = mlContext.Transforms.Conversion.ConvertType(nameof(Tmdb.TmdbScore), nameof(Tmdb.TmdbScore), DataKind.Single)
-                .Append(mlContext.Transforms.Conversion.ConvertType("KeywordFloat", nameof(Tmdb.Keyword), DataKind.Single))
-                .Append(mlContext.Transforms.Conversion.ConvertType("GenreFloat", nameof(Tmdb.Genre), DataKind.Single))
-                .Append(mlContext.Transforms.Concatenate("Features", "KeywordFloat", "GenreFloat"))
-                .AppendCacheCheckpoint(mlContext);
+            .Append(mlContext.Transforms.Conversion.ConvertType("KeywordFloat", nameof(Tmdb.Keyword), DataKind.Single))
+            .Append(mlContext.Transforms.Conversion.ConvertType("GenreFloat", nameof(Tmdb.Genre), DataKind.Single))
+            .Append(mlContext.Transforms.Concatenate("Features", "KeywordFloat", "GenreFloat"))
+            .AppendCacheCheckpoint(mlContext);
 
             // A modell típusának beállítása, amely ebben az esetben regressziót használó FastTree, és paramétereinek értékének beállítása
             var trainer = mlContext.Regression.Trainers.OnlineGradientDescent(
-                labelColumnName: nameof(Tmdb.TmdbScore),
-                featureColumnName: "Features"
-            );
+            labelColumnName: nameof(Tmdb.TmdbScore),
+            featureColumnName: "Features"
+        );
 
             var trainingPipeline = dataProcessPipeline.Append(trainer);
 

@@ -30,23 +30,23 @@ namespace MovieRecommendationSystem
 
 
             var dataProcessPipeline = mlContext.Transforms.Conversion.MapValueToKey("Label", nameof(Director.Dir))
-    .Append(mlContext.Transforms.Conversion.ConvertType("KeywordEncoded", nameof(Director.Keyword), DataKind.Single))
-    .Append(mlContext.Transforms.Conversion.ConvertType("GenreFloat", nameof(Director.Genre), DataKind.Single))
-    .Append(mlContext.Transforms.Concatenate("Features", "KeywordEncoded", "GenreFloat"))
-    .AppendCacheCheckpoint(mlContext);
+            .Append(mlContext.Transforms.Conversion.ConvertType("KeywordEncoded", nameof(Director.Keyword), DataKind.Single))
+            .Append(mlContext.Transforms.Conversion.ConvertType("GenreFloat", nameof(Director.Genre), DataKind.Single))
+            .Append(mlContext.Transforms.Concatenate("Features", "KeywordEncoded", "GenreFloat"))
+            .AppendCacheCheckpoint(mlContext);
 
             var trainer = mlContext.MulticlassClassification.Trainers.OneVersusAll(
-    mlContext.BinaryClassification.Trainers.FastTree(
-        labelColumnName: "Label",
-        featureColumnName: "Features",
-        numberOfLeaves: 9,
-        numberOfTrees: 220,
-        minimumExampleCountPerLeaf: 1
-    )
-);
+            mlContext.BinaryClassification.Trainers.FastTree(
+            labelColumnName: "Label",
+            featureColumnName: "Features",
+            numberOfLeaves: 9,
+            numberOfTrees: 220,
+            minimumExampleCountPerLeaf: 1
+                )
+                    );
             var trainingPipeline = dataProcessPipeline
-        .Append(trainer)
-        .Append(mlContext.Transforms.Conversion.MapKeyToValue("PredictedLabel"));
+            .Append(trainer)
+            .Append(mlContext.Transforms.Conversion.MapKeyToValue("PredictedLabel"));
 
             // Modell tanítása
             var model = trainingPipeline.Fit(data);
@@ -61,13 +61,7 @@ namespace MovieRecommendationSystem
 
             // Egy film előrejelzése
             var predictionEngine = mlContext.Model.CreatePredictionEngine<Director, DirectorPredict>(model);
-            /* int film = 2;
-             Console.WriteLine(moviesL[film].Title);
-             var testMovie = new Director { Genre = prop.GenreContains[film], Keyword = prop.KeywordContains[film] };
-             var prediction = predictionEngine.Predict(testMovie);
 
-             Console.WriteLine($"Predicted director's name: {prediction.PredictedDirector}");
-            */
             for (int i = 59; i < 79; i++)
             {
                 var testMovie = new Director
@@ -77,14 +71,14 @@ namespace MovieRecommendationSystem
                 };
                 var prediction = predictionEngine.Predict(testMovie);
                 Console.WriteLine($"Title:{moviesL[i].Title} Predicted Director: {prediction.PredictedDirector}");
-                if(moviesL[i].DirectorStringWithCommas== prediction.PredictedDirector)
+                if (moviesL[i].DirectorStringWithCommas == prediction.PredictedDirector)
                 {
                     efficiency++;
                 }
 
             }
             efficiency = efficiency / 20;
-            Console.WriteLine("Efficiency: "+efficiency);
+            Console.WriteLine("Efficiency: " + efficiency);
         }
     }
 }

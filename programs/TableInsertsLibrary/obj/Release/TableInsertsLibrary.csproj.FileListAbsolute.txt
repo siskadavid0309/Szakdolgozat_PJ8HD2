@@ -1,0 +1,16 @@
+C:\Users\siskad\source\repos\TableInsertsLibrary\TableInsertsLibrary\bin\Release\TableInsertsLibrary.dll.config
+C:\Users\siskad\source\repos\TableInsertsLibrary\TableInsertsLibrary\bin\Release\TableInsertsLibrary.dll
+C:\Users\siskad\source\repos\TableInsertsLibrary\TableInsertsLibrary\bin\Release\TableInsertsLibrary.pdb
+C:\Users\siskad\source\repos\TableInsertsLibrary\TableInsertsLibrary\bin\Release\EntityFramework.dll
+C:\Users\siskad\source\repos\TableInsertsLibrary\TableInsertsLibrary\bin\Release\EntityFramework.SqlServer.dll
+C:\Users\siskad\source\repos\TableInsertsLibrary\TableInsertsLibrary\bin\Release\System.Data.SQLite.dll
+C:\Users\siskad\source\repos\TableInsertsLibrary\TableInsertsLibrary\bin\Release\System.Data.SQLite.EF6.dll
+C:\Users\siskad\source\repos\TableInsertsLibrary\TableInsertsLibrary\bin\Release\System.Data.SQLite.Linq.dll
+C:\Users\siskad\source\repos\TableInsertsLibrary\TableInsertsLibrary\bin\Release\EntityFramework.xml
+C:\Users\siskad\source\repos\TableInsertsLibrary\TableInsertsLibrary\bin\Release\EntityFramework.SqlServer.xml
+C:\Users\siskad\source\repos\TableInsertsLibrary\TableInsertsLibrary\bin\Release\System.Data.SQLite.xml
+C:\Users\siskad\source\repos\TableInsertsLibrary\TableInsertsLibrary\obj\Release\TableInsertsLibrary.csproj.AssemblyReference.cache
+C:\Users\siskad\source\repos\TableInsertsLibrary\TableInsertsLibrary\obj\Release\TableInsertsLibrary.csproj.CoreCompileInputs.cache
+C:\Users\siskad\source\repos\TableInsertsLibrary\TableInsertsLibrary\obj\Release\TableInsertsLibrary.csproj.CopyComplete
+C:\Users\siskad\source\repos\TableInsertsLibrary\TableInsertsLibrary\obj\Release\TableInsertsLibrary.dll
+C:\Users\siskad\source\repos\TableInsertsLibrary\TableInsertsLibrary\obj\Release\TableInsertsLibrary.pdb

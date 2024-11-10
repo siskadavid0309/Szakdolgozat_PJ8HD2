@@ -18,18 +18,19 @@ namespace TableInsertsLibrary
     public class AlgorithmsTI
     {
 
-        public void CreateData(List<int> id, List<string> list_ok, List<MovieTI> movies, ref List<int> finalID, ref List<int> finalData, int mode)
+        public void CreateData(List<int> id, List<string> filteredList, List<MovieTI> movies, ref List<int> finalId, ref List<int> finalData, int mode)
         {
             List<string> tempData = new List<string>();
-            Copy(movies, ref tempData, mode);
+            CopyForCreateData(movies, ref tempData, mode);
             for (int i = 0; i < tempData.Count; i++)
             {
                 for (int j = 0; j < id.Count; j++)
                 {
 
-                    if (tempData[i].Equals(list_ok[j]) || tempData[i].StartsWith(list_ok[j] + ",") || tempData[i].Contains(", " + list_ok[j] + ",") || tempData[i].EndsWith(" " + list_ok[j]))
+                    if (tempData[i].Equals(filteredList[j]) || tempData[i].StartsWith(filteredList[j] + ",") ||
+                        tempData[i].Contains(", " + filteredList[j] + ",") || tempData[i].EndsWith(" " + filteredList[j]))
                     {
-                        finalID.Add(Convert.ToInt32(movies[i].Id));
+                        finalId.Add(Convert.ToInt32(movies[i].Id));
                         finalData.Add(Convert.ToInt32(id[j]));
                     }
                 }
@@ -39,25 +40,25 @@ namespace TableInsertsLibrary
 
         public List<string> Matches(List<string> list)
         {
-            List<string> list_ok = new List<string>();
+            List<string> filteredList = new List<string>();
             bool match = false;
             for (int i = 0; i < list.Count; i++)
             {
                 match = false;
-                for (int j = 0; j < list_ok.Count; j++)
+                for (int j = 0; j < filteredList.Count; j++)
                 {
-                    if (list[i] == list_ok[j])
+                    if (list[i] == filteredList[j])
                     {
                         match = true;
                     }
                 }
                 if (match == false)
                 {
-                    list_ok.Add(list[i]);
+                    filteredList.Add(list[i]);
                 }
 
             }
-            return list_ok;
+            return filteredList;
         }
 
         public void GenerateId(ref List<int> id, List<string> list)
@@ -70,7 +71,7 @@ namespace TableInsertsLibrary
 
 
 
-        public static void Copy(List<MovieTI> movies, ref List<string> tempData, int mode)
+        public static void CopyForCreateData(List<MovieTI> movies, ref List<string> tempData, int mode)
         {
 
             switch (mode)

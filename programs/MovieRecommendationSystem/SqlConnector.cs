@@ -63,13 +63,6 @@ namespace MovieRecommendation
                     Budget = Convert.ToInt64(reader["Budget"]),
                     Revenue = Convert.ToInt64(reader["Revenue"]),
 
-                    /*
-                    Keywords = reader["Keywords"].ToString(),
-                    Language = reader["Language"].ToString(),
-                    Director = reader["Director"].ToString(),
-                    Country = reader["Production_countries"].ToString(),
-                    Genre = reader["Genre"].ToString()
-                    */
                 };
                 movies.Add(movie);
             }
@@ -83,14 +76,13 @@ namespace MovieRecommendation
         /// </summary>
         /// <param name="movies">A movies listában tároljuk el a filmek műfajait</param>
         public void FillupGenre(ref List<Movie> movies)
-        
         {
 
             int index;
             int data;
             SQLiteDataReader reader = null;
             SQLiteCommand command = connection.CreateCommand();
-            
+
             command.CommandText = "SELECT * FROM Movies_Genres";
             reader = command.ExecuteReader();
             while (reader.Read())
@@ -107,7 +99,6 @@ namespace MovieRecommendation
             }
             reader.Close();
         }
-
         public void FillupKeywords(ref List<Movie> movies)
         {
             int index;
@@ -179,7 +170,7 @@ namespace MovieRecommendation
             }
             reader.Close();
         }
-        
+
         public void FillupCountry(ref List<Movie> movies)
         {
             int index;
@@ -225,9 +216,7 @@ namespace MovieRecommendation
             }
             reader.Close();
             Algorithms alg = new Algorithms();
-            //int mode = (int)Mode.Genre; //enumot használva beállítjuk a mode változó értékét Genre-re, amit castolással integerré alakítunk
-            //alg.tableFiller(ref movies, tableID, tableData, mode); //a tableFiller metódusnak átadjuk a műfajok azonosítóit és a műfajokat is, a mode változó értékébőúl pedig tudni fogja hogy a movies lista melyik adattagját kell feltölteni a kapott adatokkal
-            alg.GenreToString(ref movies,tableID,tableData);
+            alg.GenreToString(ref movies, tableID, tableData);
         }
 
         public void GetKeyword(ref List<Movie> movies, List<int> tableID, List<string> tableData, ref PropertiesForDecTree prop)
@@ -245,10 +234,7 @@ namespace MovieRecommendation
             }
             reader.Close();
             Algorithms alg = new Algorithms();
-            //int mode = (int)Mode.Keyword;
-            //alg.tableFiller(ref movies, tableID, tableData, mode);
             alg.KeywordToString(ref movies, tableID, tableData);
-            //prop.KeywordAll = tableData;
 
         }
 
@@ -267,10 +253,7 @@ namespace MovieRecommendation
             }
             reader.Close();
             Algorithms alg = new Algorithms();
-            //int mode = (int)Mode.Language;
-            //alg.tableFiller(ref movies, tableID, tableData, mode);
             alg.LanguageToString(ref movies, tableID, tableData);
-            //prop.LanguageAll = tableData;
         }
 
         public void GetDirector(ref List<Movie> movies, List<int> tableID, List<string> tableData, ref PropertiesForDecTree prop)
@@ -288,10 +271,7 @@ namespace MovieRecommendation
             }
             reader.Close();
             Algorithms alg = new Algorithms();
-            //int mode = (int)Mode.Director;
-            //alg.tableFiller(ref movies, tableID, tableData, mode);
             alg.DirectorToString(ref movies, tableID, tableData);
-            //prop.DirectorAll = tableData;
         }
 
         public void GetCountry(ref List<Movie> movies, List<int> tableID, List<string> tableData, ref PropertiesForDecTree prop)
@@ -309,10 +289,7 @@ namespace MovieRecommendation
             }
             reader.Close();
             Algorithms alg = new Algorithms();
-            //int mode = (int)Mode.Country;
-            //alg.tableFiller(ref movies, tableID, tableData, mode);
             alg.CountryToString(ref movies, tableID, tableData);
-            // prop.CountryAll = tableData;
         }
 
         public void UpdateCommand(string cmd)
@@ -322,33 +299,32 @@ namespace MovieRecommendation
             command.ExecuteNonQuery();
         }
 
-
-// Add this method to query the tables in sqlite_master and store the names in a list
         public string GetDbStructure(string databaseFilePath)
-            {
-            string structure= "";
-                string connectionString = $"Data Source={databaseFilePath}";
+        {
+            string structure = "";
+            string connectionString = $"Data Source={databaseFilePath}";
 
             using (SQLiteConnection connection = new SQLiteConnection(connectionString))
             {
                 connection.Open();
                 SQLiteCommand command = connection.CreateCommand();
-                //command.CommandText= "SELECT name FROM sqlite_master;";
                 command.CommandText = "SELECT sql FROM sqlite_master where name=\"Movies\"";
 
-               try{ SQLiteDataReader reader = command.ExecuteReader();
+                try
                 {
-                    while (reader.Read())
+                    SQLiteDataReader reader = command.ExecuteReader();
                     {
-                        structure=reader.GetString(0); // Read each table name and add it to the list
+                        while (reader.Read())
+                        {
+                            structure = reader.GetString(0);
+                        }
                     }
                 }
-                }
-                catch { MessageBox.Show("Table \"Movies\" not found!","Error!", MessageBoxButtons.OK, MessageBoxIcon.Error); }
-                }
-            Console.WriteLine(structure);
-                return structure;
+                catch { MessageBox.Show("Table \"Movies\" not found!", "Error!", MessageBoxButtons.OK, MessageBoxIcon.Error); }
             }
-
+            Console.WriteLine(structure);
+            return structure;
         }
+
+    }
 }
